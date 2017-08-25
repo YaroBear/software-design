@@ -21,7 +21,7 @@ HW1: Due 11:59PM September 1
 
 Q1. What's simple design?
 
-Simple design is minimalistic design.  Meaning, every feature is relevant and nothing irrelevant has been added.  In general, this lack of irrelevant features allows the code to fail less, or fails in "more graceful ways".
+Simple design is minimalistic design.  Meaning, every feature is relevant and nothing irrelevant has been added.  In general, this lack of irrelevant features allows the code to fail less, or to fail "in more graceful ways".
 
 Q2. Why should design be simple?
 
