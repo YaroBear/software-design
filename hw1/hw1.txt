@@ -1,0 +1,32 @@
+Please keep all files related to a homework or an assignment within the appropriate directory. Files checked in outside of specific homework or assignment directory will not be reviewed or graded for that homework/assignment.
+
+Check in and modify files as many times as you like. You will not be able to modify the files after the deadline.
+
+During pairing rotate who checks in the code. There should be somewhat (approximately) the same number of checkins from each member of a pair/team. In other words, we don't want to see check in from only one person of the pair/team.
+
+You will work as a pair, both of you are responsible for the completed work in all assignments and homework. Reasonable effort is expected from each person.
+
+The deadlines are strict, there will be no extensions. Don't email any code to Venkat or to the mailing list. Your last check in before the deadline will be graded. If your last check in breaks the code, both you and your pair will lose significant points.
+
+Please feel free to ask for frequent reviews. See the reviews/readme.txt file for details on how to ask for reviews.
+
+You can evolve the answers and solutions based on the reviews. Only the latest checkin at the time of review will be looked at. Also the final check in will be the only one graded.
+
+Please read the academic honesty policy posted on the course mailing list.
+
+Now to homework #1.
+
+------------------------------------------------------------------------------
+HW1: Due 11:59PM September 1
+
+Q1. What's simple design?
+
+REPLACE THIS WITH YOUR ANSWER
+
+Q2. Why should design be simple?
+
+REPLACE THIS WITH YOUR ANSWER
+
+Q3. In your experience, from what you've seen, has there been problems with design not being simple or benefits from it being simple? Give examples of situations and impact. Discuss.
+
+REPLACE THIS WITH YOUR ANSWER
