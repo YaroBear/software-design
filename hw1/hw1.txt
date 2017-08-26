@@ -23,7 +23,7 @@ Q1. What's simple design?
 
 Simple design is minimalistic design.  Meaning, every feature is relevant and nothing irrelevant has been added.  In general, this lack of irrelevant features allows the code to fail less, or to fail "in more graceful ways".
 
-The way features are coded is important in creating a minmialistic design. This often involves deep knowledge of your language of choice, utilizing features or shortcuts that make your code more readable as well as reducing how much you have to write in order to achieve the same outcome.
+The way features are coded is important in creating a minimalistic design. This often involves deep knowledge of your language of choice, utilizing features or shortcuts that make your code more readable as well as reducing how much you have to write in order to achieve the same outcome.
 
 Q2. Why should design be simple?
 
