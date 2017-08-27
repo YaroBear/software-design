@@ -1,0 +1,18 @@
+[Venkat 08/27/17 04:45 AM MDT]
+synopsis: good start 
+
+details:       
+1.
+In the first paragraph, minimalism is a good thing to discuss, however, how does keeping it minimum results in fewer failures or graceful failures. If that were true, please explain or connect the two points.
+
+The second paragraph deviates from the questions. Please remove. Then focus the second and may be a third paragraph on other aspects of simple design. Minimalism is one attribute of simplicity, there are more.
+
+2.
+Please start by setting the context about nature of software project and the cost involved. Then tie how different aspects of simple design impacts those.
+
+3.
+Nick: Please write in small paragraphs. There are different ideas and influences being discussed here, we can separate them into shorter paragraphs for better clarity. That may also help to see if some of the thoughts are related to better planning (and may be removed) rather than simple design.
+
+Yaro: Please relate this to simple design in some way or we may have to choose a different example/experience here.
+
+------------------------------------------------------------------------------
