@@ -1,3 +1,25 @@
+[Venkat 08/28/17 05:20 AM MDT]
+synopsis: a few more tweaks 
+
+details:
+1.
+"This can be difficult to accomplish because typically the intended users of a piece of software are not the developers of that software." The user of the software generally does not care nor see the design. We need to change this line of discussion. Let's keep the focus on the design and the developers maintaining the design. The point of keeping focus on what is relevant is important and valid. The point that requirements change is true as well. There are a lot of good ideas and reasons in this paragraph. They need to be woven together differently than it is now to bring out the reasons clearly.
+
+The second paragraph focuses on minimalism and graceful failure. Good.
+
+Are there more things we could add to a third paragraph? Intuitive, fewer moving parts, less coupling/fewer dependencies, cohesive, modular (mentioned in part 3)...
+
+2.
+The second paragraph is very well written, excellent work here.
+
+The third paragraph makes excellent points as well, good job here too.
+
+Guidelines?
+
+3. 
+Please check spelling.
+
+------------------------------------------------------------------------------
 [Venkat 08/27/17 04:45 AM MDT]
 synopsis: good start 
 
