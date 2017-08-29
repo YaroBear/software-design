@@ -39,9 +39,6 @@ The readability of the code is another important factor that determines cost for
 
 A simple design allows the developer to follow the original requirements in manageable sprints, and enables them to be more responsive to unanticipated changes when the requirements change. If you are designing software for another end user, refactoring code and making small changes to specific functions is much easier and cost effective than rewriting entire features just because the end user was unsatisfied with a small detail. When software is easy to maintain, more maintenance is likely to be done as well. If features are too complex then developers are less likely to fix them or would end up having to start over entirely.
 
-
-Guidelines
-
 Q3. In your experience, from what you've seen, has there been problems with design not being simple or benefits from it being simple? Give examples of situations and impact. Discuss.
 
 Nick:
