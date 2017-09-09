@@ -52,3 +52,5 @@ By the time the project was due, there were still plenty of changes to make and 
 Yaro:
 
 Planning the schema as well as some of the basic API end-points early on helped to get the project rolling. As the project was coming together and some of the main features were implemented, we noticed there was a lot of revision happening to the existing code. We had to do a lot of thinking on the spot, and we tried a number of different strategies before arriving to something that just worked. Our code was not very modular, and could have benefitted from having a simpler design of feature classes, where each module would contain related methods that implement small and manageable single task functions. For example, our routes file which provides much of the API functionality was extremely cluttered (1400+ lines of code) and had clashing styles of programming. We did not maintain any particular design principle in mind, and I think a lot of time of rewriting and planning could have been saved had we stuck to a particular design pattern.
+
+Total [10]: 10
