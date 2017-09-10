@@ -41,12 +41,12 @@ Include a separate file (may be a scan of hand drawn picture if you like, or a p
 
 How would you design this program? 
 
-REPLACE THIS WITH YOUR ANSWER. Refer to the diagram from the text here.
+Our design is composed of two classes:  Cell and Grid.  The Cell class has attributes:  bool mined, bool sealed, bool exposed, and int adjacentMines.  The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true).  The adjacentMines attribute is used to track the number of mines around a particular cell.  
 
 Discuss what language you would use.
 
-REPLACE THIS WITH YOUR ANSWER
+We're planning on using Java.
 
 How do you plan to structure the program, what libraries would you use?
 
-REPLACE THIS WITH YOUR ANSWER
+We are thinking of using the swing library for the graphics and the awt library to handle events.
