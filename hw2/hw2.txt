@@ -41,7 +41,7 @@ Include a separate file (may be a scan of hand drawn picture if you like, or a p
 
 How would you design this program? 
 
-Our game state and basic data structures for our "grid" are kept in separate extensible classes. GameGUI, Cell, and Grid.  
+Our game state and basic data structures for our "grid" are kept in separate extensible classes. Game, Cell, and Grid.  
 The Cell class has attributes:  bool mined, bool sealed, bool exposed, and int adjacentMines.  The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true).  The adjacentMines attribute is used to track the number of mines that are adjacent to the Cell instance.
 
 For our basic data structures, we decided it would be easiest to keep track of our cells using a one-dimensional ArrayList. This poses two advantages: 1. we can scale the game to any size using ArrayList’s dynamic ArrayList.add() method, and would not be stuck with using a compile-time grid size as would be the case if we used a simple array. 2. Using a one-dimensional representation of the game simplifies the math (and lines of code). For example:
@@ -73,14 +73,13 @@ if(((currentCell + 1) % width) > 0 && (currentCell + 1) < grid.size())
 
 Etc.
 
-The GameGui class will import the Grid class, Swing, and AWT libraries. The sole purpose of this class will be to configure the GUI, add event listeners to the cells, enable the visuals of the game state (things such as time, reset, clicked on a bomb, sealed a cell, or win), while Grid keeps track of every instance of Cell and their statuses.
-
-
 
 Discuss what language you would use.
 
-We chose Java as our language for its portability, abundant and well documented GUI libraries, and its wide presence in many industries. We are not too familiar with Java but feel that it would be a bit easier to prototype and create something and not have to worry about pointers and memory like in C++.
+We were originally considering Java, but after doing research on some GUI and even game engine platforms, we are leaning towards using JavaScript. Modern applications are mostly web oriented these days, and now that flash and java applets are being deprecated for the web, it would make sense to build something modern. We both have experience using JavaScript in both the front and back end, and pairing this with the simple yet powerful Html5 Canvas we believe would make a great application.
+
+Our only concern is that if we use JavaScript, will we be stuck with the same language for the entire semester? Or are we allowed to pick and choose for each assignment? We love JavaScript, but white board interviews seem to favor languages like Java, C++, and C#, so we would like the ability to pick languages as they are suited for each assignment so we get some practice with these "core" languages.
 
 How do you plan to structure the program, what libraries would you use?
 
-We are thinking of using the swing library for the graphics and the awt library to handle events such as mouse overs and button clicks.
+The Game class will import the Html5 Canvas and our Cell and Grid classes. The sole purpose of the Game class will be to configure the GUI, add event listeners to the cells, enable the visuals of the game state (things such as time, reset, clicked on a bomb, sealed a cell, or win), while Grid keeps track of every instance of Cell and their statuses.
