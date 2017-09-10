@@ -44,7 +44,7 @@ How would you design this program?
 Our game state and basic data structures for our "grid" are kept in separate extensible classes. Game, Cell, and Grid.  
 The Cell class has attributes:  bool mined, bool sealed, bool exposed, and int adjacentMines.  The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true).  The adjacentMines attribute is used to track the number of mines that are adjacent to the Cell instance.
 
-For our basic data structures, we decided it would be easiest to keep track of our cells using a one-dimensional ArrayList. This poses two advantages: 1. we can scale the game to any size using ArrayList’s dynamic ArrayList.add() method, and would not be stuck with using a compile-time grid size as would be the case if we used a simple array. 2. Using a one-dimensional representation of the game simplifies the math (and lines of code). For example:
+For our basic data structures, we decided it would be easiest to keep track of our cells using a one-dimensional JavaScript array. This poses two advantages: 1. we can scale the game to any size using JavaScript built in dynamic arrays 2. Using a one-dimensional representation of the grid simplifies the math (and lines of code). For example:
 
 Calculating adjacent cells for a grid that has width*height number of cells:
 
@@ -72,7 +72,6 @@ if(((currentCell + 1) % width) > 0 && (currentCell + 1) < grid.size())
 	}
 
 Etc.
-
 
 Discuss what language you would use.
 
