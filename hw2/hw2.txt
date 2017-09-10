@@ -41,12 +41,46 @@ Include a separate file (may be a scan of hand drawn picture if you like, or a p
 
 How would you design this program? 
 
-Our design is composed of two classes:  Cell and Grid.  The Cell class has attributes:  bool mined, bool sealed, bool exposed, and int adjacentMines.  The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true).  The adjacentMines attribute is used to track the number of mines around a particular cell.  
+Our game state and basic data structures for our "grid" are kept in separate extensible classes. GameGUI, Cell, and Grid.  
+The Cell class has attributes:  bool mined, bool sealed, bool exposed, and int adjacentMines.  The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true).  The adjacentMines attribute is used to track the number of mines that are adjacent to the Cell instance.
+
+For our basic data structures, we decided it would be easiest to keep track of our cells using a one-dimensional ArrayList. This poses two advantages: 1. we can scale the game to any size using ArrayList’s dynamic ArrayList.add() method, and would not be stuck with using a compile-time grid size as would be the case if we used a simple array. 2. Using a one-dimensional representation of the game simplifies the math (and lines of code). For example:
+
+Calculating adjacent cells for a grid that has width*height number of cells:
+
+Top: currentCell – height
+Bottom: currentCell + height
+Left: currentCell – 1
+Right: currentCell + 1
+Top Left Corner: currentCell – height – 1
+Top Right Corner: currentCell – height + 1
+Bottom Left Corner: currentCell + height – 1
+Bottom Right Corner: currentCell + height + 1
+
+Bounds checking, in the example case where currentCell – 1 would be considered off the left edge of the “grid”, we use % math and array bounds checking. For example:
+
+//left
+if(((currentCell - 1) % width) > 1 && (currentCell - 1) >= 0)
+{
+		grid.get(currentCell - 1).adjacentMines += 1;
+	}
+
+//right
+if(((currentCell + 1) % width) > 0 && (currentCell + 1) < grid.size())
+	{
+		grid.get(currentCell + 1).adjacentMines += 1;
+	}
+
+Etc.
+
+The GameGui class will import the Grid class, Swing, and AWT libraries. The sole purpose of this class will be to configure the GUI, add event listeners to the cells, enable the visuals of the game state (things such as time, reset, clicked on a bomb, sealed a cell, or win), while Grid keeps track of every instance of Cell and their statuses.
+
+
 
 Discuss what language you would use.
 
-We're planning on using Java.
+We chose Java as our language for its portability, abundant and well documented GUI libraries, and its wide presence in many industries. We are not too familiar with Java but feel that it would be a bit easier to prototype and create something and not have to worry about pointers and memory like in C++.
 
 How do you plan to structure the program, what libraries would you use?
 
-We are thinking of using the swing library for the graphics and the awt library to handle events.
+We are thinking of using the swing library for the graphics and the awt library to handle events such as mouse overs and button clicks.
