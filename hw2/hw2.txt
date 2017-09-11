@@ -79,7 +79,7 @@ The game's physical size on the screen is determined by the display.innerWidth a
 
 Grid layer:
 
-Grid(width, height, numberMines) is called by the Game layer. Grid randomly places the mines, and Grid.findAdjacentCells() increments Cell.numberMines of all adjacent Cell instances. Once all mines have been placed and Cell.adjacentMines calculated, the Grid array is returned to be used by the Game layer. The game layer interfaces with Cell methods Cell.expose(), Cell.seal(), Cell.unseal() to change Grid state, which is visually mapped in the game layer.
+Grid(width, height, numberMines) is called by the Game layer. Grid randomly places the mines, and Grid.findAdjacentCells() increments Cell.numberMines of all adjacent Cell instances. Once all mines have been placed and Cell.numberMines calculated, the Grid array is returned to be used by the Game layer. The game layer interfaces with Cell methods Cell.expose(), Cell.seal(), Cell.unseal() to change Grid state, which is visually mapped in the game layer.
 
 Cell layer:
 
