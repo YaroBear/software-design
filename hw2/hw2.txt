@@ -57,27 +57,37 @@ Top Right Corner: currentCell – height + 1
 Bottom Left Corner: currentCell + height – 1
 Bottom Right Corner: currentCell + height + 1
 
-Bounds checking, in the example case where currentCell – 1 would be considered off the left edge of the “grid”, we use % math and array bounds checking. For example:
+Bounds checking, in the example case where currentCell – 1 would be considered off the left edge of the “grid”, we use % math and array bounds checking.
 
-//left
-if(((currentCell - 1) % width) > 1 && (currentCell - 1) >= 0)
-{
-		grid.get(currentCell - 1).adjacentMines += 1;
-	}
+Game layer:
 
-//right
-if(((currentCell + 1) % width) > 0 && (currentCell + 1) < grid.size())
-	{
-		grid.get(currentCell + 1).adjacentMines += 1;
-	}
+Calls the Grid class to instantiate a new Grid array populated with instances of the Cell class - Grid(width, height, numberMines)
 
-Etc.
+The only logic bound to the Game layer is
+- Where each Cell is placed
+- The size of each Cell in terms of display size
+- Whether a cursor falls within the boundaries of a cell and the type of click (left or right click)
+- A timer
+- The mapping of Cell attributes to Cell textures. 
+
+There is a texture for each attribute: mined, sealed, exposed, adjacentMines (number). 
+The game layer is only concerned about where the player clicks and displaying the appropriate tile, and then calling winGame(), loseGame(), or continuation of a valid game state.
+
+A valid game state is where a bomb has not been clicked, and there are tiles that are yet to be exposed. An end game state is where all tiles have been revealed and only cells that are mined have been sealed. Game.reset() can be called during a valid game state or end game state where a new instance of Grid is created, and then mapped to the game layer cells. Game.reset() resets the timer, and the timer starts when the first click event is detected.
+
+The game's physical size on the screen is determined by the display.innerWidth and display.innerHeight of the browsers DOM to dynamically fit on any screen size. Each Cell size is a function of the game size and the number of cells in the game (default 10*10). Each Cell is drawn to the Canvas using CanvasRenderingContext2D.rect(xPos, yPos, width, height). The GUI will display the timer, as well as a reset button to call Game.reset().
+
+Grid layer:
+
+Grid(width, height, numberMines) is called by the Game layer. Grid randomly places the mines, and Grid.findAdjacentCells() increments Cell.numberMines of all adjacent Cell instances. Once all mines have been placed and Cell.adjacentMines calculated, the Grid array is returned to be used by the Game layer. The game layer interfaces with Cell methods Cell.expose(), Cell.seal(), Cell.unseal() to change Grid state, which is visually mapped in the game layer.
+
+Cell layer:
+
+Bool mined, bool sealed, bool exposed, and int adjacentMines define the state for every instance of Cell. The Grid layer creates as many Cell instances as necessary to fill the Grid array.
 
 2. Discuss what language you would use.
 
-We were originally considering Java, but after doing research on some GUI and even game engine platforms, we are leaning towards using JavaScript. Modern applications are mostly web oriented these days, and now that flash and java applets are being deprecated for the web, it would make sense to build something modern. We both have experience using JavaScript in both the front and back end, and pairing this with the simple yet powerful Html5 Canvas we believe would make a great application.
-
-Our only concern is that if we use JavaScript, will we be stuck with the same language for the entire semester? Or are we allowed to pick and choose for each assignment? We love JavaScript, but white board interviews seem to favor languages like Java, C++, and C#, so we would like the ability to pick languages as they are suited for each assignment so we get some practice with these "core" languages.
+We were originally considering Java, but after doing research on some GUI and even game engine platforms, we decided on using JavaScript. Modern applications are mostly web oriented these days, and now that flash and java applets are being deprecated for the web, it would make sense to build something modern. We both have experience using JavaScript in both the front and back end, and pairing this with the simple yet powerful Html5 Canvas we believe would make a great application.
 
 3. How do you plan to structure the program, what libraries would you use?
 
