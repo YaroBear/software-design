@@ -1,0 +1,26 @@
+[Venkat 09/11/17 10:06 AM CEST]
+synopsis: good start, let's present some details on separation of concerns 
+
+details:
+Diagram:
+Please show cardinality - the number of objects of that class that will participate in the relationship.
+
+Let's show the class that will deal with GUI separated from the one that will deal with logic.
+
+Text:
+1.
+Please show all the classes mentioned here in the diagram.
+
+Good reasoning for the design decisions, nice.
+
+We can remove most of the low level details from here, like specific properties and the code sample, not useful at this level of design.
+
+Instead, let's focus on high level details, layers, separation of concerns, distribution of logic, state, GUI among classes.
+
+2.
+You may use any of these languages you like. You may switch to another language later if you like, but don't switch too frequently.
+
+3.
+Good.
+
+------------------------------------------------------------------------------
