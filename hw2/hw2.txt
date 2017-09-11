@@ -61,25 +61,26 @@ Bounds checking, in the example case where currentCell – 1 would be considered
 
 Game layer:
 
-Calls the Grid class to instantiate a new Grid array populated with instances of the Cell class - Grid(width, height, numberMines)
+The Game class calls the Grid class to instantiate a new Grid array populated with instances of the Cell class - Grid.grid[cells]. This is the internal state of the game.
+While the Grid class preserves the state of every instance of Cell, the GameCell in the Game class acts as the graphical representation of the Cell, keeping tracking of position, size, texture, and click events in the Canvas - Game.grid[GameCell]. This is the external, user level representation.
+This gives us the hierarchy: Game.grid[GameCells], Grid[Cells], and Cell. The lowest levels work independently of the classes above, and the upper level classes call public methods of the ones below. This makes it easier to debug each layer and the Grid and Cell classes more portable.
 
 The only logic bound to the Game layer is
 - Where each Cell is placed
 - The size of each Cell in terms of display size
 - Whether a cursor falls within the boundaries of a cell and the type of click (left or right click)
 - A timer
-- The mapping of Cell attributes to Cell textures. 
+- The mapping of graphical representations of the game to the internal state
 
-There is a texture for each attribute: mined, sealed, exposed, adjacentMines (number). 
-The game layer is only concerned about where the player clicks and displaying the appropriate tile, and then calling winGame(), loseGame(), or continuation of a valid game state.
+Game.GameCell is the base layer of every cell with attributes xPosition, yPosition, width, height, and exposed(boolean), with methods expose(), seal(), and unseal(). Game.MinedCell, Game.SealedCell, Game.NumberedCell, Game.EmptyCell inherit from the Game.GameCell base class, displaying a different texture and overriding the base methods if needed. For example: Game.MinedCell.expose() would result in an end game state, whereas Game.NumberedCell.expose() allows continuation of a the valid game state.
 
-A valid game state is where a bomb has not been clicked, and there are tiles that are yet to be exposed. An end game state is where all tiles have been revealed and only cells that are mined have been sealed. Game.reset() can be called during a valid game state or end game state where a new instance of Grid is created, and then mapped to the game layer cells. Game.reset() resets the timer, and the timer starts when the first click event is detected.
+A valid game state is where a bomb has not been clicked, and there are tiles that are yet to be exposed. An end game state is where all tiles have been revealed and only cells that are mined have been sealed. Game.reset() can be called during a valid game state or end game state. Game.reset() resets the timer, and the timer starts when the first click event is detected.
 
-The game's physical size on the screen is determined by the display.innerWidth and display.innerHeight of the browsers DOM to dynamically fit on any screen size. Each Cell size is a function of the game size and the number of cells in the game (default 10*10). Each Cell is drawn to the Canvas using CanvasRenderingContext2D.rect(xPos, yPos, width, height). The GUI will display the timer, as well as a reset button to call Game.reset().
+The game's physical size on the screen is determined by the display.innerWidth and display.innerHeight of the browser's DOM to dynamically fit on any screen size. Each Cell size is a function of the game size and the number of cells in the game (default 10*10). Each Cell is drawn to the Canvas using CanvasRenderingContext2D.rect(xPos, yPos, width, height). The GUI will display the timer, as well as a reset button to call Game.reset().
 
 Grid layer:
 
-Grid(width, height, numberMines) is called by the Game layer. Grid randomly places the mines, and Grid.findAdjacentCells() increments Cell.numberMines of all adjacent Cell instances. Once all mines have been placed and Cell.numberMines calculated, the Grid array is returned to be used by the Game layer. The game layer interfaces with Cell methods Cell.expose(), Cell.seal(), Cell.unseal() to change Grid state, which is visually mapped in the game layer.
+Grid(width, height, numberMines) is called by the Game layer. Grid randomly places the mines, and Grid.findAdjacentCells() increments Cell.numberMines of all adjacent Cell instances. Once all mines have been placed and Cell.numberMines calculated, the Grid array is returned to be used by the Game layer. The game layer interfaces with Cell instances' internal methods Cell.expose(), Cell.seal(), Cell.unseal() to change the internal state of the game.
 
 Cell layer:
 
