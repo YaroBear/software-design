@@ -41,9 +41,6 @@ Include a separate file (may be a scan of hand drawn picture if you like, or a p
 
 1. How would you design this program? 
 
-Our game state and basic data structures for our "grid" are kept in separate extensible classes. Game, Cell, and Grid.  
-The Cell class has attributes:  bool mined, bool sealed, bool exposed, and int adjacentMines.  The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true).  The adjacentMines attribute is used to track the number of mines that are adjacent to the Cell instance.
-
 For our basic data structures, we decided it would be easiest to keep track of our cells using a one-dimensional JavaScript array. This poses two advantages: 1. we can scale the game to any size using JavaScript built in dynamic arrays 2. Using a one-dimensional representation of the grid simplifies the math (and lines of code). For example:
 
 Calculating adjacent cells for a grid that has width*height number of cells:
@@ -59,37 +56,32 @@ Bottom Right Corner: currentCell + height + 1
 
 Bounds checking, in the example case where currentCell – 1 would be considered off the left edge of the “grid”, we use % math and array bounds checking.
 
-Game layer:
+The main objects of our game follow a Model View Controller pattern.
+Controller: GameController()
+Views: GameView(), CellView()
+Models: Grid(), Cell()
 
-The Game class calls Grid to instantiate a new Grid.grid array populated with instances of the Cell class - Grid.grid[cell]. This is the internal state of the game. The Game class sets xPosition, yPosition, cellWidth, and cellHeight of every instance of Cell to provide a graphical representation of the internal state. This gives us the hierarchy: Game, Grid, and Cell.
+The GameController() calls Grid() to return a new Grid object, which acts as a container that manages Cell() objects. Grid() and Cell() make up the internal state of the game, keeping track whether a cell is exposed or sealed, and making Cell.expose(), Cell.seal(), Cell.unseal() avilable to the GameController(). When any of these methods are called, GameController() also calls GameView() to update the Canvas.
 
-The only logic bound to the Game layer is
-- Where each Cell is placed
-- The size of each Cell in terms of display size
-- Whether a cursor falls within the boundaries of a cell and the type of click (left or right click)
-- A timer
-- The mapping of the internal state to the external (graphical) state
+The GameView() object acts as the graphical representation of the Grid() object, managing CellView() objects that store the external state of the game. This includes xPosition, yPosition, cell size, texture, and click event listeners of each cell in the Canvas.
 
-A valid game state is where a bomb has not been clicked, and there are tiles that are yet to be exposed. An end game state is where all tiles have been revealed and only cells that are mined have been sealed. Game.reset() can be called during a valid game state or end game state. Game.reset() resets the timer, and the timer starts when the first click event is detected. For example: MinedCell.expose() would result in an end game state, whereas NumberedCell.expose() allows continuation of a the valid game state.
+The 1D Grid array must be mapped to a 2D canvas, where each cell is represented as a rectangle taking parameters (xPos, yPos, width, height), so it makes sense to keep the internal state of the cell separate from what Canvas needs to draw the cells.
 
-The game's physical size on the screen is determined by the window.innerWidth and window.innerHeight of the browser's DOM to dynamically fit on any screen size. Each Cell size is a function of the game size and the number of cells in the game (default 10*10). Each Cell is drawn to the Canvas using CanvasRenderingContext2D.rect(xPos, yPos, width, height). The GUI will display the timer, as well as a reset button to call Game.reset().
+The Cell object has attributes: bool mined, bool sealed, bool exposed, and int adjacentMines. The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true). The adjacentMines attribute is used to track the number of mines that are adjacent to the Cell instance.
 
-Grid layer:
+Every CellView object starts with the default unexposed texture, and CellView.renderTexture() updates the texture when the internal state of the game has changed, i.e. Cell.expose() is called.
 
-Grid(width, height, numberMines) is called by the Game layer. Grid.distributeMines(int mines) randomly places the mines in the Grid.grid array, and Grid.findAdjacentCells() creates instances of NumberedCell that are adjacent to the current MinedCell, and sets NumberedCell.value to indicate adjacent mines. Once all mines have been placed and NumberedCell.value calculated, the Grid array is returned to be used by the Game layer. The game layer interfaces with Cell instances' internal methods Cell.expose(), Cell.seal(), Cell.unseal() to change the internal state of the game.
+JavaScript allows us to extend a prototypical object to any constructor function, which provides similar functionality to subclasses in languages like Java. MinedCell, EmptyCell, and NumberedCell inherit from the Cell object using this prototypical inheritance pattern. Every Cell object has attributes: exposed and sealed, with methods expose(), seal(), and unseal(). The other Cell prototype objects override expose() from the base object.
 
-Cell layer:
+MinedCell.expose(): GameController() calls GameController.loseGame() and Gameview() to update textures.
 
-Cell is a base class with attributes: exposed (boolean), sealed(boolean), xPosition, yPosition, cellWidth, cellHeight, and texture.
-Cell has three methods: expose(), seal(), and unseal().
+EmptyCell.expose(): GameController() calls Grid.exposeNeighbors() and Gameview() to update textures.
 
-MinedCell, EmptyCell, and NumberedCell inherit from Cell, and set appropriate textures to the texture attribute.
-MinedCell() overrides the base class method expose() by calling Game.loseGame()
-EmptyCell() overrides the base class method expose() by rendering an empty cell texture, and calling Grid.exposeNeighbors() to reveal empty cells, bordered by numbered cells.
-NumberedCell() overrides the base class method expose() by rendering a cell with a number inside of it to indicate Cell.adjacentMines.
+NumberedCell.expose(): GameController() just tells Gameview() to update one CellView texture.
 
-The Grid layer creates as many Cell instances (and child class instances) as necessary to fill the Grid.grid array.
+A valid game state is where a bomb has not been clicked, and there are tiles that are yet to be exposed. An end game state is where all tiles have been revealed and only cells that are mined have been sealed. GameController.reset() can be called during a valid game state or end game state. GameController.reset() resets the GameController.timer, and the timer starts when the first click event is detected. For example: MinedCell.expose() would result in an end game state, whereas NumberedCell.expose() allows continuation of the valid game state.
 
+The game's physical size on the screen is determined by the window.innerWidth and window.innerHeight of the browser's DOM to dynamically fit on any screen size. Each Cell size is a function of the game size and the number of cells in the game (default 10*10). Each Cell is drawn to the Canvas using CanvasRenderingContext2D.rect(xPos, yPos, width, height). The GUI will display the timer, as well as a reset button to call GameController.reset().
 
 2. Discuss what language you would use.
 
@@ -97,4 +89,9 @@ We were originally considering Java, but after doing research on some GUI and ev
 
 3. How do you plan to structure the program, what libraries would you use?
 
-The Game class will import the Html5 Canvas and our Cell and Grid classes. The sole purpose of the Game class will be to configure the GUI, add event listeners to the cells, enable the visuals of the game state (things such as time, reset, clicked on a bomb, sealed a cell, or win), while Grid keeps track of every instance of Cell and their statuses.
+The main objects of our game follow a Model View Controller pattern.
+Controller: GameController()
+Views: GameView(), CellView()
+Models: Grid(), Cell()
+
+The GameController() object will configure the GUI, add event listeners to the cells, enable the visuals of the game state (things such as time, reset, lose, and win) through GameView() and CellView(), while relying on Grid to keep track the internal state of the game including every instance of Cell and their attributes. HTML5 Canvas provides the API to render our views.
