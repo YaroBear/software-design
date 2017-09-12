@@ -1,3 +1,19 @@
+[Venkat 09/12/17 08:43 AM CEST]
+synopsis: almost done 
+
+details:
+Diagram:
+If cardinality is 1, we do not put 1 as that is the default.
+
+We are using shaded diamonds - means composition, but that is the most restrictive relationship. Better to use aggregation/unshaded diamond instead at this level of design.
+
+It would be better to show GUI separated form logic of the game.
+
+Text:
+
+1. Good details. We need to include a paragraph discussing how GUI will be handled and how it will be separated from the logic of the game, the details of which has been presented so far.
+
+------------------------------------------------------------------------------
 [Venkat 09/11/17 10:06 AM CEST]
 synopsis: good start, let's present some details on separation of concerns 
 
