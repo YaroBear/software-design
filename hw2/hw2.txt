@@ -67,8 +67,6 @@ The GameView() object acts as the graphical representation of the Grid() object,
 
 The 1D Grid array must be mapped to a 2D canvas, where each cell is represented as a rectangle taking parameters (xPos, yPos, width, height), so it makes sense to keep the internal state of the cell separate from what Canvas needs to draw the cells.
 
-The Cell object has attributes: bool mined, bool sealed, bool exposed, and int adjacentMines. The boolean attributes will be used to indicate if a cell has a mine (mined = true), if a cell has been sealed (sealed = true), and if a cell has been exposed (exposed = true). The adjacentMines attribute is used to track the number of mines that are adjacent to the Cell instance.
-
 Every CellView object starts with the default unexposed texture, and CellView.renderTexture() updates the texture when the internal state of the game has changed, i.e. Cell.expose() is called.
 
 JavaScript allows us to extend a prototypical object to any constructor function, which provides similar functionality to subclasses in languages like Java. MinedCell, EmptyCell, and NumberedCell inherit from the Cell object using this prototypical inheritance pattern. Every Cell object has attributes: exposed and sealed, with methods expose(), seal(), and unseal(). The other Cell prototype objects override expose() from the base object.
