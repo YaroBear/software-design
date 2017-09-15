@@ -1,0 +1,25 @@
+Assign1: Due 11:59PM September 29
+
+***Your chance of success greatly increases if you start very early. Your chance of failure increases if you start late.
+
+Using Test First Development (no code without test first) implement the problem you designed in hw2. Feel free to evolve that design and use your judgment to make changes based on the improved understanding and learning.
+
+Take small steps, ask for frequent reviews.
+
+First start with a tests list and a canary test.
+
+After completing the assignment (and only after) answer the following questions:
+
+1. What did you learn mainly in this assignment?
+
+YOUR ANSWER GOES HERE
+
+2. How is your current design different, if at all, from the strategic design created in hw2?
+
+YOUR ANSWER GOES HERE
+
+3. Were there any surprises or things you did not expect along the way? Any 
+particular problem faced, things you had to tackle that you did not expect 
+beforehand?
+
+YOUR ANSWER GOES HERE
