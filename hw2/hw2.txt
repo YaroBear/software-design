@@ -93,3 +93,5 @@ Views: GameView(), CellView()
 Models: Grid(), Cell()
 
 The GameController() object will configure the GUI, add event listeners to the cells, enable the visuals of the game state (things such as time, reset, lose, and win) through GameView() and CellView(), while relying on Grid to keep track the internal state of the game including every instance of Cell and their attributes. HTML5 Canvas provides the API to render our views.
+
+Total [10]: 10
