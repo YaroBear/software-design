@@ -1,0 +1,19 @@
+[Venkat 09/17/17 19:06 PM MDT]
+synopsis: build setup 
+
+details:
+I have setup a build file for you and have integrated that into the continuous integration also-see build.bat in your repository root directory.
+
+To install the packages, run 
+npm install 
+just once on the command line in assign1 directory.
+
+Then to run the test, each time run 
+npm test 
+in the command prompt from the assign1 directory.
+
+Please make sure that the build passes (all tests pass) upon each commit. If a build fails, please fix the build right away. Either make change to fix the build or roll back the code change to fix the build (and then try again once you figure out what's going on). 
+
+Start with may be three tests and minimum code for those three tests. We will review that and move forward.
+
+------------------------------------------------------------------------------
