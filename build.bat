@@ -1,4 +1,4 @@
 cd assign1
-npm install
-npm test
+call npm install
+call npm test
 exit %ERRORLEVEL%
