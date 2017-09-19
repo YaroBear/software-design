@@ -1,6 +1,6 @@
-var expect = require('chai').expect;
-var Cell = require('../src/Cell.js');
-var Grid = require('../src/Grid.js');
+// var expect = require('chai').expect;
+// var Cell = require('../src/Cell.js');
+// var Grid = require('../src/Grid.js');
 
 describe('MineSweeper Tests', function() {
 	it('canary test', function() {
@@ -8,14 +8,14 @@ describe('MineSweeper Tests', function() {
 	});
 
 	it('should seal a cell', function(){
-		var newCell = new Cell.Cell();
+		var newCell = new Cell();
 		newCell.seal();
 		expect(newCell.sealed).to.eql(true);
 	});
 
 
 	it('should unseal a cell', function(){
-		var newCell = new Cell.Cell();
+		var newCell = new Cell();
 		newCell.unseal();
 		expect(newCell.sealed).to.eql(false);
 	});
@@ -26,7 +26,7 @@ describe('MineSweeper Tests', function() {
 	});
 
 	it('should make a new MinedCell', function(){
-		var newCell = new Cell.MinedCell();
+		var newCell = new MinedCell();
 		expect(newCell.mined).to.eql(true);
 	});
 	
@@ -36,7 +36,7 @@ describe('MineSweeper Tests', function() {
 
 		newGrid.distributeMines();
 		for(var i = 0; i < 10*10; i++){
-			if (newGrid.grid[i] instanceof Cell.MinedCell) {
+			if (newGrid.grid[i] instanceof MinedCell) {
 				count++;
 			}
 		}

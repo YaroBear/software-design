@@ -24,5 +24,5 @@ var MinedCell = function(){
 };
 
 
-module.exports.Cell = Cell;
-module.exports.MinedCell = MinedCell;
+// module.exports.Cell = Cell;
+// module.exports.MinedCell = MinedCell;

@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --watch --reporter min"
+    "test": "karma start --reporters dots --single-run",
+    "watchtest": "karma start --reporters dots"
   },
   "author": "",
   "license": "ISC",
