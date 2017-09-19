@@ -1,3 +1,25 @@
+[Venkat 09/19/17 02:07 AM MDT]
+synopsis: let's start with simpler tests and less code
+
+details:
+In package.json, we should not run
+"test": "mocha --watch --reporter min"
+
+with watch. This will run the test and wait. And that will result in the CI hanging.
+
+If you want to run in watch mode locally, that is fine. For this we can setup another script to run in watch mode. I have created a watchtest. To use this, run
+
+npm run watchtest
+
+We don't need to use module and requires. We will be running the code in a browser. So, the browser will pick up the files from the src and the test directory without needing require. I have fixed the code to work with browser and tests to run with Karma. Please do not run mocha directly on node. Instead run mocha on the browser using Karma. If you have questions about this, please drop me an email.
+
+Now to the code review.     
+                          
+Let's start with simpler tests and a lot less code as well.
+
+Please see notes in code.
+
+------------------------------------------------------------------------------
 [Venkat 09/17/17 19:06 PM MDT]
 synopsis: build setup 
 

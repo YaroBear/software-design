@@ -1,11 +1,33 @@
-// var expect = require('chai').expect;
-// var Cell = require('../src/Cell.js');
-// var Grid = require('../src/Grid.js');
+// var expect = require('chai').expect;  //Venkat: please remove this line
+// var Cell = require('../src/Cell.js'); //Venkat: please remove this line
+// var Grid = require('../src/Grid.js'); //Venkat: please remove this line
 
 describe('MineSweeper Tests', function() {
 	it('canary test', function() {
 		expect(true).to.be.true;
 	});
+
+//Venkat: Let's delete these tests and start over with something much simpler.
+//here are a few tests to write at first.
+
+// expose a cell
+// expose another cell
+// expose an exposed cell
+
+//For the expose a cell, call exposeCell(1, 2) and verify that 
+//isCellExposed(1, 2) is true.
+
+//For expose  an exposed cell test, call exposeCell twice on the same location 
+//and let the reult still be true for isCellExposed. That is calling expose on 
+//an exposed cell is OK.
+
+//Let's do all this test on a MineSweeper class (not Grid, not Cell). At this 
+//time we do not need a Cell class, so let's remove Grid and Cell. For now, we 
+//need MineSweeper class and three tests in our MineSweeper Tests.
+
+//Keep the code very minium (literally). Do not create any fields in your 
+//class until that field is absolutely needed at this time (and it is not 
+//right now).
 
 	it('should seal a cell', function(){
 		var newCell = new Cell();
