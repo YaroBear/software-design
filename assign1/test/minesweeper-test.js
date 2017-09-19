@@ -30,11 +30,11 @@ describe('MineSweeper Tests', function() {
 //right now).
 
 
+	//New tests based on feedback above
 	it('expose a cell', function(){
 		var minesweeper = new MineSweeper();
 		minesweeper.exposeCell(1, 2);
 		expect(minesweeper.isCellExposed(1, 2)).to.eql(true);
-
 	});
 
 	it('expose another cell', function(){
@@ -45,7 +45,6 @@ describe('MineSweeper Tests', function() {
 		//expose second cell
 		minesweeper.exposeCell(2, 3);
 		expect(minesweeper.isCellExposed(2, 3)).to.eql(true);
-
 	});
 
 	it('expose an exposed cell', function(){
@@ -54,43 +53,5 @@ describe('MineSweeper Tests', function() {
 		minesweeper.exposeCell(1, 2);
 		minesweeper.exposeCell(1, 2);
 		expect(minesweeper.isCellExposed(1, 2)).to.eql(true);
-
 	});
-
-	// it('should seal a cell', function(){
-	// 	var newCell = new Cell();
-	// 	newCell.seal();
-	// 	expect(newCell.sealed).to.eql(true);
-	// });
-
-
-	// it('should unseal a cell', function(){
-	// 	var newCell = new Cell();
-	// 	newCell.unseal();
-	// 	expect(newCell.sealed).to.eql(false);
-	// });
-
-	// it('should create an array of cells', function(){
-	// 	var newGrid = new Grid(10, 10, 5);
-	// 	expect(newGrid.grid.length).to.eql(100);
-	// });
-
-	// it('should make a new MinedCell', function(){
-	// 	var newCell = new MinedCell();
-	// 	expect(newCell.mined).to.eql(true);
-	// });
-	
-	// it('should distribute 5 mines', function(){
-	// 	var newGrid = new Grid(10, 10, 5);
-	// 	var count = 0;
-
-	// 	newGrid.distributeMines();
-	// 	for(var i = 0; i < 10*10; i++){
-	// 		if (newGrid.grid[i] instanceof MinedCell) {
-	// 			count++;
-	// 		}
-	// 	}
-	// 	expect(count).to.eql(5);
-	// });
-
 });
