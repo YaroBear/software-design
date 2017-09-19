@@ -1,6 +1,4 @@
-// var expect = require('chai').expect;  //Venkat: please remove this line
-// var Cell = require('../src/Cell.js'); //Venkat: please remove this line
-// var Grid = require('../src/Grid.js'); //Venkat: please remove this line
+
 
 describe('MineSweeper Tests', function() {
 	it('canary test', function() {
@@ -38,7 +36,6 @@ describe('MineSweeper Tests', function() {
 	});
 
 	it('expose another cell', function(){
-
 		var minesweeper = new MineSweeper();
 		//expose first cell
 		minesweeper.exposeCell(1, 2);

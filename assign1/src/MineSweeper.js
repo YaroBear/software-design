@@ -1,14 +1,12 @@
 
 var MineSweeper = function(){
-
-	var Cell = {EXPOSED : false};
-
+	this.Cell = {EXPOSED : false};
 };
 
 MineSweeper.prototype.exposeCell = function(row, column){
-	Cell.EXPOSED = true;
+	this.Cell.EXPOSED = true;
 };
 
 MineSweeper.prototype.isCellExposed = function(row, column){
-	return Cell.EXPOSED;
+	return this.Cell.EXPOSED;
 };
