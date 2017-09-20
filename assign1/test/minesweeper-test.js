@@ -1,10 +1,9 @@
-
-
 describe('MineSweeper Tests', function() {
 	it('canary test', function() {
 		expect(true).to.be.true;
 	});
 
+//Venkat: Please remove review notes before asking for the next review.
 //Venkat: Let's delete these tests and start over with something much simpler.
 //here are a few tests to write at first.
 
@@ -28,27 +27,30 @@ describe('MineSweeper Tests', function() {
 //right now).
 
 
-	//New tests based on feedback above
+	//New tests based on feedback above  //Venkat: Please do not leave comments in code. We will evolve code continuously based on feedback.
 	it('expose a cell', function(){
-		var minesweeper = new MineSweeper();
+		var minesweeper = new MineSweeper(); //Venkat: let's move this to before_each setup
 		minesweeper.exposeCell(1, 2);
+//Venkat: Let's put a blank line here		
 		expect(minesweeper.isCellExposed(1, 2)).to.eql(true);
 	});
 
 	it('expose another cell', function(){
 		var minesweeper = new MineSweeper();
-		//expose first cell
+		//expose first cell //Venkat: Please remove this line
 		minesweeper.exposeCell(1, 2);
-		//expose second cell
+		//expose second cell //Venkat: Please remove this line
 		minesweeper.exposeCell(2, 3);
+//Venkat: Let's put a blank line here		
 		expect(minesweeper.isCellExposed(2, 3)).to.eql(true);
 	});
 
 	it('expose an exposed cell', function(){
 		var minesweeper = new MineSweeper();
-		//expose same cell twice
+		//expose same cell twice //Venkat: Please remove this line
 		minesweeper.exposeCell(1, 2);
 		minesweeper.exposeCell(1, 2);
+//Venkat: Let's put a blank line here		
 		expect(minesweeper.isCellExposed(1, 2)).to.eql(true);
 	});
 });

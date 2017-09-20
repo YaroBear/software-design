@@ -1,3 +1,27 @@
+[Venkat 09/20/17 05:24 AM MDT]
+synopsis: good job so far
+
+details:
+Please address and remove the review notes I leave in the code.
+
+A test contains three parts: Arrange, Act, Assert. Let's give blank lines between each of these parts (if any of these parts are present).
+
+Good work so far.
+
+Let's move on to a few more tests.
+
+exposeCell cell out of row range.
+exposeCell out of column range.
+
+exposeCell calls "exposeNeighbor" on each of its eight neighbors.
+
+exposeCell call on an already exposed cell does not call exposeNeighbor on its neighbors.
+
+Also, write tests for this when cell is on top edge, right edge, bottom edge,
+left edge, top left corner.
+
+
+------------------------------------------------------------------------------
 [Venkat 09/19/17 02:07 AM MDT]
 synopsis: let's start with simpler tests and less code
 
