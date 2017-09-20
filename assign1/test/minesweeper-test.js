@@ -5,7 +5,7 @@ describe('MineSweeper Tests', function() {
 
 	var minesweeper;
 	beforeEach(function(){
-		minesweeper = new MineSweeper();
+		minesweeper = new MineSweeper(5,5);
 	});
 
 	it('expose a cell', function(){
@@ -42,5 +42,29 @@ describe('MineSweeper Tests', function() {
 		var toCall = function() { minesweeper.exposeCell(1, 8); }
 
 		expect(toCall).to.throw("Out of column range");
+	});
+
+
+	it('should be true that neighbors to a cell are exposed', function(){
+		var row = 1;
+		var column = 1;
+
+		minesweeper.exposeCell(row, column);
+
+		minesweeper.exposeNeighborCells(row, column);
+
+		var adjCells = [
+			[-1, -1],
+			[-1, 0], 
+			[-1, 1],
+			[0, -1],
+			[0, 1],
+			[1, -1],
+			[1, 0],
+			[1, 1]
+			];
+
+		for(var i = 0; i < adjCells.length; i++)
+			expect(minesweeper.isCellExposed(row + adjCells[i][0], column + adjCells[i][1])).to.eql(true);
 	});
 });
