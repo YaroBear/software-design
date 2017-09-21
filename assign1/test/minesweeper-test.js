@@ -60,19 +60,23 @@ describe('MineSweeper Tests', function() {
          
 //Venkat: Nice work upto this point.
 
-	it('should expose all neighbors of a current inner cell', function(){
-		var row = 1;
-		var column = 1;
+	//refactored based on feedback
+	it('exposeCell should expose its neighbors.', function(){
 
-		minesweeper.exposeCell(row, column);
+		var calledExposeNeighborsOf = minesweeper.exposeCell(1, 1);
 
-		minesweeper.exposeNeighborCells(row, column);
-
-		var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1],[0, 1],[1, -1],[1, 0],[1, 1]];
-
-		for(var i = 0; i < adjCells.length; i++)
-			expect(minesweeper.isCellExposed(row + adjCells[i][0], column + adjCells[i][1])).to.eql(true);
+		expect(calledExposeNeighborsOf).to.eql(true);
 	});
+
+	//refactored based on feedback
+	it('exposeCell should not expose neighbor cells if called on an already exposed cell', function(){
+		minesweeper.exposeCell(1, 2);
+
+		var calledExposeNeighborsOf = minesweeper.exposeCell(1, 2);
+		
+		expect(calledExposeNeighborsOf).to.eql(false);
+	});
+
 
 	it('should expose neighbors around top left corner cell, skipping over neighbor cells that are out of bounds', function(){
 		var row = 0;
@@ -119,9 +123,4 @@ describe('MineSweeper Tests', function() {
 		expect(minesweeper.exposeNeighborCells(row, column)).to.eql(3);
 	});
 
-	it('should not expose neighbor cells if exposeCell is called on an already exposed cell', function(){
-		minesweeper.exposeCell(1, 2);
-		
-		expect(minesweeper.exposeCell(1, 2)).to.eql(0);
-	});
 });

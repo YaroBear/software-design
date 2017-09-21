@@ -17,11 +17,13 @@ MineSweeper.prototype.exposeCell = function(row, column){
 	if(column>=this.width || column<0)
 		throw new Error('Out of column range');
 
+
 	if (this.Grid[row][column].exposed){
-		return 0;
+		return false;
 	}else{
 		this.Grid[row][column].exposed = true;
-		//expose neighbor cells //Venkat: Please remove
+
+		return this.exposeNeighborsOf(row, column);
 	}
 	
 };
@@ -44,3 +46,8 @@ MineSweeper.prototype.exposeNeighborCells = function(row, column){
 	}
 	return skipped;
 };
+
+MineSweeper.prototype.exposeNeighborsOf = function(row, column){
+	return true;
+};
+
