@@ -73,12 +73,25 @@ describe('MineSweeper Tests', function() {
 			expect(minesweeper.isCellExposed(row + adjCells[i][0], column + adjCells[i][1])).to.eql(true);
 	});
 
-	it('should expose neighbors around current edge cell, skipping over neighbor cells that are out of bounds', function(){
+	it('should expose neighbors around top left corner cell, skipping over neighbor cells that are out of bounds', function(){
 		var row = 0;
 		var column = 0;
 
 		minesweeper.exposeCell(row, column);
 
 		expect(minesweeper.exposeNeighborCells(row, column)).to.eql(5);
+	});
+
+	it('should expose neighbors around any edge cell, skipping over neighbor cells that are out of bounds', function(){
+		var edges = [[0, 1], [1, minesweeper.width - 1], [minesweeper.height - 1, 1], [1,0]];
+
+		for (var i = 0; i < 4;i++){
+			var row = edges[i][0];
+			var column = edges[i][1];
+
+			minesweeper.exposeCell(row, column);
+
+			expect(minesweeper.exposeNeighborCells(row, column)).to.eql(3);
+		}
 	});
 });

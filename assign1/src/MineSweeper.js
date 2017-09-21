@@ -32,7 +32,6 @@ MineSweeper.prototype.exposeNeighborCells = function(row, column){
 		try {
 			this.exposeCell(row + adjCells[i][0], column + adjCells[i][1]);
 		} catch(error) {
-			console.log("Skipping to next neighbor");
 			skipped += 1;
 		}
 	}
