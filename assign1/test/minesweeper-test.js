@@ -58,69 +58,62 @@ describe('MineSweeper Tests', function() {
 		expect(toCall).to.throw("Out of column range");
 	});
          
-//Venkat: Nice work upto this point.
-
-	//refactored based on feedback
 	it('exposeCell should expose its neighbors.', function(){
+		var actualNeighborCells = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2]];
 
-		var calledExposeNeighborsOf = minesweeper.exposeCell(1, 1);
+		var returnedNeighborCells = minesweeper.exposeCell(1, 1);
 
-		expect(calledExposeNeighborsOf).to.eql(true);
+		expect(actualNeighborCells).to.eql(returnedNeighborCells);
 	});
 
-	//refactored based on feedback
 	it('exposeCell should not expose neighbor cells if called on an already exposed cell', function(){
+		var calledExposeNeighborsOf = true;
+
 		minesweeper.exposeCell(1, 2);
 
-		var calledExposeNeighborsOf = minesweeper.exposeCell(1, 2);
+		calledExposeNeighborsOf = minesweeper.exposeCell(1, 2);
 		
 		expect(calledExposeNeighborsOf).to.eql(false);
 	});
 
-
 	it('should expose neighbors around top left corner cell, skipping over neighbor cells that are out of bounds', function(){
-		var row = 0;
-		var column = 0;
+		var actualNeighborCells = [[0, 1],[1, 0],[1, 1]];
 
-		minesweeper.exposeCell(row, column);
+		var returnedNeighborCells = minesweeper.exposeNeighborsOf(0, 0);
 
-		expect(minesweeper.exposeNeighborCells(row, column)).to.eql(5);
+		expect(actualNeighborCells).to.eql(returnedNeighborCells);
 	});
 
 	it('should expose neighbors around a cell on the top edge, skipping over neighbor cells that are out of bounds', function(){
-		var row = 0;
-		var column = 1;
+		var actualNeighborCells = [[0, 0], [0, 2], [1, 0], [1, 1], [1, 2]];
 
-		minesweeper.exposeCell(row, column);
+		var returnedNeighborCells = minesweeper.exposeNeighborsOf(0, 1);
 
-		expect(minesweeper.exposeNeighborCells(row, column)).to.eql(3);
+		expect(actualNeighborCells).to.eql(returnedNeighborCells);
 	});
 
 	it('should expose neighbors around a cell on the right edge, skipping over neighbor cells that are out of bounds', function(){
-		var row = 1;
-		var column = minesweeper.width - 1;
+		var actualNeighborCells = [[0, minesweeper.width-2], [0, minesweeper.width-1], [1, minesweeper.width-2], [2, minesweeper.width-2], [2, minesweeper.width-1]];
 
-		minesweeper.exposeCell(row, column);
+		var returnedNeighborCells = minesweeper.exposeNeighborsOf(1, minesweeper.width-1);
 
-		expect(minesweeper.exposeNeighborCells(row, column)).to.eql(3);
+		expect(actualNeighborCells).to.eql(returnedNeighborCells);
 	});
 
 	it('should expose neighbors around a cell on the bottom edge, skipping over neighbor cells that are out of bounds', function(){
-		var row = minesweeper.height - 1;
-		var column = 1;
+		var actualNeighborCells = [[minesweeper.height-2, 0], [minesweeper.height-2, 1], [minesweeper.height-2, 2], [minesweeper.height-1, 0], [minesweeper.height-1, 2]];
 
-		minesweeper.exposeCell(row, column);
+		var returnedNeighborCells = minesweeper.exposeNeighborsOf(minesweeper.height-1, 1);
 
-		expect(minesweeper.exposeNeighborCells(row, column)).to.eql(3);
+		expect(actualNeighborCells).to.eql(returnedNeighborCells);
 	});
 
 	it('should expose neighbors around a cell on the left edge, skipping over neighbor cells that are out of bounds', function(){
-		var row = 1;
-		var column = 0;
+		var actualNeighborCells = [[0, 0], [0, 1], [1, 1], [2, 0], [2, 1]];
 
-		minesweeper.exposeCell(row, column);
+		var returnedNeighborCells = minesweeper.exposeNeighborsOf(1, 0);
 
-		expect(minesweeper.exposeNeighborCells(row, column)).to.eql(3);
+		expect(actualNeighborCells).to.eql(returnedNeighborCells);
 	});
 
 });

@@ -32,22 +32,15 @@ MineSweeper.prototype.isCellExposed = function(row, column){
 	return this.Grid[row][column].exposed;
 };
 
-MineSweeper.prototype.exposeNeighborCells = function(row, column){
-	var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1],[0, 1],[1, -1],[1, 0],[1, 1]];
-
-	var skipped = 0;
-
-	for(var i = 0; i < adjCells.length; i++) {
-		try {
-			this.exposeCell(row + adjCells[i][0], column + adjCells[i][1]);
-		} catch(error) {
-			skipped += 1;
-		}
-	}
-	return skipped;
-};
-
 MineSweeper.prototype.exposeNeighborsOf = function(row, column){
-	return true;
+	var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1],[0, 1],[1, -1],[1, 0],[1, 1]];
+	var neighbors = [];
+	for (var i=0;i<8;i++){
+		var x = adjCells[i][0] + row;
+		var y = adjCells[i][1] + column;
+		if (x >= 0 && y >= 0 && x <= this.height-1 && y <= this.width-1)
+			neighbors.push([x, y]);
+	}
+	return neighbors;
 };
 
