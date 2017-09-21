@@ -1,3 +1,52 @@
+[Venkat 09/21/17 08:14 AM MDT]
+synopsis: let's rework the tests a bit 
+
+details:
+should expose all neighbors of a current inner cell
+let's rename this as
+exposeCell should expose its neighbors.
+
+For this test we want to make sure that when exposeCell is called,
+it in turn calls exposeNeighborsOf. For this we can do the following:
+
+var called = false;
+minesweeper.exposeNeighborsOf = function(row, column) {
+  called = true;
+}               
+
+minesweeper.exposeCell(1, 2);
+
+expect(called).to.be.true;
+
+This approach verifies exactly what we want to verify, that calling exposeCell calls exposeNeighborsOf.
+
+Then, if a cell is already exposed, we can verify that exposeCell does not call exposeNeighborsOf, like so:
+
+var called = false;
+minesweeper.exposeNeighborsOf = function(row, column) {
+  called = true;
+}               
+
+minesweeper.exposeCell(1, 2);
+called = false;
+minesweeper.exposeCell(1, 2);
+
+expect(called).to.be.false;            
+
+We can then turn around and write test for exposeNeighborsOf separately, like so
+                                           
+var list = ...
+minesweeper.exposeCell = function(row, column) {
+  ...store row and column into the list ...
+}
+              
+minesweeper.exposeNeighborsOf(1, 2);
+
+...expect... list... to have the neighbors of 1, 2...
+
+After this, let's move on to tests for sealing a cell. Keep your focus on only sealing an unsealing. Then work on tests for sealing an exposed cell. Then exposing a sealed cell.
+
+------------------------------------------------------------------------------
 [Venkat 09/20/17 05:24 AM MDT]
 synopsis: good job so far
 

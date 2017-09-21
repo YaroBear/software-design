@@ -5,7 +5,7 @@ describe('MineSweeper Tests', function() {
 
 	var minesweeper;
 	beforeEach(function(){
-		minesweeper = new MineSweeper(5,5);
+		minesweeper = new MineSweeper(5,5); //Venkat: minesweeper = new MineSweeper();
 	});
 
 	it('expose a cell', function(){
@@ -57,7 +57,8 @@ describe('MineSweeper Tests', function() {
 
 		expect(toCall).to.throw("Out of column range");
 	});
-
+         
+//Venkat: Nice work upto this point.
 
 	it('should expose all neighbors of a current inner cell', function(){
 		var row = 1;

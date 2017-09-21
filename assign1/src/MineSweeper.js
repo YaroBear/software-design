@@ -1,4 +1,4 @@
-var MineSweeper = function(w,h){
+var MineSweeper = function(w,h){ //Venkat: no need for w, h to be passed in. Use MAX = 10
 	this.height = w;
 	this.width = h;
 
@@ -21,7 +21,7 @@ MineSweeper.prototype.exposeCell = function(row, column){
 		return 0;
 	}else{
 		this.Grid[row][column].exposed = true;
-		//expose neighbor cells
+		//expose neighbor cells //Venkat: Please remove
 	}
 	
 };
