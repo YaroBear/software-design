@@ -21,6 +21,7 @@ MineSweeper.prototype.exposeCell = function(row, column){
 		return 0;
 	}else{
 		this.Grid[row][column].exposed = true;
+		//expose neighbor cells
 	}
 	
 };
