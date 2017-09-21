@@ -16,7 +16,13 @@ MineSweeper.prototype.exposeCell = function(row, column){
 		throw new Error('Out of row range');
 	if(column>=this.width || column<0)
 		throw new Error('Out of column range');
-	this.Grid[row][column].exposed = true;
+
+	if (this.Grid[row][column].exposed){
+		return 0;
+	}else{
+		this.Grid[row][column].exposed = true;
+	}
+	
 };
 
 MineSweeper.prototype.isCellExposed = function(row, column){
