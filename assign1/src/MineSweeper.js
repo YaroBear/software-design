@@ -12,9 +12,9 @@ var MineSweeper = function(w,h){
 };
 
 MineSweeper.prototype.exposeCell = function(row, column){
-	if (row>=this.height)
+	if (row>=this.height || row<0)
 		throw new Error('Out of row range');
-	if(column>=this.width)
+	if(column>=this.width || column<0)
 		throw new Error('Out of column range');
 	this.Grid[row][column].exposed = true;
 };
@@ -24,12 +24,17 @@ MineSweeper.prototype.isCellExposed = function(row, column){
 };
 
 MineSweeper.prototype.exposeNeighborCells = function(row, column){
-	this.exposeCell(row - 1, column -1);
-	this.exposeCell(row - 1, column);
-	this.exposeCell(row - 1, column + 1);
-	this.exposeCell(row, column - 1);
-	this.exposeCell(row, column + 1);
-	this.exposeCell(row + 1, column - 1);
-	this.exposeCell(row + 1, column);
-	this.exposeCell(row + 1, column + 1);
+	var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1],[0, 1],[1, -1],[1, 0],[1, 1]];
+
+	var skipped = 0;
+
+	for(var i = 0; i < adjCells.length; i++) {
+		try {
+			this.exposeCell(row + adjCells[i][0], column + adjCells[i][1]);
+		} catch(error) {
+			console.log("Skipping to next neighbor");
+			skipped += 1;
+		}
+	}
+	return skipped;
 };
