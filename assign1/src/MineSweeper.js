@@ -13,12 +13,15 @@ var MineSweeper = function(){
 	}
 };
 
-MineSweeper.prototype.exposeCell = function(row, column){
+MineSweeper.prototype.checkBounds = function(row, column){
 	if (row>=this.height || row<0)
 		throw new Error('Out of row range');
 	if(column>=this.width || column<0)
 		throw new Error('Out of column range');
+};
 
+MineSweeper.prototype.exposeCell = function(row, column){
+	this.checkBounds(row,column);
 
 	if (this.Grid[row][column].exposed){
 		return false;
@@ -48,10 +51,7 @@ MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 };
 
 MineSweeper.prototype.sealCell = function(row, column) {
-	if (row>=this.height || row<0)
-		throw new Error('Out of row range');
-	if(column>=this.width || column<0)
-		throw new Error('Out of column range');
+	this.checkBounds(row,column);
 
 	if(!this.Grid[row][column].exposed)
 		return true;
@@ -60,10 +60,7 @@ MineSweeper.prototype.sealCell = function(row, column) {
 };
 
 MineSweeper.prototype.unsealCell = function(row, column) {
-	if (row>=this.height || row<0)
-		throw new Error('Out of row range');
-	if(column>=this.width || column<0)
-		throw new Error('Out of column range');
+	this.checkBounds(row,column);
 
 	return true;
 };
