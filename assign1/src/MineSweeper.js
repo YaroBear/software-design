@@ -36,16 +36,13 @@ MineSweeper.prototype.isCellExposed = function(row, column){
 
 MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 	var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1],[0, 1],[1, -1],[1, 0],[1, 1]];
-	var neighbors = [];
 	for (var i=0;i<adjCells.length;i++){
 		var x = adjCells[i][0] + row;
 		var y = adjCells[i][1] + column;
 		if (x >= 0 && y >= 0 && x <= this.height-1 && y <= this.width-1){
-			neighbors.push([x, y]);
 			this.exposeCell(x, y);
 		}
 	}
-	//return neighbors;
 };
 
 MineSweeper.prototype.sealCell = function(row, column) {

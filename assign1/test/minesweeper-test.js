@@ -4,7 +4,7 @@ describe('MineSweeper Tests', function() {
 	});
 
 	var minesweeper;
-//Venkat: a blank line here please
+
 	beforeEach(function(){
 		minesweeper = new MineSweeper();
 	});
@@ -59,17 +59,8 @@ describe('MineSweeper Tests', function() {
 		expect(toCall).to.throw("Out of column range");
 	});
 
-//Venkat: Let's rework this test. Let us not check for the results here. 
-//Make exposeCell a void method, don't return anything from it.
-//Let us test interaction here.
 	it('exposeCell should expose its neighbors.', function(){
-    // var actualNeighborCells = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2]];
-    
-    // var returnedNeighborCells = minesweeper.exposeCell(1, 1);
-    
-    // expect(actualNeighborCells).to.eql(returnedNeighborCells);
 
-    //Venkat: instead of the above lines, let's do the following:
     var exposeNeighborsOfCalledWith = '';
     minesweeper.exposeNeighborsOf = function(row, column) {
       exposeNeighborsOfCalledWith = row + ', ' + column;
@@ -80,15 +71,7 @@ describe('MineSweeper Tests', function() {
 	});
 
 	it('exposeCell should not expose neighbor cells if called on an already exposed cell', function(){
-    // var calledExposeNeighborsOf = true;
-    
-    // minesweeper.exposeCell(1, 2);
-    
-    // calledExposeNeighborsOf = minesweeper.exposeCell(1, 2);
-    
-    // expect(calledExposeNeighborsOf).to.eql(false);
-		
-		//Venkat: This test is lacking a key part, replacing the exposeNeighborsOf method. Let's do the following instead of the above:
+
     var exposeNeighborsOfCalledWith = '';
     minesweeper.exposeNeighborsOf = function(row, column) {
       exposeNeighborsOfCalledWith = row + ', ' + column;
@@ -102,9 +85,6 @@ describe('MineSweeper Tests', function() {
     expect(exposeNeighborsOfCalledWith).to.be.equal('...not called...');
 	});
                                             
-//Venkat: Let's make both exposeCell and exposeNeighborsOf void methods
-
-//Venkat: Let's first test the happy path and then the edge cases. Here we will verify that exposeNeighborsOf calls exposeCell for each of the neighbors
 	it('exposeNeighborsOf should expose all its neighbors', function() {
 		var exposeCellCalledWith = [];
 		minesweeper.exposeCell = function(row, column) {
