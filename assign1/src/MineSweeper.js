@@ -23,12 +23,9 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-	if (this.Grid[row][column].exposed){
-		return false;
-	}else{
+	if (!this.Grid[row][column].exposed){
 		this.Grid[row][column].exposed = true;
-
-		return this.exposeNeighborsOf(row, column);
+		this.exposeNeighborsOf(row, column);
 	}
 	
 };
@@ -45,9 +42,10 @@ MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 		var y = adjCells[i][1] + column;
 		if (x >= 0 && y >= 0 && x <= this.height-1 && y <= this.width-1){
 			neighbors.push([x, y]);
+			this.exposeCell(x, y);
 		}
 	}
-	return neighbors;
+	//return neighbors;
 };
 
 MineSweeper.prototype.sealCell = function(row, column) {

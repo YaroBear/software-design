@@ -63,114 +63,120 @@ describe('MineSweeper Tests', function() {
 //Make exposeCell a void method, don't return anything from it.
 //Let us test interaction here.
 	it('exposeCell should expose its neighbors.', function(){
-    var actualNeighborCells = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2]];
+    // var actualNeighborCells = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2]];
     
-    var returnedNeighborCells = minesweeper.exposeCell(1, 1);
+    // var returnedNeighborCells = minesweeper.exposeCell(1, 1);
     
-    expect(actualNeighborCells).to.eql(returnedNeighborCells);
+    // expect(actualNeighborCells).to.eql(returnedNeighborCells);
 
     //Venkat: instead of the above lines, let's do the following:
-    // var exposeNeighborsOfCalledWith = '';
-    // minesweeper.exposeNeighborsOf = function(row, column) {
-    //   exposeNeighborsOfCalledWith = row + ', ' + column;
-    // }
-    // 
-    // minesweeper.exposeCell(1, 2);
-    // expect(exposeNeighborsOfCalledWith).to.be.equal('1, 2');
+    var exposeNeighborsOfCalledWith = '';
+    minesweeper.exposeNeighborsOf = function(row, column) {
+      exposeNeighborsOfCalledWith = row + ', ' + column;
+    }
+    
+    minesweeper.exposeCell(1, 2);
+    expect(exposeNeighborsOfCalledWith).to.be.equal('1, 2');
 	});
 
 	it('exposeCell should not expose neighbor cells if called on an already exposed cell', function(){
-    var calledExposeNeighborsOf = true;
+    // var calledExposeNeighborsOf = true;
+    
+    // minesweeper.exposeCell(1, 2);
+    
+    // calledExposeNeighborsOf = minesweeper.exposeCell(1, 2);
+    
+    // expect(calledExposeNeighborsOf).to.eql(false);
+		
+		//Venkat: This test is lacking a key part, replacing the exposeNeighborsOf method. Let's do the following instead of the above:
+    var exposeNeighborsOfCalledWith = '';
+    minesweeper.exposeNeighborsOf = function(row, column) {
+      exposeNeighborsOfCalledWith = row + ', ' + column;
+    }
+    
+    minesweeper.exposeCell(1, 2);
+    exposeNeighborsOfCalledWith = '...not called...';
     
     minesweeper.exposeCell(1, 2);
     
-    calledExposeNeighborsOf = minesweeper.exposeCell(1, 2);
-    
-    expect(calledExposeNeighborsOf).to.eql(false);
-		
-		//Venkat: This test is lacking a key part, replacing the exposeNeighborsOf method. Let's do the following instead of the above:
-    // var exposeNeighborsOfCalledWith = '';
-    // minesweeper.exposeNeighborsOf = function(row, column) {
-    //   exposeNeighborsOfCalledWith = row + ', ' + column;
-    // }
-    // 
-    // minesweeper.exposeCell(1, 2);
-    // exposeNeighborsOfCalledWith = '...not called...';
-    // 
-    // minesweeper.exposeCell(1, 2);
-    // 
-    // expect(exposeNeighborsOfCalledWith).to.be.equal('...not called...');
+    expect(exposeNeighborsOfCalledWith).to.be.equal('...not called...');
 	});
                                             
 //Venkat: Let's make both exposeCell and exposeNeighborsOf void methods
 
 //Venkat: Let's first test the happy path and then the edge cases. Here we will verify that exposeNeighborsOf calls exposeCell for each of the neighbors
-  // it('exposeNeighborsOf should expose all its neighbors', function() {
-  //   var exposeCellCalledWith = [];
-  //   minesweeper.exposeCell = function(row, column) {
-  //     exposeCellCalledWith.push(row);
-  //     exposeCellCalledWith.push(column);
-  //   }
-  //   
-  //   minesweeper.exposeNeighborsOf(1, 2);
-  //                                     
-  //   expect(exposeCellCalledWith).to.be.eql([0, 1, 0, 2, 0, 3, 1, 1, 1, 3, 2, 1, 2, 2, 2, 3]);
-  // });
+	it('exposeNeighborsOf should expose all its neighbors', function() {
+		var exposeCellCalledWith = [];
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
+
+		minesweeper.exposeNeighborsOf(1, 2);
+		                                  
+		expect(exposeCellCalledWith).to.be.eql([0, 1, 0, 2, 0, 3, 1, 1, 1, 3, 2, 1, 2, 2, 2, 3]);
+	});
 
 	it('should expose neighbors around top left corner cell, skipping over neighbor cells that are out of bounds', function(){
-		var actualNeighborCells = [[0, 1],[1, 0],[1, 1]];
+		var exposeCellCalledWith = [];
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
 
-		var returnedNeighborCells = minesweeper.exposeNeighborsOf(0, 0);
-
-		expect(actualNeighborCells).to.eql(returnedNeighborCells);
-		
-		//Venkat: Let's change this test so it will verify that exposeNeighborsOf is calling exposeCell with proper row, column values, like so:
-    //   var exposeCellCalledWith = [];
-    //   minesweeper.exposeCell = function(row, column) {
-    //     exposeCellCalledWith.push(row);
-    //     exposeCellCalledWith.push(column);
-    //   }
-    //   
-    //   minesweeper.exposeNeighborsOf(0, 0);
-    //                                     
-    //   expect(exposeCellCalledWith).to.be.eql([0, 1, 1, 0, 1, 1]);
+		minesweeper.exposeNeighborsOf(0, 0);
+		                                
+		expect(exposeCellCalledWith).to.be.eql([0, 1, 1, 0, 1, 1]);
 	});
 
 	it('should expose neighbors around a cell on the top edge, skipping over neighbor cells that are out of bounds', function(){
-		var actualNeighborCells = [[0, 0], [0, 2], [1, 0], [1, 1], [1, 2]];
+		var exposeCellCalledWith = [];
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
 
-		var returnedNeighborCells = minesweeper.exposeNeighborsOf(0, 1);
-
-		expect(actualNeighborCells).to.eql(returnedNeighborCells);
-
-		//Venkat: Let's change this test so it will verify that exposeNeighborsOf is calling exposeCell with proper row, column values.
+		minesweeper.exposeNeighborsOf(0, 1);
+		                                
+		expect(exposeCellCalledWith).to.be.eql([0, 0, 0, 2, 1, 0, 1, 1, 1, 2]);
 	});
 
 	it('should expose neighbors around a cell on the right edge, skipping over neighbor cells that are out of bounds', function(){
-		var actualNeighborCells = [[0, minesweeper.width-2], [0, minesweeper.width-1], [1, minesweeper.width-2], [2, minesweeper.width-2], [2, minesweeper.width-1]];
+		var exposeCellCalledWith = [];
+		var width = minesweeper.width-1;
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
 
-		var returnedNeighborCells = minesweeper.exposeNeighborsOf(1, minesweeper.width-1);
-
-		expect(actualNeighborCells).to.eql(returnedNeighborCells);
-		//Venkat: Let's change this test so it will verify that exposeNeighborsOf is calling exposeCell with proper row, column values.
+		minesweeper.exposeNeighborsOf(1, width);
+		                                
+		expect(exposeCellCalledWith).to.be.eql([0, width-1, 0, width, 1, width-1, 2, width-1, 2, width]);
 	});
 
 	it('should expose neighbors around a cell on the bottom edge, skipping over neighbor cells that are out of bounds', function(){
-		var actualNeighborCells = [[minesweeper.height-2, 0], [minesweeper.height-2, 1], [minesweeper.height-2, 2], [minesweeper.height-1, 0], [minesweeper.height-1, 2]];
+		var exposeCellCalledWith = [];
+		var height = minesweeper.height-1;
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
 
-		var returnedNeighborCells = minesweeper.exposeNeighborsOf(minesweeper.height-1, 1);
-
-		expect(actualNeighborCells).to.eql(returnedNeighborCells);
-		//Venkat: Let's change this test so it will verify that exposeNeighborsOf is calling exposeCell with proper row, column values.
+		minesweeper.exposeNeighborsOf(height, 1);
+		                                
+		expect(exposeCellCalledWith).to.be.eql([height-1, 0, height-1, 1, height-1, 2, height, 0, height, 2]);
 	});
 
 	it('should expose neighbors around a cell on the left edge, skipping over neighbor cells that are out of bounds', function(){
-		var actualNeighborCells = [[0, 0], [0, 1], [1, 1], [2, 0], [2, 1]];
+		var exposeCellCalledWith = [];
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
 
-		var returnedNeighborCells = minesweeper.exposeNeighborsOf(1, 0);
-
-		expect(actualNeighborCells).to.eql(returnedNeighborCells);
-		//Venkat: Let's change this test so it will verify that exposeNeighborsOf is calling exposeCell with proper row, column values.
+		minesweeper.exposeNeighborsOf(1, 0);
+		                                
+		expect(exposeCellCalledWith).to.be.eql([0, 0, 0, 1, 1, 1, 2, 0, 2, 1]);
 	});
 
 	it('should seal a cell', function(){
