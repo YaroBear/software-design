@@ -1,3 +1,18 @@
+[Venkat 09/22/17 05:25 AM MDT]
+synopsis: let's reduce some tests and refactor a bit 
+
+details:                       
+Nice progress so far.
+                     
+Please see suggestions in code.
+
+After the changes, please proceed to test for (if you already have these tests then ignore the suggestions below for those tests):
+
+sealing an exposed cell
+exposing a sealed cell
+exposing a sealed cell does not expose any neighbors
+
+------------------------------------------------------------------------------
 [Venkat 09/21/17 08:14 AM MDT]
 synopsis: let's rework the tests a bit 
 
