@@ -1,10 +1,9 @@
 const MAX_SIZE = 10;
 
 const EXPOSED = "EXPOSED";
-const UNEXPOSED = "UNEXPOSED";
 const SEALED = "SEALED";
-const UNSEALED = "UNSEALED";
-
+const MINED = "MINED";
+const ADJACENT_CELL = "ADJACENT_CELL";
 
 Object.defineProperty(Array.prototype, "contains", {
 	configurable: true,
@@ -72,4 +71,28 @@ MineSweeper.prototype.toggleCell = function(row, column){
 		this.Grid[row][column] = [SEALED];
 	else if(this.Grid[row][column].contains(SEALED))
 		this.Grid[row][column] = [];
+};
+
+MineSweeper.prototype.setAdjacentCell = function(row, column){
+	this.checkBounds(row,column);
+
+	if(!this.Grid[row][column].contains(MINED))
+		this.Grid[row][column] = [ADJACENT_CELL];
+};
+
+MineSweeper.prototype.setMine = function(row, column){
+	this.checkBounds(row,column);
+
+	this.Grid[row][column] = [MINED];
+
+	var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1],[0, 1],[1, -1],[1, 0],[1, 1]];
+
+	for(var i=0; i < adjCells.length; i++) {
+
+		var x = adjCells[i][0] + row;
+		var y = adjCells[i][1] + column;
+		if (x >= 0 && y >= 0 && x <= this.height-1 && y <= this.width-1){
+			this.setAdjacentCell(x, y);
+		}
+	}
 };

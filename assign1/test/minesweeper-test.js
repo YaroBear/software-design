@@ -218,4 +218,36 @@ describe('MineSweeper Tests', function() {
 		expect(called).to.eql(false);
 	});
 
+	it('should set a mine at a location', function(){
+		minesweeper.setMine(0,0);
+
+		expect(minesweeper.cellState(0, 0)).to.include('MINED');
+	});
+
+	
+	it('should set a mine at a location and checks if a cell is adjacent to the mine', function(){
+		minesweeper.setMine(0,0);
+
+		expect(minesweeper.cellState(0, 1)).to.include('ADJACENT_CELL');
+	});
+
+	it('should set a mine at another location and checks if a cell is adjacent to the mine', function(){
+		minesweeper.setMine(5,0);
+
+		expect(minesweeper.cellState(6, 0)).to.include('ADJACENT_CELL');
+	});
+
+	it('should not consider a mined location to be an adjacent cell', function(){
+		minesweeper.setMine(5,0);
+
+		expect(minesweeper.cellState(5, 0)).to.not.include('ADJACENT_CELL');
+	});
+
+	it('should not consider a location with a mine that is adjacent to another mine to be an adjacent cell', function(){
+		minesweeper.setMine(5,0);
+		minesweeper.setMine(5,1);
+
+		expect(minesweeper.cellState(5, 0)).to.not.include('ADJACENT_CELL');
+	});
+
 });
