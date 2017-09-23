@@ -1,10 +1,28 @@
 const MAX_SIZE = 10;
 
+const EXPOSED = "EXPOSED";
+const UNEXPOSED = "UNEXPOSED";
+const SEALED = "SEALED";
+const UNSEALED = "UNSEALED";
+
+
+Object.defineProperty(Array.prototype, "contains", {
+	configurable: true,
+	writable: true,
+	value: function contains(x) {
+		return this.indexOf(x) !== -1;
+	}
+});
+
+
+// Array.includes() works in a regular javascript environment but not in node
+// Had to define a contains function that accomplished the same task
+
 var MineSweeper = function(){
 	this.height = MAX_SIZE;
 	this.width = MAX_SIZE;
 
-	var CellState = { EXPOSED : 'unexposed' , SEALED : 'unsealed'}; //Venkat: we don't need both. A cell is either exposed or sealed. We can come up with constants like UNEXPOSED, EXPOSED, SEALED, and use an array to store those values for each cell position
+	var CellState = [UNEXPOSED, UNSEALED];
 
 	this.Grid = new Array();
 	for (var i = 0; i < this.width; i++) {
@@ -26,10 +44,8 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-
-
-	if (this.Grid[row][column].EXPOSED == 'unexposed' && this.Grid[row][column].SEALED == 'unsealed'){
-		this.Grid[row][column].EXPOSED = 'exposed';
+	if (this.Grid[row][column].contains(UNEXPOSED) && this.Grid[row][column].contains(UNSEALED)){
+		this.Grid[row][column] = [EXPOSED, UNSEALED];
 		this.exposeNeighborsOf(row, column);
 	}
 	
@@ -52,8 +68,8 @@ MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 
 MineSweeper.prototype.toggleCell = function(row, column){
 	this.checkBounds(row,column);
-	if(this.Grid[row][column].SEALED == 'unsealed' && this.Grid[row][column].EXPOSED == 'unexposed')
-		this.Grid[row][column].SEALED = 'sealed';
-	else if(this.Grid[row][column].SEALED == 'sealed')
-		this.Grid[row][column].SEALED = 'unsealed';
+	if(this.Grid[row][column].contains(UNSEALED) && this.Grid[row][column].contains(UNEXPOSED))
+		this.Grid[row][column] = [SEALED, UNEXPOSED];
+	else if(this.Grid[row][column].contains(SEALED))
+		this.Grid[row][column] = [UNSEALED, UNEXPOSED];
 };

@@ -11,24 +11,27 @@ describe('MineSweeper Tests', function() {
 
 	it('expose a cell', function(){
 		minesweeper.exposeCell(1, 2);
-		
-		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql('exposed'); 
+
+		expect(minesweeper.cellState(1, 2)).to.include('EXPOSED'); 
 	});
+
+	
 
 	it('expose another cell', function(){
 		minesweeper.exposeCell(1, 2);
 
 		minesweeper.exposeCell(2, 3);
 	
-		expect(minesweeper.cellState(2, 3).EXPOSED).to.eql('exposed');
+		expect(minesweeper.cellState(2, 3)).to.include('EXPOSED');
 	});
+
 
 	it('expose an exposed cell', function(){
 		minesweeper.exposeCell(1, 2);
 		
 		minesweeper.exposeCell(1, 2);
 		
-		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql('exposed');
+		expect(minesweeper.cellState(1, 2)).to.include('EXPOSED'); 
 	});
 
 	it('should throw an exception when trying to expose a cell greater than row range', function(){
@@ -61,28 +64,30 @@ describe('MineSweeper Tests', function() {
 
 	it('exposeCell should expose its neighbors.', function(){
 
-    var exposeNeighborsOfCalledWith = '';
-    minesweeper.exposeNeighborsOf = function(row, column) {
-      exposeNeighborsOfCalledWith = row + ', ' + column;
-    }
-    
-    minesweeper.exposeCell(1, 2);
-    expect(exposeNeighborsOfCalledWith).to.be.equal('1, 2');
+		var exposeNeighborsOfCalledWith = '';
+		minesweeper.exposeNeighborsOf = function(row, column) {
+			exposeNeighborsOfCalledWith = row + ', ' + column;
+		}
+
+		minesweeper.exposeCell(1, 2);
+		expect(exposeNeighborsOfCalledWith).to.be.equal('1, 2');
 	});
+
+
 
 	it('exposeCell should not expose neighbor cells if called on an already exposed cell', function(){
 
-    var exposeNeighborsOfCalledWith = '';
-    minesweeper.exposeNeighborsOf = function(row, column) {
-      exposeNeighborsOfCalledWith = row + ', ' + column;
-    }
-    
-    minesweeper.exposeCell(1, 2);
-    exposeNeighborsOfCalledWith = '...not called...';
-    
-    minesweeper.exposeCell(1, 2);
-    
-    expect(exposeNeighborsOfCalledWith).to.be.equal('...not called...');
+		var exposeNeighborsOfCalledWith = '';
+		minesweeper.exposeNeighborsOf = function(row, column) {
+			exposeNeighborsOfCalledWith = row + ', ' + column;
+		}
+
+		minesweeper.exposeCell(1, 2);
+		exposeNeighborsOfCalledWith = '...not called...';
+
+		minesweeper.exposeCell(1, 2);
+
+		expect(exposeNeighborsOfCalledWith).to.be.equal('...not called...');
 	});
                                             
 	it('exposeNeighborsOf should expose all its neighbors', function() {
@@ -93,7 +98,7 @@ describe('MineSweeper Tests', function() {
 		}
 
 		minesweeper.exposeNeighborsOf(1, 2);
-		                                  
+
 		expect(exposeCellCalledWith).to.be.eql([0, 1, 0, 2, 0, 3, 1, 1, 1, 3, 2, 1, 2, 2, 2, 3]);
 	});
 
@@ -162,7 +167,7 @@ describe('MineSweeper Tests', function() {
 	it('should seal a cell', function(){
 		minesweeper.toggleCell(0,0); 
                              
-        expect(minesweeper.cellState(0, 0).SEALED).to.eql('sealed');         
+        expect(minesweeper.cellState(0, 0)).to.include('SEALED');         
 	});
 
 	it('Sealing or unsealing a cell by calling toggleCell calls checkBounds', function(){
@@ -181,7 +186,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.toggleCell(0,0);     
 
-		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql('unexposed');
+		expect(minesweeper.cellState(0, 0)).to.include('UNEXPOSED');
 	});
 
 	it('should not seal an exposed cell', function(){
@@ -189,7 +194,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.toggleCell(0,0);
 
-		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql('exposed');
+		expect(minesweeper.cellState(0, 0)).to.include('EXPOSED');
 	});
 
 	it('should not expose a sealed cell', function(){
@@ -197,7 +202,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(0,0); 
 
-		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql('unexposed');
+		expect(minesweeper.cellState(0, 0)).to.include('UNEXPOSED');
 	});
 
 	it('exposing a sealed cell should not expose any neighbors', function(){
@@ -212,4 +217,5 @@ describe('MineSweeper Tests', function() {
 
 		expect(called).to.eql(false);
 	});
+
 });
