@@ -1,3 +1,20 @@
+[Venkat 09/23/17 06:07 AM MDT]
+synopsis: nice work so far 
+
+details:                  
+Please see suggestions in code.
+
+Please move forward to the next tests:
+
+set mine at a location and check if there is a mine there
+set mine at a location and check if a neighbor is considered an adjacent cell
+check if a location with a mine is considered an adjacent cell
+check if a location with a mine and adjacent to a mine is considered an adjacent cell
+
+exposing a mined cell does not expose any neighbors
+exposing an adjacent cell does not exposing any neighbors
+
+------------------------------------------------------------------------------
 [Venkat 09/22/17 05:25 AM MDT]
 synopsis: let's reduce some tests and refactor a bit 
 

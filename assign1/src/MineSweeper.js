@@ -4,7 +4,7 @@ var MineSweeper = function(){
 	this.height = MAX_SIZE;
 	this.width = MAX_SIZE;
 
-	var CellState = { EXPOSED : false , SEALED : false};
+	var CellState = { EXPOSED : false , SEALED : false}; //Venkat: we don't need both. A cell is either exposed or sealed. We can come up with constants like UNEXPOSED, EXPOSED, SEALED, and use an array to store those values for each cell position
 
 	this.Grid = new Array();
 	for (var i = 0; i < this.width; i++) {
