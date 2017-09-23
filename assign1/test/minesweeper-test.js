@@ -12,8 +12,7 @@ describe('MineSweeper Tests', function() {
 	it('expose a cell', function(){
 		minesweeper.exposeCell(1, 2);
 		
-		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql(true); 
-		//Venkat: Will be nice to check to.eql(EXPOSED) where EXPOSED is a constant (may be EXPOSED = "exposed")
+		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql('exposed'); 
 	});
 
 	it('expose another cell', function(){
@@ -21,7 +20,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(2, 3);
 	
-		expect(minesweeper.cellState(2, 3).EXPOSED).to.eql(true);
+		expect(minesweeper.cellState(2, 3).EXPOSED).to.eql('exposed');
 	});
 
 	it('expose an exposed cell', function(){
@@ -29,7 +28,7 @@ describe('MineSweeper Tests', function() {
 		
 		minesweeper.exposeCell(1, 2);
 		
-		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql(true);
+		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql('exposed');
 	});
 
 	it('should throw an exception when trying to expose a cell greater than row range', function(){
@@ -163,7 +162,7 @@ describe('MineSweeper Tests', function() {
 	it('should seal a cell', function(){
 		minesweeper.toggleCell(0,0); 
                              
-        expect(minesweeper.cellState(0, 0).SEALED).to.eql(true);         
+        expect(minesweeper.cellState(0, 0).SEALED).to.eql('sealed');         
 	});
 
 	it('Sealing or unsealing a cell by calling toggleCell calls checkBounds', function(){
@@ -177,23 +176,12 @@ describe('MineSweeper Tests', function() {
 		expect(called).to.eql(true);
 	});
 
-	it('should not allow sealing an exposed cell', function(){
-		minesweeper.exposeCell(0, 0);
-
-		minesweeper.toggleCell(0, 0);
-
-	  	expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(true);
-	});
-
-	it('should unseal a cell', function(){  //Venkat: please rephrase this test description, not sure what this means. Do we mean unsealing a sealed cell leaves it unexposed?
+	it('unsealing a sealed cell leaves it unexposed', function(){  
 		minesweeper.toggleCell(0,0); 
 
 		minesweeper.toggleCell(0,0);     
-		
-		//Venkat: 
 
-		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(false);
-		//Venkat: to.eql(UNEXPOSED) will be nice here.
+		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql('unexposed');
 	});
 
 	it('should not seal an exposed cell', function(){
@@ -201,8 +189,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.toggleCell(0,0);
 
-		expect(minesweeper.cellState(0, 0).SEALED).to.eql(false);
-		//Venkat: what we want to see here is to.eql(EXPOSED)
+		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql('exposed');
 	});
 
 	it('should not expose a sealed cell', function(){
@@ -210,8 +197,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(0,0); 
 
-		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(false);
-		//Venkat: please avoid false checks, Instead check equal to what it should be
+		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql('unexposed');
 	});
 
 	it('exposing a sealed cell should not expose any neighbors', function(){
@@ -224,6 +210,6 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(0,0); 
 
-		expect(called).to.eql(false); //Venkat: here false is the right check
+		expect(called).to.eql(false);
 	});
 });

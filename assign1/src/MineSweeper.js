@@ -4,7 +4,7 @@ var MineSweeper = function(){
 	this.height = MAX_SIZE;
 	this.width = MAX_SIZE;
 
-	var CellState = { EXPOSED : false , SEALED : false}; //Venkat: we don't need both. A cell is either exposed or sealed. We can come up with constants like UNEXPOSED, EXPOSED, SEALED, and use an array to store those values for each cell position
+	var CellState = { EXPOSED : 'unexposed' , SEALED : 'unsealed'}; //Venkat: we don't need both. A cell is either exposed or sealed. We can come up with constants like UNEXPOSED, EXPOSED, SEALED, and use an array to store those values for each cell position
 
 	this.Grid = new Array();
 	for (var i = 0; i < this.width; i++) {
@@ -26,8 +26,10 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-	if (!this.Grid[row][column].EXPOSED && !this.Grid[row][column].SEALED){
-		this.Grid[row][column].EXPOSED = true;
+
+
+	if (this.Grid[row][column].EXPOSED == 'unexposed' && this.Grid[row][column].SEALED == 'unsealed'){
+		this.Grid[row][column].EXPOSED = 'exposed';
 		this.exposeNeighborsOf(row, column);
 	}
 	
@@ -50,8 +52,8 @@ MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 
 MineSweeper.prototype.toggleCell = function(row, column){
 	this.checkBounds(row,column);
-	if(!this.Grid[row][column].SEALED && !this.Grid[row][column].EXPOSED)
-		this.Grid[row][column].SEALED = true;
-	else if(this.Grid[row][column].SEALED)
-		this.Grid[row][column].SEALED = false;
+	if(this.Grid[row][column].SEALED == 'unsealed' && this.Grid[row][column].EXPOSED == 'unexposed')
+		this.Grid[row][column].SEALED = 'sealed';
+	else if(this.Grid[row][column].SEALED == 'sealed')
+		this.Grid[row][column].SEALED = 'unsealed';
 };
