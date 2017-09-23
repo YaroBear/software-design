@@ -22,7 +22,7 @@ var MineSweeper = function(){
 	this.height = MAX_SIZE;
 	this.width = MAX_SIZE;
 
-	var CellState = [UNEXPOSED, UNSEALED];
+	var CellState = [];
 
 	this.Grid = new Array();
 	for (var i = 0; i < this.width; i++) {
@@ -44,7 +44,7 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-	if (this.Grid[row][column].contains(UNEXPOSED) && this.Grid[row][column].contains(UNSEALED)){
+	if (this.Grid[row][column].length == 0){
 		this.Grid[row][column] = [EXPOSED, UNSEALED];
 		this.exposeNeighborsOf(row, column);
 	}
@@ -68,7 +68,7 @@ MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 
 MineSweeper.prototype.toggleCell = function(row, column){
 	this.checkBounds(row,column);
-	if(this.Grid[row][column].contains(UNSEALED) && this.Grid[row][column].contains(UNEXPOSED))
+	if(this.Grid[row][column].length == 0)
 		this.Grid[row][column] = [SEALED, UNEXPOSED];
 	else if(this.Grid[row][column].contains(SEALED))
 		this.Grid[row][column] = [UNSEALED, UNEXPOSED];
