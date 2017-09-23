@@ -55,6 +55,10 @@ MineSweeper.prototype.cellState = function(row, column){
 };
 
 MineSweeper.prototype.exposeNeighborsOf = function(row, column){
+
+	if(this.Grid[row][column].contains(MINED)) return;
+	if(this.Grid[row][column].contains(ADJACENT_CELL)) return;
+
 	var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1],[0, 1],[1, -1],[1, 0],[1, 1]];
 	for (var i=0;i<adjCells.length;i++){
 		var x = adjCells[i][0] + row;

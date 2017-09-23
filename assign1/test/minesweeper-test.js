@@ -224,6 +224,12 @@ describe('MineSweeper Tests', function() {
 		expect(minesweeper.cellState(0, 0)).to.include('MINED');
 	});
 
+	it('should set an adjacent cell', function(){
+		minesweeper.setAdjacentCell(0,0);
+
+		expect(minesweeper.cellState(0, 0)).to.include('ADJACENT_CELL');
+	});
+
 	
 	it('should set a mine at a location and checks if a cell is adjacent to the mine', function(){
 		minesweeper.setMine(0,0);
@@ -250,4 +256,31 @@ describe('MineSweeper Tests', function() {
 		expect(minesweeper.cellState(5, 0)).to.not.include('ADJACENT_CELL');
 	});
 
+	it('should not expose any neighbors when exposing a mined cell', function(){
+		minesweeper.setMine(5,0);
+
+		var exposeCellCalledWith = [];
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
+
+		minesweeper.exposeNeighborsOf(5, 0);
+		                                
+		expect(exposeCellCalledWith).to.be.eql([]);
+	});
+
+		it('should not expose any neighbors when exposing an adjacent cell', function(){
+		minesweeper.setMine(5,0);
+
+		var exposeCellCalledWith = [];
+		minesweeper.exposeCell = function(row, column) {
+			exposeCellCalledWith.push(row);
+			exposeCellCalledWith.push(column);
+		}
+
+		minesweeper.exposeNeighborsOf(5, 1);
+		                                
+		expect(exposeCellCalledWith).to.be.eql([]);
+	});
 });
