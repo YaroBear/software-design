@@ -160,34 +160,20 @@ describe('MineSweeper Tests', function() {
 	});
 
 	it('should seal a cell', function(){
-		minesweeper.toggleCell(0,0); //Venkat: let's call this toggleCell. This will reduce the number of tests and errors to check as well.
+		minesweeper.toggleCell(0,0); 
                              
         expect(minesweeper.cellState(0, 0).SEALED).to.eql(true);         
 	});
 
-	it('should throw an expection when sealing a cell greater than row range', function(){
-		var toCall = function(){minesweeper.toggleCell(11,0);};
+	it('Sealing or unsealing a cell by calling toggleCell calls checkBounds', function(){
+		var called = false;
+		minesweeper.checkBounds = function(row, column){
+			called = true;
+		}
 
-		expect(toCall).to.throw("Out of row range");
-		//Venkat: You took a very nice design decision, to call checkBounds from within exposeCell and sealCell. Good job there. Let's make use of that design decision to our favor here. Instead of multiple tests for bounds for sealCell/toggleCell, we need only one test, verify that when toggleCell is called, it calls checkBounds.
-	});
+		minesweeper.toggleCell(0, 0);
 
-	it('should throw an expection when sealing a cell less than row range', function(){
-		var toCall = function(){minesweeper.toggleCell(-1,0);};
-
-		expect(toCall).to.throw("Out of row range");
-	});
-
-	it('should throw an expection when sealing a cell greater than column range', function(){
-		var toCall = function(){minesweeper.toggleCell(0,11);};
-
-		expect(toCall).to.throw("Out of column range");
-	});
-
-	it('should throw an expection when sealing a cell less than column range', function(){
-		var toCall = function(){minesweeper.toggleCell(0,-1);};
-
-		expect(toCall).to.throw("Out of column range");
+		expect(called).to.eql(true);
 	});
 
 	it('should not allow sealing an exposed cell', function(){
@@ -203,7 +189,36 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.toggleCell(0,0);
 
-		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(false)
+		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(false);
+	});
+
+	it('should not seal an exposed cell', function(){
+		minesweeper.exposeCell(0,0); 
+
+		minesweeper.toggleCell(0,0);
+
+		expect(minesweeper.cellState(0, 0).SEALED).to.eql(false);
+	});
+
+	it('should not expose a sealed cell', function(){
+		minesweeper.toggleCell(0,0);
+
+		minesweeper.exposeCell(0,0); 
+
+		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(false);
+	});
+
+	it('exposing a sealed cell should not expose any neighbors', function(){
+		var called = false;
+		minesweeper.exposeNeighborsOf = function(row, column) {
+			called = true;
+		}
+
+		minesweeper.toggleCell(0,0);
+
+		minesweeper.exposeCell(0,0); 
+
+		expect(called).to.eql(false);
 	});
 
 });

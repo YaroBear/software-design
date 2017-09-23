@@ -11,7 +11,6 @@ var MineSweeper = function(){
 			var column = new Array();
 			this.Grid.push(column)
 		for (var j = 0; j < this.width; j++){
-			//column.push({exposed : false});
 			column.push(CellState);
 		}
 	}
@@ -27,7 +26,7 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-	if (!this.Grid[row][column].EXPOSED){
+	if (!this.Grid[row][column].EXPOSED && !this.Grid[row][column].SEALED){
 		this.Grid[row][column].EXPOSED = true;
 		this.exposeNeighborsOf(row, column);
 	}
