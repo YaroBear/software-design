@@ -4,12 +4,16 @@ var MineSweeper = function(){
 	this.height = MAX_SIZE;
 	this.width = MAX_SIZE;
 
+	var CellState = { EXPOSED : false , SEALED : false};
+
 	this.Grid = new Array();
 	for (var i = 0; i < this.width; i++) {
 			var column = new Array();
 			this.Grid.push(column)
-		for (var j = 0; j < this.width; j++)
-			column.push({exposed : false});
+		for (var j = 0; j < this.width; j++){
+			//column.push({exposed : false});
+			column.push(CellState);
+		}
 	}
 };
 
@@ -23,15 +27,15 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-	if (!this.Grid[row][column].exposed){
-		this.Grid[row][column].exposed = true;
+	if (!this.Grid[row][column].EXPOSED){
+		this.Grid[row][column].EXPOSED = true;
 		this.exposeNeighborsOf(row, column);
 	}
 	
 };
 
-MineSweeper.prototype.isCellExposed = function(row, column){
-	return this.Grid[row][column].exposed;
+MineSweeper.prototype.cellState = function(row, column){
+	return this.Grid[row][column];
 };
 
 MineSweeper.prototype.exposeNeighborsOf = function(row, column){
@@ -45,17 +49,10 @@ MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 	}
 };
 
-MineSweeper.prototype.sealCell = function(row, column) {
+MineSweeper.prototype.toggleCell = function(row, column){
 	this.checkBounds(row,column);
-
-	if(!this.Grid[row][column].exposed)
-		return true;
-
-	else return false;
-};
-
-MineSweeper.prototype.unsealCell = function(row, column) {
-	this.checkBounds(row,column);
-
-	return true;
+	if(!this.Grid[row][column].SEALED && !this.Grid[row][column].EXPOSED)
+		this.Grid[row][column].SEALED = true;
+	else if(this.Grid[row][column].SEALED)
+		this.Grid[row][column].SEALED = false;
 };

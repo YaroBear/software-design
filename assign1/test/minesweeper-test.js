@@ -12,7 +12,7 @@ describe('MineSweeper Tests', function() {
 	it('expose a cell', function(){
 		minesweeper.exposeCell(1, 2);
 		
-		expect(minesweeper.isCellExposed(1, 2)).to.eql(true);
+		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql(true);
 	});
 
 	it('expose another cell', function(){
@@ -20,7 +20,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(2, 3);
 	
-		expect(minesweeper.isCellExposed(2, 3)).to.eql(true);
+		expect(minesweeper.cellState(2, 3).EXPOSED).to.eql(true);
 	});
 
 	it('expose an exposed cell', function(){
@@ -28,7 +28,7 @@ describe('MineSweeper Tests', function() {
 		
 		minesweeper.exposeCell(1, 2);
 		
-		expect(minesweeper.isCellExposed(1, 2)).to.eql(true);
+		expect(minesweeper.cellState(1, 2).EXPOSED).to.eql(true);
 	});
 
 	it('should throw an exception when trying to expose a cell greater than row range', function(){
@@ -160,83 +160,50 @@ describe('MineSweeper Tests', function() {
 	});
 
 	it('should seal a cell', function(){
-		var sealed = minesweeper.sealCell(0,0); //Venkat: let's call this toggleCell. This will reduce the number of tests and errors to check as well.
-		//Venkat: make toggleCell a void method
-		expect(sealed).to.be.true;                                 
-                 
-    //Venkat: let's rename isCellExposed to cellState and return a CellState
-		//Venkat: expect(minesweeper.cellState(0, 0)).to.be.equal(CellState.SEALED);
-		//where CellState is a class with SEALED and EXPOSED defined as constant values, something like CellState.SEALED = 'sealed';
+		minesweeper.toggleCell(0,0); //Venkat: let's call this toggleCell. This will reduce the number of tests and errors to check as well.
+                             
+        expect(minesweeper.cellState(0, 0).SEALED).to.eql(true);         
 	});
 
 	it('should throw an expection when sealing a cell greater than row range', function(){
-		var toCall = function(){minesweeper.sealCell(11,0);};
+		var toCall = function(){minesweeper.toggleCell(11,0);};
 
 		expect(toCall).to.throw("Out of row range");
 		//Venkat: You took a very nice design decision, to call checkBounds from within exposeCell and sealCell. Good job there. Let's make use of that design decision to our favor here. Instead of multiple tests for bounds for sealCell/toggleCell, we need only one test, verify that when toggleCell is called, it calls checkBounds.
 	});
 
 	it('should throw an expection when sealing a cell less than row range', function(){
-		var toCall = function(){minesweeper.sealCell(-1,0);};
+		var toCall = function(){minesweeper.toggleCell(-1,0);};
 
 		expect(toCall).to.throw("Out of row range");
 	});
 
 	it('should throw an expection when sealing a cell greater than column range', function(){
-		var toCall = function(){minesweeper.sealCell(0,11);};
+		var toCall = function(){minesweeper.toggleCell(0,11);};
 
 		expect(toCall).to.throw("Out of column range");
 	});
 
 	it('should throw an expection when sealing a cell less than column range', function(){
-		var toCall = function(){minesweeper.sealCell(0,-1);};
+		var toCall = function(){minesweeper.toggleCell(0,-1);};
 
 		expect(toCall).to.throw("Out of column range");
 	});
 
 	it('should not allow sealing an exposed cell', function(){
-		minesweeper.exposeCell(0,0);
+		minesweeper.exposeCell(0, 0);
 
-		var isItSealed = minesweeper.sealCell(0,0);
+		minesweeper.toggleCell(0, 0);
 
-		expect(isItSealed).to.be.false; 
-	  //Venkat: here verify that the cellState returns EXPOSED
+	  	expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(true);
 	});
 
 	it('should unseal a cell', function(){
-		var sealed = minesweeper.unsealCell(0,0); //Venkat: call toggleCell twice, verify that the state of the cell retunred by cellState is UNEXPOSED
+		minesweeper.toggleCell(0,0); 
 
-		expect(sealed).to.be.true;
+		minesweeper.toggleCell(0,0);
+
+		expect(minesweeper.cellState(0, 0).EXPOSED).to.eql(false)
 	});
 
-
-	it('should do nothing when unsealing an unsealed cell', function(){
-		var isItUnsealed = minesweeper.unsealCell(0,0);
-
-		expect(isItUnsealed).to.be.true;
-	});
-
-	it('should throw an expection when unsealing a cell greater than row range', function(){
-		var toCall = function(){minesweeper.unsealCell(11,0);};
-
-		expect(toCall).to.throw("Out of row range");
-	});
-
-	it('should throw an expection when unsealing a cell less than row range', function(){
-		var toCall = function(){minesweeper.unsealCell(-1,0);};
-
-		expect(toCall).to.throw("Out of row range");
-	});
-
-	it('should throw an expection when unsealing a cell greater than column range', function(){
-		var toCall = function(){minesweeper.unsealCell(0,11);};
-
-		expect(toCall).to.throw("Out of column range");
-	});
-
-	it('should throw an expection when unsealing a cell less than column range', function(){
-		var toCall = function(){minesweeper.unsealCell(0,-1);};
-
-		expect(toCall).to.throw("Out of column range");
-	});
 });
