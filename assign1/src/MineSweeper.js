@@ -45,7 +45,7 @@ MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
 	if (this.Grid[row][column].length == 0){
-		this.Grid[row][column] = [EXPOSED, UNSEALED];
+		this.Grid[row][column] = [EXPOSED];
 		this.exposeNeighborsOf(row, column);
 	}
 	
@@ -69,7 +69,7 @@ MineSweeper.prototype.exposeNeighborsOf = function(row, column){
 MineSweeper.prototype.toggleCell = function(row, column){
 	this.checkBounds(row,column);
 	if(this.Grid[row][column].length == 0)
-		this.Grid[row][column] = [SEALED, UNEXPOSED];
+		this.Grid[row][column] = [SEALED];
 	else if(this.Grid[row][column].contains(SEALED))
-		this.Grid[row][column] = [UNSEALED, UNEXPOSED];
+		this.Grid[row][column] = [];
 };

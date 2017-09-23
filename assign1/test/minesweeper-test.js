@@ -186,7 +186,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.toggleCell(0,0);     
 
-		expect(minesweeper.cellState(0, 0)).to.include('UNEXPOSED');
+		expect(minesweeper.cellState(0, 0)).to.be.empty;
 	});
 
 	it('should not seal an exposed cell', function(){
@@ -202,7 +202,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(0,0); 
 
-		expect(minesweeper.cellState(0, 0)).to.include('UNEXPOSED');
+		expect(minesweeper.cellState(0, 0)).to.include('SEALED');
 	});
 
 	it('exposing a sealed cell should not expose any neighbors', function(){
