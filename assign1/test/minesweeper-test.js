@@ -12,17 +12,15 @@ describe('MineSweeper Tests', function() {
 	it('expose a cell', function(){
 		minesweeper.exposeCell(1, 2);
 
-		expect(minesweeper.cellState(1, 2)).to.include('EXPOSED'); //Venkat: equals
+		expect(minesweeper.cellState(1, 2)).to.eql('EXPOSED'); //Venkat: equals
 	});
-
-	
 
 	it('expose another cell', function(){
 		minesweeper.exposeCell(1, 2);
 
 		minesweeper.exposeCell(2, 3);
 	
-		expect(minesweeper.cellState(2, 3)).to.include('EXPOSED');
+		expect(minesweeper.cellState(2, 3)).to.eql('EXPOSED');
 	});
 
 
@@ -31,35 +29,35 @@ describe('MineSweeper Tests', function() {
 		
 		minesweeper.exposeCell(1, 2);
 		
-		expect(minesweeper.cellState(1, 2)).to.include('EXPOSED'); 
+		expect(minesweeper.cellState(1, 2)).to.eql('EXPOSED'); 
 	});
 
 	it('should throw an exception when trying to expose a cell greater than row range', function(){
 
 		var toCall = function() { minesweeper.exposeCell(11, 2); }
 
-		expect(toCall).to.throw("Out of row range");
+		expect(toCall).to.throw("Out of row/column range");
 	});
 
 	it('should throw an exception when trying to expose a cell greater than column range', function(){
 
 		var toCall = function() { minesweeper.exposeCell(1, 11); }
 
-		expect(toCall).to.throw("Out of column range");
+		expect(toCall).to.throw("Out of row/column range");
 	});
 
 	it('should throw an exception when trying to expose a cell less than row range', function(){
 
 		var toCall = function() { minesweeper.exposeCell(-1, 0); }
 
-		expect(toCall).to.throw("Out of row range");
+		expect(toCall).to.throw("Out of row/column range");
 	});
 
 	it('should throw an exception when trying to expose a cell less than column range', function(){
 
 		var toCall = function() { minesweeper.exposeCell(0, -1); }
 
-		expect(toCall).to.throw("Out of column range");
+		expect(toCall).to.throw("Out of row/column range");
 	});
 
 	it('exposeCell should expose its neighbors.', function(){
@@ -166,7 +164,7 @@ describe('MineSweeper Tests', function() {
 	it('should seal a cell', function(){
 		minesweeper.toggleCell(0,0); 
                              
-    expect(minesweeper.cellState(0, 0)).to.include('SEALED');         
+    expect(minesweeper.cellState(0, 0)).to.eql('SEALED');         
 	});
 
 	it('Sealing or unsealing a cell by calling toggleCell calls checkBounds', function(){
@@ -185,7 +183,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.toggleCell(0,0);     
 
-		expect(minesweeper.cellState(0, 0)).to.be.empty; //Venkat: equal UNEXPOSED
+		expect(minesweeper.cellState(0, 0)).to.eql('UNEXPOSED');
 	});
 
 	it('should not seal an exposed cell', function(){
@@ -193,7 +191,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.toggleCell(0,0);
 
-		expect(minesweeper.cellState(0, 0)).to.include('EXPOSED');
+		expect(minesweeper.cellState(0, 0)).to.eql('EXPOSED');
 	});
 
 	it('should not expose a sealed cell', function(){
@@ -201,7 +199,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(0,0); 
 
-		expect(minesweeper.cellState(0, 0)).to.include('SEALED');
+		expect(minesweeper.cellState(0, 0)).to.eql('SEALED');
 	});
 
 	it('exposing a sealed cell should not expose any neighbors', function(){
@@ -220,72 +218,72 @@ describe('MineSweeper Tests', function() {
 	it('should set a mine at a location', function(){
 		minesweeper.setMine(0,0);
 
-		expect(minesweeper.cellState(0, 0)).to.include('MINED');    //Venkat: to.be.true on minesweeper.mines[0][0]
+		expect(minesweeper.mines[0][0]).to.be.true;
 	});
 
-	it('should set an adjacent cell', function(){ //Venkat: should verify if a cell with a mine is not an adjacent cell
-		minesweeper.setAdjacentCell(0, 0); //Venkat: change to setMine(0, 0)
+	it('should verify if a cell with a mine is not an adjacent cell', function(){
+		minesweeper.setMine(0, 0);
 
-		expect(minesweeper.cellState(0, 0)).to.include('ADJACENT_CELL');
-		//Venkat: Check if minesweeper.isAdjacentCell(0, 0) is false
-		//In isAdjacentCell compute if it is adjacent based on its neighbors
+		expect(minesweeper.isAdjacentCell(0,0)).to.be.false;
 	});
 
 	
 	it('should set a mine at a location and checks if a cell is adjacent to the mine', function(){
 		minesweeper.setMine(0, 0);
 
-		expect(minesweeper.cellState(0, 1)).to.include('ADJACENT_CELL'); 
-		//Venkat: check if minesweeper.isAdjacentCell(0, 1) is true
+		expect(minesweeper.isAdjacentCell(0, 1)).to.be.true; 
 	});
 
 	it('should set a mine at another location and checks if a cell is adjacent to the mine', function(){
 		minesweeper.setMine(5, 0);
 
-		expect(minesweeper.cellState(6, 0)).to.include('ADJACENT_CELL');
+		expect(minesweeper.isAdjacentCell(6, 0)).to.be.true; 
 	});
 
 	it('should not consider a mined location to be an adjacent cell', function(){
 		minesweeper.setMine(5, 0);
 
-		expect(minesweeper.cellState(5, 0)).to.not.include('ADJACENT_CELL');
+		expect(minesweeper.isAdjacentCell(5,0)).to.be.false; 
 	});
                                 
 //Venkat: Need test for isAdjacentCell for cell location at top right corner, top left corner, ...
 
+/*
+	it('should be an adjacent cell in the top-left corner', function(){
+
+	});
+*/
 	it('should not consider a location with a mine that is adjacent to another mine to be an adjacent cell', function(){
 		minesweeper.setMine(5, 0);
 		minesweeper.setMine(5, 1);
 
-		expect(minesweeper.cellState(5, 0)).to.not.include('ADJACENT_CELL');
+		expect(minesweeper.isAdjacentCell(5,0)).to.be.false; 
 	});
 
 	it('should not expose any neighbors when exposing a mined cell', function(){  
 		minesweeper.setMine(5, 0);
+		var called = false;
 
-		var exposeCellCalledWith = [];
-		minesweeper.exposeCell = function(row, column) {
-			exposeCellCalledWith.push(row);
-			exposeCellCalledWith.push(column);
+		minesweeper.exposeNeighborsOf = function(row, column) {
+			called = true;
 		}
 
-		minesweeper.exposeNeighborsOf(5, 0); //Venkat: this test should be on exposeCell and not on exposeNeighborsOf
-	  
-		                                
-		expect(exposeCellCalledWith).to.be.eql([]);
+		minesweeper.exposeCell(5, 0);
+
+		expect(called).to.be.false;
 	});
 
 		it('should not expose any neighbors when exposing an adjacent cell', function(){
 		minesweeper.setMine(5,0);
+		var called = false;
 
 		var exposeCellCalledWith = [];
-		minesweeper.exposeCell = function(row, column) {
-			exposeCellCalledWith.push(row);
-			exposeCellCalledWith.push(column);
+		minesweeper.exposeNeighborsOf = function(row, column) {
+			called = true;
 		}
 
-		minesweeper.exposeNeighborsOf(5, 1);  //Venkat: this test should be on exposeCell and not on exposeNeighborsOf 
+		minesweeper.exposeCell(5, 1);
 		                                
-		expect(exposeCellCalledWith).to.be.eql([]);
+		expect(called).to.be.false;
 	});
 });
