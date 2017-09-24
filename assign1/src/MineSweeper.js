@@ -8,18 +8,19 @@ var MineSweeper = function(){
 	this.height = MAX_SIZE;
 	this.width = MAX_SIZE;
 
-	var CellState = {};
-	
 	this.cellStatus = new Array(MAX_SIZE);
 	this.mines = new Array(MAX_SIZE);
+	this.cellNumber = new Array(MAX_SIZE);
 
 	for(var i = 0; i < MAX_SIZE; i++) { 
 		this.cellStatus[i] = new Array(MAX_SIZE);
 		this.mines[i] = new Array(MAX_SIZE);
+		this.cellNumber[i] = new Array(MAX_SIZE);
 
 		for(var j = 0; j < MAX_SIZE; j++) {
 			this.cellStatus[i][j] = UNEXPOSED;
 			this.mines[i][j] = false;
+			this.cellNumber[i][j] = 0;
 		}
 	}
 };
@@ -96,9 +97,12 @@ MineSweeper.prototype.isAdjacentCell = function(row, column){
 	for (var i=0;i<neighbors.length;i++){
 		var x = neighbors[i].x;
 		var y = neighbors[i].y;
-		if(this.mines[x][y] == true && this.mines[row][column] == false) return true;
+		if(this.mines[x][y] == true && this.mines[row][column] == false) {
+			this.cellNumber[row][column] += 1;
+		}
 	}
-	return false; 
+	if(this.cellNumber[row][column] > 0) return true;
+	else return false; 
 };
 
 MineSweeper.prototype.setMine = function(row, column){

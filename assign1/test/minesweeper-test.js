@@ -245,14 +245,31 @@ describe('MineSweeper Tests', function() {
 
 		expect(minesweeper.isAdjacentCell(5,0)).to.be.false; 
 	});
-                                
-//Venkat: Need test for isAdjacentCell for cell location at top right corner, top left corner, ...
 
-/*
-	it('should be an adjacent cell in the top-left corner', function(){
+	it('should set an adjacent cell in the top-left corner', function(){
+		minesweeper.setMine(1, 0);
 
+		expect(minesweeper.isAdjacentCell(0,0)).to.be.true; 
 	});
-*/
+
+	it('should set an adjacent cell in the top-right corner', function(){
+		minesweeper.setMine(0, 8);
+
+		expect(minesweeper.isAdjacentCell(0,9)).to.be.true; 
+	});
+
+	it('should set an adjacent cell in the bottom-left corner', function(){
+		minesweeper.setMine(9, 1);
+
+		expect(minesweeper.isAdjacentCell(9, 0)).to.be.true; 
+	});
+
+	it('should set an adjacent cell in the bottom-right corner', function(){
+		minesweeper.setMine(9,8);
+
+		expect(minesweeper.isAdjacentCell(9,9)).to.be.true; 
+	});
+
 	it('should not consider a location with a mine that is adjacent to another mine to be an adjacent cell', function(){
 		minesweeper.setMine(5, 0);
 		minesweeper.setMine(5, 1);
@@ -273,7 +290,7 @@ describe('MineSweeper Tests', function() {
 		expect(called).to.be.false;
 	});
 
-		it('should not expose any neighbors when exposing an adjacent cell', function(){
+	it('should not expose any neighbors when exposing an adjacent cell', function(){
 		minesweeper.setMine(5,0);
 		var called = false;
 
@@ -285,5 +302,27 @@ describe('MineSweeper Tests', function() {
 		minesweeper.exposeCell(5, 1);
 		                                
 		expect(called).to.be.false;
+	});
+
+	it('should return the correct number of mines when a cornered adjacent cell is exposed', function(){
+		minesweeper.setMine(0, 1);
+		minesweeper.setMine(1, 1);
+		minesweeper.setMine(1, 0);
+
+		minesweeper.exposeCell(0,0);
+
+		expect(minesweeper.cellNumber[0][0]).to.be.eql(3);
+	});
+
+	it('should return the correct number of mines when another adjacent cell is exposed', function(){
+		minesweeper.setMine(4, 5);
+		minesweeper.setMine(4, 6);
+		minesweeper.setMine(5, 5);
+		minesweeper.setMine(5, 7);
+		minesweeper.setMine(6, 6);
+
+		minesweeper.exposeCell(5,6);
+
+		expect(minesweeper.cellNumber[5][6]).to.be.eql(5);
 	});
 });
