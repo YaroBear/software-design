@@ -1,3 +1,19 @@
+[Venkat 09/24/17 06:39 AM CEST]
+synopsis: let's refactor 
+
+details:                
+Let's separate storing a mine (boolean) from storing UNEXPOSED, EXPOSED, SEALED.
+
+Please see suggestions in code.
+
+After this, please proceed to the tests for:
+
+check game status is in progress when no cells are exposed and no cells sealed
+check game status is in progress when there is at least one unexposed or unsealed cell
+check game status lost if a mine has been exposed
+check game won when all mines are sealed and all other cells are exposed
+
+------------------------------------------------------------------------------
 [Venkat 09/23/17 06:07 AM MDT]
 synopsis: nice work so far 
 
