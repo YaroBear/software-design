@@ -1,4 +1,4 @@
-describe('MineSweeper Tests', function() {
+describe('MineSweeper state tests', function() {
 	it('canary test', function() {
 		expect(true).to.be.true;
 	});
@@ -12,7 +12,7 @@ describe('MineSweeper Tests', function() {
 	it('expose a cell', function(){
 		minesweeper.exposeCell(1, 2);
 
-		expect(minesweeper.cellState(1, 2)).to.eql('EXPOSED'); //Venkat: equals
+		expect(minesweeper.cellState(1, 2)).to.eql('EXPOSED');
 	});
 
 	it('expose another cell', function(){
@@ -311,8 +311,7 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(0,0);
 
-		expect(minesweeper.cellNumber[0][0]).to.be.eql(3); 
-		//Venkat: may be we need a getAdjacentMinesCount or something like that which can be computed instead of being stored
+		expect(minesweeper.getAdjacentMinesCount(0,0)).to.be.eql(3); 
 	});
 
 	it('should return the correct number of mines when another adjacent cell is exposed', function(){
@@ -324,60 +323,77 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(5,6);
 
-		expect(minesweeper.cellNumber[5][6]).to.be.eql(5);
+		expect(minesweeper.getAdjacentMinesCount(5,6)).to.be.eql(5); 
 	});
 
-	it('should return the correct number of mines when another adjacent cell is exposed', function(){
-		minesweeper.setMine(4, 5);
-		minesweeper.setMine(4, 6);
-		minesweeper.setMine(5, 5);
-		minesweeper.setMine(5, 7);
-		minesweeper.setMine(6, 6);
+	it('should place 10 mines on the grid', function(){
+		minesweeper.distributeMines(NUMBER_MINES);
 
-		minesweeper.exposeCell(5,6);
+		var count = 0;
 
-		expect(minesweeper.cellNumber[5][6]).to.be.eql(5);
+		for(var i = 0; i< MAX_SIZE; i++)
+			for(var j = 0; j< MAX_SIZE; j++)
+				if (minesweeper.mines[i][j]  == true) 
+					count +=1;
+
+		expect(count).to.be.eql(10);
+	});
+
+	it('should have placed 10 mines randomly', function(){
+
+	});
+});
+
+/*
+describe('MineSweeper game layer tests', function(){
+
+	var Game;
+
+	beforeEach(function(){
+		Game = new Game();
 	});
 
 	it('game status is in progress when no cells are exposed and no cells sealed', function(){
-		expect(minesweeper.gameState).to.eql('in progress');  //Venkat: no string, instead const please.
+		expect(Game.gameState).to.eql(IN_PROGRESS);
 	});
 
 	it('game status is in progress when there is at least one unexposed or unsealed cell', function(){
 
-		minesweeper.toggleCell(0,0);
+		Game.grid.toggleCell(0,0);
 
 		for(var i=0; i<MAX_SIZE; i++){
 			for(var j=0; j<MAX_SIZE; j++){
-				minesweeper.exposeCell(i, j);
+				Game.grid.exposeCell(i, j);
 			}
 		}
 
-		minesweeper.toggleCell(0,0);
+		Game.grid.toggleCell(0,0);
 
-		expect(minesweeper.gameState).to.eql('in progress');
+		expect(Game.gameState).to.eql(IN_PROGRESS);
 	});
 
 	it('game status lost if a mine has been exposed', function(){
-		minesweeper.setMine(0, 0);
-		minesweeper.exposeCell(0, 0);
+		Game.grid.setMine(0, 0);
+		Game.grid.exposeCell(0, 0);
 
-		expect(minesweeper.gameState).to.eql('lost');
+		expect(Game.gameState).to.eql(LOSE);
 	});
 
 	it('game status won when all mines sealed and all other cells exposed', function(){
 		for(var i=0;i<MAX_SIZE;i++){
-			minesweeper.setMine(i, i);
-			minesweeper.toggleCell(i, i);
+			Game.grid.setMine(i, i);
+			Game.grid.toggleCell(i, i);
 		}
 
 		for(var i=0; i<MAX_SIZE; i++){
 			for(var j=0; j<MAX_SIZE; j++){
 				if (i != j)
-					minesweeper.exposeCell(i, j);
+					Game.grid.exposeCell(i, j);
 			}
 		}
 
-		expect(minesweeper.gameState).to.eql('won');
+		expect(Game.gameState).to.eql(WON);
 	});
 });
+
+*/
