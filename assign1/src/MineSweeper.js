@@ -12,6 +12,8 @@ var MineSweeper = function(){
 	this.mines = new Array(MAX_SIZE);
 	this.cellNumber = new Array(MAX_SIZE);
 
+	this.gameState = 'in progress';
+
 	for(var i = 0; i < MAX_SIZE; i++) { 
 		this.cellStatus[i] = new Array(MAX_SIZE);
 		this.mines[i] = new Array(MAX_SIZE);
@@ -33,15 +35,20 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-	if(this.mines[row][column] == true) return;
+	if(this.mines[row][column] == true) {
+		this.gameState= 'lost';
+		return;
+	}
 
 	if(this.isAdjacentCell(row, column)) {
 		this.cellStatus[row][column] = EXPOSED;
+		this.gameState = this.checkGameState();
 		return;
 	}
 
 	if (this.cellStatus[row][column] == UNEXPOSED){
 		this.cellStatus[row][column] = EXPOSED;
+		this.gameState = this.checkGameState();
 		this.exposeNeighborsOf(row, column);
 	}
 };
@@ -87,6 +94,8 @@ MineSweeper.prototype.toggleCell = function(row, column){
 		this.cellStatus[row][column] = SEALED;
 	else if(this.cellStatus[row][column] == SEALED)
 		this.cellStatus[row][column] = UNEXPOSED;
+
+	this.gameState = this.checkGameState();
 };
 
 MineSweeper.prototype.isAdjacentCell = function(row, column){
@@ -109,4 +118,18 @@ MineSweeper.prototype.setMine = function(row, column){
 	this.checkBounds(row,column);
 
 	this.mines[row][column] = true;
+};
+
+MineSweeper.prototype.checkGameState = function(){
+
+	for(var i = 0; i<MAX_SIZE; i++){
+		for(var j = 0; j<MAX_SIZE; j++){
+			if(this.cellStatus[i][j] == UNEXPOSED)
+				return 'in progress';
+			else if(this.cellStatus[i][j] == SEALED && !this.mines[i][j])
+				return 'in progress';
+		}
+	}
+	return 'won';
+
 };

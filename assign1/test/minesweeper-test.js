@@ -325,4 +325,58 @@ describe('MineSweeper Tests', function() {
 
 		expect(minesweeper.cellNumber[5][6]).to.be.eql(5);
 	});
+
+	it('should return the correct number of mines when another adjacent cell is exposed', function(){
+		minesweeper.setMine(4, 5);
+		minesweeper.setMine(4, 6);
+		minesweeper.setMine(5, 5);
+		minesweeper.setMine(5, 7);
+		minesweeper.setMine(6, 6);
+
+		minesweeper.exposeCell(5,6);
+
+		expect(minesweeper.cellNumber[5][6]).to.be.eql(5);
+	});
+
+	it('game status is in progress when no cells are exposed and no cells sealed', function(){
+		expect(minesweeper.gameState).to.eql('in progress');
+	});
+
+	it('game status is in progress when there is at least one unexposed or unsealed cell', function(){
+
+		minesweeper.toggleCell(0,0);
+
+		for(var i=0; i<MAX_SIZE; i++){
+			for(var j=0; j<MAX_SIZE; j++){
+				minesweeper.exposeCell(i, j);
+			}
+		}
+
+		minesweeper.toggleCell(0,0);
+
+		expect(minesweeper.gameState).to.eql('in progress');
+	});
+
+	it('game status lost if a mine has been exposed', function(){
+		minesweeper.setMine(0, 0);
+		minesweeper.exposeCell(0, 0);
+
+		expect(minesweeper.gameState).to.eql('lost');
+	});
+
+	it('game status won when all mines sealed and all other cells exposed', function(){
+		for(var i=0;i<MAX_SIZE;i++){
+			minesweeper.setMine(i, i);
+			minesweeper.toggleCell(i, i);
+		}
+
+		for(var i=0; i<MAX_SIZE; i++){
+			for(var j=0; j<MAX_SIZE; j++){
+				if (i != j)
+					minesweeper.exposeCell(i, j);
+			}
+		}
+
+		expect(minesweeper.gameState).to.eql('won');
+	});
 });
