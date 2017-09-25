@@ -10,9 +10,9 @@ var MineSweeper = function(){
 
 	this.cellStatus = new Array(MAX_SIZE);
 	this.mines = new Array(MAX_SIZE);
-	this.cellNumber = new Array(MAX_SIZE);
+	this.cellNumber = new Array(MAX_SIZE); //Venkat: Please remove
 
-	this.gameState = 'in progress';
+	this.gameState = 'in progress';  //Venkat: please avoid using String, use constants instead.
 
 	for(var i = 0; i < MAX_SIZE; i++) { 
 		this.cellStatus[i] = new Array(MAX_SIZE);
@@ -36,19 +36,19 @@ MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
 	if(this.mines[row][column] == true) {
-		this.gameState= 'lost';
+		this.gameState= 'lost'; //Venkat: Doing this makes this function lose its cohesion and fails SRP. Please avoid
 		return;
 	}
 
 	if(this.isAdjacentCell(row, column)) {
 		this.cellStatus[row][column] = EXPOSED;
-		this.gameState = this.checkGameState();
+		this.gameState = this.checkGameState();  //Venkat: SRP
 		return;
 	}
 
 	if (this.cellStatus[row][column] == UNEXPOSED){
 		this.cellStatus[row][column] = EXPOSED;
-		this.gameState = this.checkGameState();
+		this.gameState = this.checkGameState(); //Venkat: SRP
 		this.exposeNeighborsOf(row, column);
 	}
 };
@@ -57,9 +57,9 @@ MineSweeper.prototype.cellState = function(row, column){
 	return this.cellStatus[row][column];
 };
 
-MineSweeper.prototype.findNeighborsOf = function(row, column){
+MineSweeper.prototype.findNeighborsOf = function(row, column){   //Venkat: we may need only a count instead of the actual neighbors
 
-	var neighbors = [];
+	var neighbors = []; //Venkat: let's try to solve without needing an array
 	var adjCells = [[-1, -1],[-1, 0], [-1, 1],[0, -1], [0, 1],[1, -1],[1, 0], [1, 1]];
 	for (var i=0;i<adjCells.length;i++){
 		var x = adjCells[i][0] + row;
@@ -69,15 +69,6 @@ MineSweeper.prototype.findNeighborsOf = function(row, column){
 		}
 	} 
 	return neighbors;
-
-	/* need to figure out how to exclude original calling cell (0,0)
-	for(var i = row-1; i <= row + 1; i++) {
-		for(var j = column-1; j <= column+1; j++) {
-			if (i >= 0 && j >= 0 && i < this.height && j < this.width)
-				this.exposeCell(i, j);
-		}
-	}
-	*/
 };
 
 MineSweeper.prototype.exposeNeighborsOf = function(row, column){
@@ -95,7 +86,7 @@ MineSweeper.prototype.toggleCell = function(row, column){
 	else if(this.cellStatus[row][column] == SEALED)
 		this.cellStatus[row][column] = UNEXPOSED;
 
-	this.gameState = this.checkGameState();
+	this.gameState = this.checkGameState();  //Venkat: SRP
 };
 
 MineSweeper.prototype.isAdjacentCell = function(row, column){
@@ -120,16 +111,16 @@ MineSweeper.prototype.setMine = function(row, column){
 	this.mines[row][column] = true;
 };
 
-MineSweeper.prototype.checkGameState = function(){
+MineSweeper.prototype.checkGameState = function(){ //Venkat: let's do the computation here and only hear for progress, loss, or win
 
 	for(var i = 0; i<MAX_SIZE; i++){
 		for(var j = 0; j<MAX_SIZE; j++){
 			if(this.cellStatus[i][j] == UNEXPOSED)
-				return 'in progress';
+				return 'in progress';              //Venkat: no strings please, use const
 			else if(this.cellStatus[i][j] == SEALED && !this.mines[i][j])
 				return 'in progress';
 		}
 	}
-	return 'won';
+	return 'won';  //Venkat: const instead of string
 
 };

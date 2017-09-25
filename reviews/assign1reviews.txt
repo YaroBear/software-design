@@ -1,3 +1,18 @@
+[Venkat 09/25/17 05:41 AM CEST]
+synopsis: let's keep an eye on cohesion and SRP 
+
+details:                                       
+Let functions have a single responsibility. Anything that can be done elsewhere should be done elsewhere.
+
+Please see suggestions in code.
+
+Then, here are some tests to consider:
+test for placing ten mines when minesweeper is created
+test that the locations of the mines are random
+
+Now proceed to implement a think layer of GUI. Keep the GUI related code in a separate directory. A simple html file that refers to the source file is enough. We can open the index.html directly in a browser and see the game progress.
+
+------------------------------------------------------------------------------
 [Venkat 09/24/17 06:39 AM CEST]
 synopsis: let's refactor 
 

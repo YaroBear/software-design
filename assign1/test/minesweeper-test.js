@@ -311,7 +311,8 @@ describe('MineSweeper Tests', function() {
 
 		minesweeper.exposeCell(0,0);
 
-		expect(minesweeper.cellNumber[0][0]).to.be.eql(3);
+		expect(minesweeper.cellNumber[0][0]).to.be.eql(3); 
+		//Venkat: may be we need a getAdjacentMinesCount or something like that which can be computed instead of being stored
 	});
 
 	it('should return the correct number of mines when another adjacent cell is exposed', function(){
@@ -339,7 +340,7 @@ describe('MineSweeper Tests', function() {
 	});
 
 	it('game status is in progress when no cells are exposed and no cells sealed', function(){
-		expect(minesweeper.gameState).to.eql('in progress');
+		expect(minesweeper.gameState).to.eql('in progress');  //Venkat: no string, instead const please.
 	});
 
 	it('game status is in progress when there is at least one unexposed or unsealed cell', function(){
