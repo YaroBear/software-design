@@ -390,8 +390,8 @@ describe('MineSweeper game layer tests', function(){
 	});
 
 	it('game status lost if a mine has been exposed', function(){
-		game.grid.setMine(0, 0);
-		game.grid.exposeCell(0, 0);
+		game.grid.setMine(5, 0);
+		game.grid.exposeCell(5, 0);
 
 		game.checkGameState();
 

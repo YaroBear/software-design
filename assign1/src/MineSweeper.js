@@ -126,17 +126,19 @@ var Game = function(){
 
 Game.prototype.checkGameState = function(){
 
+	var foundMines = 0;
+	var exposedCells = 0;
 	for(var i = 0; i<MAX_SIZE; i++){
 		for(var j = 0; j<MAX_SIZE; j++){
 			if(this.grid.cellStatus[i][j] == EXPOSED && this.grid.mines[i][j])
 				return this.gameState = LOSE;
-			else if(this.grid.cellStatus[i][j] == UNEXPOSED)
-				return this.gameState = IN_PROGRESS; 
-			else if(this.grid.cellStatus[i][j] == SEALED && !this.grid.mines[i][j])
-				return this.gameState = IN_PROGRESS;
-
+			if(this.grid.cellStatus[i][j] == SEALED && this.grid.mines[i][j])
+				foundMines++;
+			if(this.grid.cellStatus[i][j] == EXPOSED)
+				exposedCells++;
 		}
 	}
-	return this.gameState = WIN; 
+	if(foundMines == NUMBER_MINES && exposedCells == MAX_SIZE*MAX_SIZE-NUMBER_MINES) 
+		return this.gameState = WIN;
 
 };

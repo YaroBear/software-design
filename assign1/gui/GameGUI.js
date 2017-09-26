@@ -11,13 +11,38 @@ const OCEAN_BLUE = "#2d7eff";
 const WHITE = "#FFFFFF";
 
 
-canvas = document.getElementById('MineSweeperGame');
-ctx = canvas.getContext('2d');
+var canvas = document.getElementById('MineSweeperGame');
+var gameStatus = document.getElementById('GameStatus');
+var ctx = canvas.getContext('2d');
 canvas.width = GLOBAL_DISPLAY_WIDTH;
 canvas.height = GLOBAL_DISPLAY_HEIGHT;
 
 game = new Game();
 game.grid.distributeMines();
+var reset;
+
+var getGameStatus = function(){
+
+	game.checkGameState();
+
+	if(game.gameState == LOSE){
+		game = null;
+		setTimeout(function(){
+			reset = confirm("Ooops, you clicked a bomb! Try again?");
+			if(reset)
+				location.reload();
+		}, 100);
+	}
+		
+	if(game.gameState == WIN) {
+		game = null;
+		setTimeout(function(){
+			reset = confirm("You win!!!");
+			if(reset)
+				location.reload();
+		}, 100);
+	}
+};
 
 var getMouseClickPosition = function(event){
 	var x = Math.floor(event.clientX/GLOBAL_CELL_WIDTH);
@@ -26,10 +51,12 @@ var getMouseClickPosition = function(event){
 
 	if(event.shiftKey)
 		game.grid.toggleCell(x, y);
-	else
+	else {
 		game.grid.exposeCell(x, y);
+	}
 
 	drawGrid();
+	getGameStatus();
 };
 
 canvas.addEventListener("click", getMouseClickPosition, false);
@@ -80,6 +107,7 @@ drawGrid = function(){
 
 			if(game.grid.cellStatus[i][j] == UNEXPOSED)
 				drawCell(UNEXPOSED, xPos, yPos);
+
 		}
 	}
 };
