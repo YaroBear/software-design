@@ -35,7 +35,11 @@ var getMouseClickPosition = function(event){
 	var y = Math.floor(event.clientY/GLOBAL_CELL_WIDTH);
 	console.log(x,y);
 
-	game.grid.exposeCell(x, y);
+	if(event.shiftKey)
+		game.grid.toggleCell(x, y);
+	else
+		game.grid.exposeCell(x, y);
+
 	drawGrid();
 };
 
