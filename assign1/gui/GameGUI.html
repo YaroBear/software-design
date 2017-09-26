@@ -18,11 +18,17 @@ const GLOBAL_CELL_HEIGHT = GLOBAL_CELL_WIDTH;
 const BOMB_IMAGE = "images/bomb.svg";
 const SEAL_IMAGE = "images/seal.svg";
 
+const OCEAN_BLUE = "#2d7eff";
+const WHITE = "#FFFFFF";
+
 
 canvas = document.getElementById('MineSweeperGame');
 ctx = canvas.getContext('2d');
 canvas.width = GLOBAL_DISPLAY_WIDTH;
 canvas.height = GLOBAL_DISPLAY_HEIGHT;
+
+game = new Game();
+game.grid.distributeMines();
 
 var getMouseClickPosition = function(event){
 	var x = Math.floor(event.clientX/GLOBAL_CELL_WIDTH);
@@ -35,35 +41,27 @@ var getMouseClickPosition = function(event){
 
 canvas.addEventListener("click", getMouseClickPosition, false);
 
-game = new Game();
-game.grid.distributeMines();
-
-//game.grid.toggleCell(0,0);
-//game.grid.toggleCell(5,7);
-//game.grid.toggleCell(1,3);
-
 drawCell = function(src, x, y){
-	image = new Image()
-	image.onload = function(){
-		ctx.drawImage(this, x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
-	};
-	image.src = src;
-};
 
-drawUnexposedCell = function(x,y){
-	ctx.fillStyle="#2d7eff";
-	ctx.fillRect(x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
-};
-
-drawExposedCell = function(x,y){
-	ctx.fillStyle="#FFFFFF";
-	ctx.fillRect(x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
-};
-
-drawNumberedCell = function(x, y, number){
-	ctx.font =  GLOBAL_CELL_WIDTH + "px Arial";
-	ctx.strokeText(number, x, y + GLOBAL_CELL_WIDTH);
-
+	if (src == EXPOSED){
+		ctx.fillStyle = WHITE;
+		ctx.fillRect(x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
+	}
+	else if (src == UNEXPOSED) {
+		ctx.fillStyle = OCEAN_BLUE;
+		ctx.fillRect(x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
+	}
+	else if (Number.isInteger(src)){
+		ctx.font =  GLOBAL_CELL_WIDTH + "px Arial";
+		ctx.strokeText(src, x, y + GLOBAL_CELL_WIDTH);
+	}
+	else{
+		image = new Image()
+		image.onload = function(){
+			ctx.drawImage(this, x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
+		};
+		image.src = src;
+	}
 };
 
 drawGrid = function(){
@@ -81,14 +79,14 @@ drawGrid = function(){
 				if(game.grid.mines[i][j] == true)
 					drawCell(BOMB_IMAGE, xPos, yPos);
 				if(game.grid.getAdjacentMinesCount(i,j) > 0)
-					drawNumberedCell(xPos, yPos, game.grid.getAdjacentMinesCount(i,j));
+					drawCell(game.grid.getAdjacentMinesCount(i,j), xPos, yPos);
 			}
 
 			if(game.grid.cellStatus[i][j] == SEALED)
 				drawCell(SEAL_IMAGE, xPos, yPos);
 
 			if(game.grid.cellStatus[i][j] == UNEXPOSED)
-				drawUnexposedCell(xPos, yPos);
+				drawCell(UNEXPOSED, xPos, yPos);
 		}
 	}
 };
