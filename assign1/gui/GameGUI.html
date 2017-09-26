@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<script src="../src/MineSweeper.js"></script>
+	</head>
+	<body>
+		<canvas id="MineSweeperGame"></canvas>
+	</body>
+</html>
+
+<script>
+
+const GLOBAL_DISPLAY_WIDTH = window.innerWidth/2;
+const GLOBAL_DISPLAY_HEIGHT = GLOBAL_DISPLAY_WIDTH;
+
+const GLOBAL_CELL_WIDTH = GLOBAL_DISPLAY_WIDTH / 10;
+const GLOBAL_CELL_HEIGHT = GLOBAL_CELL_WIDTH;
+
+const BOMB_IMAGE = "images/bomb.svg";
+const SEAL_IMAGE = "images/seal.svg";
+
+
+canvas = document.getElementById('MineSweeperGame');
+ctx = canvas.getContext('2d');
+canvas.width = GLOBAL_DISPLAY_WIDTH;
+canvas.height = GLOBAL_DISPLAY_HEIGHT;
+
+game = new Game();
+game.grid.distributeMines();
+
+game.grid.toggleCell(0,0);
+game.grid.toggleCell(5,7);
+game.grid.toggleCell(1,3);
+
+game.grid.exposeCell(2, 2);
+game.grid.exposeCell(7, 5);
+game.grid.exposeCell(3, 1);
+
+drawCell = function(src, x, y){
+	image = new Image()
+	image.onload = function(){
+		ctx.drawImage(this, x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
+	};
+	image.src = src;
+};
+
+drawUnexposedCell = function(x,y){
+	ctx.fillStyle="#2d7eff";
+	ctx.fillRect(x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
+};
+
+drawExposedCell = function(x,y){
+	ctx.fillStyle="#FFFFFF";
+	ctx.fillRect(x, y, GLOBAL_CELL_WIDTH, GLOBAL_CELL_WIDTH);
+};
+
+drawNumberedCell = function(x, y, number){
+	ctx.font =  GLOBAL_CELL_WIDTH + "px Arial";
+	ctx.strokeText(number, x, y);
+
+};
+
+drawGrid = function(){
+
+	for(var i = 0; i < MAX_SIZE; i++) {
+		for(var j = 0; j < MAX_SIZE; j++) {
+			var xPos = GLOBAL_CELL_WIDTH*i;
+			var yPos = GLOBAL_CELL_WIDTH*j;
+
+			ctx.strokeRect(xPos, yPos, GLOBAL_DISPLAY_WIDTH, GLOBAL_DISPLAY_HEIGHT);
+
+
+			if(game.grid.cellStatus[i][j] == EXPOSED){
+				if(game.grid.mines[i][j] == true)
+					drawCell(BOMB_IMAGE, xPos, yPos);
+				else if(game.grid.getAdjacentMinesCount(i,j) > 0)
+					drawNumberedCell(xPos, yPos, game.grid.getAdjacentMinesCount(i,j));
+			}
+
+			else if(game.grid.cellStatus[i][j] == SEALED)
+				drawCell(SEAL_IMAGE, xPos, yPos);
+
+			else if(game.grid.cellStatus[i][j] == UNEXPOSED)
+				drawUnexposedCell(xPos, yPos);
+		}
+	}
+};
+
+drawGrid();
+
+</script>
