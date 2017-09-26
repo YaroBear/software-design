@@ -33,12 +33,12 @@ MineSweeper.prototype.checkBounds = function(row, column){
 MineSweeper.prototype.exposeCell = function(row, column){
 	this.checkBounds(row,column);
 
-	if(this.mines[row][column] == true){
+	if(this.mines[row][column] == true && this.cellStatus[row][column] != SEALED){
 		this.cellStatus[row][column] = EXPOSED;
 		return;
 	}
 
-	if(this.isAdjacentCell(row, column)) {
+	if(this.isAdjacentCell(row, column) && this.cellStatus[row][column] != SEALED) {
 		this.cellStatus[row][column] = EXPOSED;
 		return;
 	}
