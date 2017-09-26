@@ -340,7 +340,24 @@ describe('MineSweeper state tests', function() {
 	});
 
 	it('should have placed 10 mines randomly', function(){
+		minesweeper.distributeMines(NUMBER_MINES);
 
+		var anotherInstance = new MineSweeper();
+		anotherInstance.distributeMines(NUMBER_MINES);
+
+		var similarCount = 0;
+
+		for (var i = 0; i < MAX_SIZE; i++) {
+			for(var j = 0; j < MAX_SIZE; j++) {
+				if (minesweeper.mines[i][j] == true && anotherInstance.mines[i][j] == true) {
+					similarCount++;
+				}
+			}
+		}
+
+		var isRandom = (similarCount < NUMBER_MINES);
+		
+		expect(isRandom).to.be.true;
 	});
 });
 

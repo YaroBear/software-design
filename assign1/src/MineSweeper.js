@@ -116,7 +116,7 @@ MineSweeper.prototype.distributeMines = function(numberMines) {
 
 
 const IN_PROGRESS = "IN_PROGRESS";
-const WIN = "WON";
+const WIN = "WIN";
 const LOSE = "LOSE";
 
 var Game = function(){
