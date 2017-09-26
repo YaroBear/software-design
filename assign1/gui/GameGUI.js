@@ -12,12 +12,11 @@ const WHITE = "#FFFFFF";
 
 
 var canvas = document.getElementById('MineSweeperGame');
-var gameStatus = document.getElementById('GameStatus');
 var ctx = canvas.getContext('2d');
 canvas.width = GLOBAL_DISPLAY_WIDTH;
 canvas.height = GLOBAL_DISPLAY_HEIGHT;
 
-game = new Game();
+var game = new Game();
 game.grid.distributeMines();
 var reset;
 
