@@ -22,7 +22,7 @@ var MineSweeper = function(){
 			this.cellStatus[i][j] = UNEXPOSED;
 			this.mines[i][j] = false;
 		}
-	}
+	} 
 };
 
 MineSweeper.prototype.checkBounds = function(row, column){
@@ -111,9 +111,7 @@ MineSweeper.prototype.distributeMines = function(numberMines) {
 		this.setMine(x,y);
 	}
 };
-// dont call in constructor, otherwise some of the expose cell tests may fail as we set static expectations
-
-
+// dont call in constructor, otherwise some of the expose cell tests may fail as we set static expectations //Venkat: I disobeyed (grin) and called it in the constructor and many tests failed. Nice, tests are the guardian angels. So we can remove the comment line.
 
 const IN_PROGRESS = "IN_PROGRESS";
 const WIN = "WIN";

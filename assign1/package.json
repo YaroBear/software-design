@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "karma start --reporters dots --single-run",
-    "watchtest": "karma start --reporters dots"
+    "watchtest": "karma start --reporters dots",
+    "start": "open gui/index.html",
+    "startonwin": "start gui/index.html"
   },
   "author": "",
   "license": "ISC",
