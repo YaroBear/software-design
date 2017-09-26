@@ -126,16 +126,19 @@ var Game = function(){
 
 }
 
-Game.prototype.checkGameState = function(){ //Venkat: let's do the computation here and only hear for progress, loss, or win
+Game.prototype.checkGameState = function(){
 
 	for(var i = 0; i<MAX_SIZE; i++){
 		for(var j = 0; j<MAX_SIZE; j++){
-			if(this.cellStatus[i][j] == UNEXPOSED)
-				return 'in progress';              //Venkat: no strings please, use const
-			else if(this.cellStatus[i][j] == SEALED && !this.mines[i][j])
-				return 'in progress';
+			if(this.grid.cellStatus[i][j] == EXPOSED && this.grid.mines[i][j])
+				return this.gameState = LOSE;
+			else if(this.grid.cellStatus[i][j] == UNEXPOSED)
+				return this.gameState = IN_PROGRESS; 
+			else if(this.grid.cellStatus[i][j] == SEALED && !this.grid.mines[i][j])
+				return this.gameState = IN_PROGRESS;
+
 		}
 	}
-	return 'won';  //Venkat: const instead of string
+	return this.gameState = WIN; 
 
 };
