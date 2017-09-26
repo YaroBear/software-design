@@ -1,3 +1,19 @@
+[Venkat 09/26/17 06:25 AM CEST]
+synopsis: almost done 
+
+details:
+GUI:
+Love it.
+
+After the mine explodes do not allow user to interact further.
+
+Please move the script from within index.html to a script file in the gui directory.
+
+Glad to review it once more if you like, but with that change you're done with coding.
+
+Please address questions in assign1.txt and glad to review that as well.
+
+------------------------------------------------------------------------------
 [Venkat 09/25/17 05:41 AM CEST]
 synopsis: let's keep an eye on cohesion and SRP 
 
