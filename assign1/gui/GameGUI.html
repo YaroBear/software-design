@@ -24,16 +24,23 @@ ctx = canvas.getContext('2d');
 canvas.width = GLOBAL_DISPLAY_WIDTH;
 canvas.height = GLOBAL_DISPLAY_HEIGHT;
 
+var getMouseClickPosition = function(event){
+	var x = Math.floor(event.clientX/GLOBAL_CELL_WIDTH);
+	var y = Math.floor(event.clientY/GLOBAL_CELL_WIDTH);
+	console.log(x,y);
+
+	game.grid.exposeCell(x, y);
+	drawGrid();
+};
+
+canvas.addEventListener("click", getMouseClickPosition, false);
+
 game = new Game();
 game.grid.distributeMines();
 
-game.grid.toggleCell(0,0);
-game.grid.toggleCell(5,7);
-game.grid.toggleCell(1,3);
-
-game.grid.exposeCell(2, 2);
-game.grid.exposeCell(7, 5);
-game.grid.exposeCell(3, 1);
+//game.grid.toggleCell(0,0);
+//game.grid.toggleCell(5,7);
+//game.grid.toggleCell(1,3);
 
 drawCell = function(src, x, y){
 	image = new Image()
@@ -55,11 +62,12 @@ drawExposedCell = function(x,y){
 
 drawNumberedCell = function(x, y, number){
 	ctx.font =  GLOBAL_CELL_WIDTH + "px Arial";
-	ctx.strokeText(number, x, y);
+	ctx.strokeText(number, x, y + GLOBAL_CELL_WIDTH);
 
 };
 
 drawGrid = function(){
+	ctx.clearRect(0,0, GLOBAL_DISPLAY_WIDTH, GLOBAL_DISPLAY_HEIGHT);
 
 	for(var i = 0; i < MAX_SIZE; i++) {
 		for(var j = 0; j < MAX_SIZE; j++) {
@@ -72,18 +80,19 @@ drawGrid = function(){
 			if(game.grid.cellStatus[i][j] == EXPOSED){
 				if(game.grid.mines[i][j] == true)
 					drawCell(BOMB_IMAGE, xPos, yPos);
-				else if(game.grid.getAdjacentMinesCount(i,j) > 0)
+				if(game.grid.getAdjacentMinesCount(i,j) > 0)
 					drawNumberedCell(xPos, yPos, game.grid.getAdjacentMinesCount(i,j));
 			}
 
-			else if(game.grid.cellStatus[i][j] == SEALED)
+			if(game.grid.cellStatus[i][j] == SEALED)
 				drawCell(SEAL_IMAGE, xPos, yPos);
 
-			else if(game.grid.cellStatus[i][j] == UNEXPOSED)
+			if(game.grid.cellStatus[i][j] == UNEXPOSED)
 				drawUnexposedCell(xPos, yPos);
 		}
 	}
 };
+
 
 drawGrid();
 
