@@ -1,3 +1,20 @@
+[Venkat 09/27/17 05:59 AM CEST]
+synopsis: very nice work 
+
+details:         
+GUI:
+Love those seal!
+
+Please use
+<link rel="stylesheet" href="style.css" type="text/css" />
+    
+Coverage:
+Let's check the coverage. Pretty good job, we can do a bit of work to get that to 100%. Please run npm test and then open
+coverage/coverage/PhantomJS.../index.html
+
+assign1.txt: good                        
+
+------------------------------------------------------------------------------
 [Venkat 09/26/17 06:25 AM CEST]
 synopsis: almost done 
 
@@ -191,3 +208,4 @@ Please make sure that the build passes (all tests pass) upon each commit. If a b
 Start with may be three tests and minimum code for those three tests. We will review that and move forward.
 
 ------------------------------------------------------------------------------
+.
