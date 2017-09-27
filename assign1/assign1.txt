@@ -12,14 +12,24 @@ After completing the assignment (and only after) answer the following questions:
 
 1. What did you learn mainly in this assignment?
 
-YOUR ANSWER GOES HERE
+Nick:  
+
+I had no experience with Test Driven Development prior to this assignment.  It was very interesting to see how designing and implementing unit tests changed the shape of our game design.  Focusing on passing tests with the minimal amount of relevant code helped us eliminate many redundant or unnecessary features of our first design.  At first, designing the tests was a bit difficult, but the feedback helped me understand what a 'good' test was.  It became clear that designing 'good' tests was very important to getting any overall design benefit.
+
+In past programming assignments, I have often have struggled to make changes as projects grew.  The tests we wrote for this assignment were extremely helpful.  They made it easier to see the implications of a change, and also easier to track down and fix problems.  It provided a great confidence boost to know that we could move forward on the assignment without running into a problem that would cause us to backtrack.  
+
+Finally, the feedback we got was very important to directing our design.  It was clear early on that the more feedback we got about our design and tests, the better.  As we made changes, we paid close attention to the feedback we were getting.  This helped illuminate the way forward.  Before any new changes were introduced we would fix anything that the feedback mentioned about our current design.  I think this helped us stay on track and only capture the relevant features for this game.
 
 2. How is your current design different, if at all, from the strategic design created in hw2?
 
-YOUR ANSWER GOES HERE
+Nick:
+
+Originally we designed the game with 8 classes:  a parent Cell class, 3 child classes (MinedCell, EmptyCell, and NumberedCell) that inherited from the Cell class, a Grid class, a GameController class, a GameView class, and a CellView class.  After all of the feedback and refactoring, we were able to build the game using just two classes called MineSweeper and Game.  We were able to avoid the inheritance we originally planned to use and thus avoid some coupling.  
 
 3. Were there any surprises or things you did not expect along the way? Any 
 particular problem faced, things you had to tackle that you did not expect 
 beforehand?
 
-YOUR ANSWER GOES HERE
+Nick:  
+
+It shouldn't be a surprise, Venkat said TDD does not guarantee bug free code, but once the tests were mostly finished and the GUI was working, I thought we were pretty much done.  Even so, we did end up finding some bugs in the logic of how we were sealing/exposing cells and in how we were checking the game state.  Our code failed 'quietly' in those cases, causing us to have to refactor the logic and tests slightly.  However, the bigger surprise is how easy these issues were to fix with all of the tests in place.  The tests either showed us that our changes worked or illuminated other changes we would need to make first.  Without them we might have spent all day making small changes and checking to see if they worked.
