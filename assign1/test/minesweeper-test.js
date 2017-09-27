@@ -359,6 +359,23 @@ describe('MineSweeper state tests', function() {
 		
 		expect(isRandom).to.be.true;
 	});
+
+	it('should check that mines are not randomly distributed to the same cells', function(){
+		minesweeper.distributeMines(NUMBER_MINES);
+		minesweeper.distributeMines(NUMBER_MINES);
+		minesweeper.distributeMines(NUMBER_MINES);
+		var numMines = 0
+		for (var i = 0; i < MAX_SIZE; i++) {
+			for(var j = 0; j < MAX_SIZE; j++) {
+				if (minesweeper.mines[i][j] == true) {
+					numMines++;
+				}
+			}
+		}
+
+		expect(numMines).to.eql(30);
+
+	});
 });
 
 
@@ -385,6 +402,8 @@ describe('MineSweeper game layer tests', function(){
 		}
 
 		game.grid.toggleCell(0,0);
+
+		game.checkGameState();
 
 		expect(game.gameState).to.eql(IN_PROGRESS);
 	});
