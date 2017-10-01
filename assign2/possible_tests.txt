@@ -3,7 +3,7 @@ Possible tests:
 ✔ - get total value of one stock
 ✔ - get total value of two stocks
 ✔ - get total value of two different stocks
-- get value of an invalid stock
+✔ - get value of an invalid stock
 - return invalid stock name(s)
 - get stock symbols from file
 - get stock share number from file
