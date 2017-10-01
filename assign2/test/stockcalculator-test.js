@@ -37,16 +37,19 @@ describe('Stock calculator unit tests:', function() {
 		expect(stockCalculator.convertDecimalToInteger(12.34)).to.eql(1234);
 	});
 
+	it('should get the total value of two different stocks', function(){
+		 var stocks = [
+		 	{symbol : "XYZ1", price: 250, count: 5},
+			{symbol : "XYZ2", price: 300, count: 3},
+		];
+		expect(stockCalculator.calculateTotalForStocks(stocks)).to.eql(2150);
+	});
 
 	const testStocks = [
 		{symbol : "XYZ1", price: 250, count: 5},
 		{symbol : "XYZ2", price: 300, count: 3},
 		{symbol : "XYZ3", price: -1000, count: 2}
 	];
-
-	it('should get the value of two different stocks', function(){
-		expect(stockCalculator.calculateTotalForStocks(testStocks)).to.eql(2150);
-	});
 
 	it('should return the price of all valid stocks when one or more stocks contains an error', function(){
 		expect(stockCalculator.calculateTotalForStocks(testStocks)).to.eql(2150);
