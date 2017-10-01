@@ -27,3 +27,13 @@ particular problem faced, things you had to tackle that you did not expect
 beforehand?
 
 It shouldn't be a surprise, Venkat said TDD does not guarantee bug free code, but once the tests were mostly finished and the GUI was working, I thought we were pretty much done.  Even so, we did end up finding some bugs in the logic of how we were sealing/exposing cells and in how we were checking the game state.  Our code failed 'quietly' in those cases, causing us to have to refactor the logic and tests slightly.  However, the bigger surprise is how easy these issues were to fix with all of the tests in place.  The tests either showed us that our changes worked or illuminated other changes we would need to make first.  Without them we might have spent all day making small changes and checking to see if they worked.
+
+Total [100]: 100
+Code compiles [10]:
+Program produces reasonably desired results when run [10]:
+All tests pass [20]:
+Code Coverage [10]:
+Test quality [10]:
+Design quality [20]:
+Code quality [10]:
+Answers to questions in assign1.txt [10]:
