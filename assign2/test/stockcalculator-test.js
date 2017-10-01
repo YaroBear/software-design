@@ -14,69 +14,63 @@ describe('Stock calculator unit tests:', function() {
 	});
 
 	it('should get the value for one stock @ $1', function(){
-		expect(stockCalculator.calculateValue(100, 1)).to.eql(100); //Venkat: calculateAssetValue
+		var stock = [{symbol : "XYZ1", price: 100, count: 1}];
+
+		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(100);
 	});
 
 	it('should get the value for two stocks @ $1', function(){
-		expect(stockCalculator.calculateValue(100, 2)).to.eql(200);
+		var stock = [{symbol : "XYZ1", price: 100, count: 2}];
+
+		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(200);
 	});
 
 	it('should throw an error if stock price is less than $0', function(){
-		var call = function() {stockCalculator.calculateValue(-100, 5);};
+		var stock = [{symbol : "XYZ1", price: -100, count: 2}];
+
+		var call = function() {stockCalculator.calculateNetAssetValue(stock);};
 
 		expect(call).to.throw("Price/Count cannot be less than 0");
 	});
 
 	it('should throw an error if count of stocks is less than 0', function(){
-		var call = function() {stockCalculator.calculateValue(1000, -1);};
+		var stock = [{symbol : "XYZ1", price: 100, count: -2}];
+
+		var call = function() {stockCalculator.calculateNetAssetValue(stock);};
 
 		expect(call).to.throw("Price/Count cannot be less than 0");
 	});
-
-	it("should convert decimal values to whole integer", function(){
-		expect(stockCalculator.convertDecimalToInteger(12.34)).to.eql(1234);
-	});                                  
-	
-	//Venkat: what if the input is 12.3, we may need a test for that.
-	//Venkat: what if the input is 12.345, we may need a test for that.
-
-//Venkat: so far we have a way to compute the assetValue given the number of shares and the value.
-
-//We may actually get rid of calculateAssetValue and only have calculateNetAssetValues (what is called here as calculateTotalForStocks).
 
 	it('should get the total value of two different stocks', function(){
 		 var stocks = [
 		 	{symbol : "XYZ1", price: 250, count: 5},
 			{symbol : "XYZ2", price: 300, count: 3},
 		];
-		expect(stockCalculator.calculateTotalForStocks(stocks)).to.eql(2150);
+		expect(stockCalculator.calculateNetAssetValue(stocks)).to.eql(2150);
 	});
 
-	const testStocks = [
-		{symbol : "XYZ1", price: 250, count: 5},
-		{symbol : "XYZ2", price: 300, count: 3},
-		{symbol : "XYZ3", price: -1000, count: 2}
-	];
+	it('throw in error if one stock in a list of stocks is invalid', function(){
+		var stocks = [
+			{symbol : "XYZ1", price: 250, count: 5},
+			{symbol : "XYZ2", price: 300, count: 3},
+			{symbol : "XYZ3", price: -1000, count: 2}
+		];
 
-	it('should return the price of all valid stocks when one or more stocks contains an error', function(){
-		expect(stockCalculator.calculateTotalForStocks(testStocks)).to.eql(2150);
+		var call = function() {stockCalculator.calculateNetAssetValue(stocks);};
+
+		expect(call).to.throw("Price/Count cannot be less than 0");
 	});
 
-	it('should log the thrown error when calculating the total for stocks and one of the stocks is invalid', function(){
-		var makeLogCalled = false;
-
-		stockCalculator.makeLog = function() {
-			makeLogCalled = true;
-		};
-
-		stockCalculator.calculateTotalForStocks(testStocks);
-
-		expect(makeLogCalled).to.be.true;
+	it("should convert 12.34 to 1234", function(){
+		expect(stockCalculator.convertDecimalToWholeIntegerRepresentation(12.34)).to.eql(1234);
 	});
 
-	it('should log the invalid stock name when calculating the total for stocks', function(){
-		stockCalculator.calculateTotalForStocks(testStocks);
-
-		expect(stockCalculator.getLogs()[0]).to.include("XYZ3");
+	it("should convert 12.3 to 1230", function(){
+		expect(stockCalculator.convertDecimalToWholeIntegerRepresentation(12.3)).to.eql(1230);
 	});
+
+	it("should convert 12.345 to 1235", function(){
+		expect(stockCalculator.convertDecimalToWholeIntegerRepresentation(12.345)).to.eql(1235);
+	});                                 
+	
 });

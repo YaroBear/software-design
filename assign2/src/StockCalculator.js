@@ -1,37 +1,18 @@
 var StockCalculator = function(){
-	this.logs = []; //Venkat: Please remove, YAGNI
 };
 
-StockCalculator.prototype.calculateValue = function(price, count){
-	if (price < 0 || count < 0)
-		throw new Error("Price/Count cannot be less than 0");
-	return price*count;
-};
-
-StockCalculator.prototype.calculateTotalForStocks = function(stocks){
+StockCalculator.prototype.calculateNetAssetValue = function(stocks){
 	var total = 0;
 	for(var stock in stocks){
-		try {
-			total += this.calculateValue(stocks[stock].price, stocks[stock].count);
-		} catch(exception) {
-			this.makeLog(stocks[stock].symbol, exception);
-			continue;
-		}
+		if (stocks[stock].price < 0 || stocks[stock].count < 0)
+			throw new Error("Price/Count cannot be less than 0");
+		total += (stocks[stock].price * stocks[stock].count);
 	}
 	return total;
 };
 
-StockCalculator.prototype.makeLog = function(symbol, exception){ //Venkat: YAGNI
-	var log = "Stock " + symbol + " " + exception;
-	this.logs.push(log);
-};
-
-StockCalculator.prototype.getLogs = function(){  //Venkat: YAGNI
-	return this.logs;
-};
-
-StockCalculator.prototype.convertDecimalToInteger = function(decimalValue){
-	return decimalValue*100;  //Venkat: space around *, please
+StockCalculator.prototype.convertDecimalToWholeIntegerRepresentation = function(decimalValue){
+	return decimalValue.toFixed(2) * 100;
 };
 
 module.exports = StockCalculator;
