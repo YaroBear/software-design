@@ -14,7 +14,7 @@ describe('Stock calculator unit tests:', function() {
 	});
 
 	it('should get the value for one stock @ $1', function(){
-		expect(stockCalculator.calculateValue(100, 1)).to.eql(100);
+		expect(stockCalculator.calculateValue(100, 1)).to.eql(100); //Venkat: calculateAssetValue
 	});
 
 	it('should get the value for two stocks @ $1', function(){
@@ -35,7 +35,14 @@ describe('Stock calculator unit tests:', function() {
 
 	it("should convert decimal values to whole integer", function(){
 		expect(stockCalculator.convertDecimalToInteger(12.34)).to.eql(1234);
-	});
+	});                                  
+	
+	//Venkat: what if the input is 12.3, we may need a test for that.
+	//Venkat: what if the input is 12.345, we may need a test for that.
+
+//Venkat: so far we have a way to compute the assetValue given the number of shares and the value.
+
+//We may actually get rid of calculateAssetValue and only have calculateNetAssetValues (what is called here as calculateTotalForStocks).
 
 	it('should get the total value of two different stocks', function(){
 		 var stocks = [

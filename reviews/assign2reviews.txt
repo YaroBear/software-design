@@ -1,0 +1,18 @@
+[Venkat 10/01/17 06:41 AM EDT]
+synopsis: good start, let's reduce code, keep an eye on YAGNI 
+
+details:
+
+Coverage:
+Let's get the coverage report in there.     
+
+Code:
+We are not using Karma, so we should get rid of karma.conf.js.
+
+Let's consider YAGNI. No need for logs.
+
+Let's reduce a lot of code. At this time, we only need one function,
+to get calculateNetAssetValue (and may be the convertDecimalToInteger, but
+we need a better name for that function to tell its real domain specific purpose).
+
+------------------------------------------------------------------------------

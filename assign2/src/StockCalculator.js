@@ -1,5 +1,5 @@
 var StockCalculator = function(){
-	this.logs = [];
+	this.logs = []; //Venkat: Please remove, YAGNI
 };
 
 StockCalculator.prototype.calculateValue = function(price, count){
@@ -21,17 +21,17 @@ StockCalculator.prototype.calculateTotalForStocks = function(stocks){
 	return total;
 };
 
-StockCalculator.prototype.makeLog = function(symbol, exception){
+StockCalculator.prototype.makeLog = function(symbol, exception){ //Venkat: YAGNI
 	var log = "Stock " + symbol + " " + exception;
 	this.logs.push(log);
 };
 
-StockCalculator.prototype.getLogs = function(){
+StockCalculator.prototype.getLogs = function(){  //Venkat: YAGNI
 	return this.logs;
 };
 
 StockCalculator.prototype.convertDecimalToInteger = function(decimalValue){
-	return decimalValue*100;
+	return decimalValue*100;  //Venkat: space around *, please
 };
 
 module.exports = StockCalculator;
