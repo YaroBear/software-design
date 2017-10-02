@@ -4,12 +4,12 @@ Possible tests:
 ✔ - get total value of two stocks
 ✔ - get total value of two different stocks
 ✔ - get value of an invalid stock
-- return invalid stock name(s)
+✔ - throw an error for an invalid stock
 - get stock symbols from file
 - get stock share number from file
-- get stock data from address
+✔ - get stock data from a stock service
 - split stock data into seperate objects
-- get price data object to calculate value of one stock
-- get price data objects to calculate value of multiple stocks
+✔ - get price data object to calculate value of one stock
+✔ - get price data objects to calculate value of multiple stocks
 - handle error for invalid stock symbol
 - handle error for invalid options (f=snbaopl1)
