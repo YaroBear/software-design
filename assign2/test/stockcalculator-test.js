@@ -14,7 +14,7 @@ describe('Stock calculator unit tests:', function() {
 	});
 
 	it('should get the value for one stock @ $1', function(){
-		var stock = [{symbol : "XYZ1", price: 100, count: 1}];
+		var stock = [{symbol : "XYZ1", price: 100, count: 1}]; //Venkat: we can remove symbol from this one, it is not used by calculateNetAssetValue
 
 		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(100);
 	});
