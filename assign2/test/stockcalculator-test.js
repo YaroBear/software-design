@@ -3,7 +3,7 @@ var Chai = require('chai');
 var expect = Chai.expect;
 
 var StockService = require('../src/StockService');
-var YahooStockService = require('../src/YahooService');
+var YahooStockService = require('../src/YahooService'); //Venkat: Please remove
 
 describe('Stock calculator and Stock Service unit tests:', function() {
 	it('canary test', function() {
@@ -11,7 +11,7 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 	});
 
 	var stockCalculator;
-  var stockService;
+  var stockService; //Venkat: Please remove
 
   beforeEach(function(){
     stockService = new StockService();
@@ -66,6 +66,7 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 		expect(call).to.throw("Price/Count cannot be less than 0");
 	});
 
+//Venkat: Let's remove all tests realted to convertDecimalToWholeIntegerRepresentation 
 	it("should convert 12.34 to 1234", function(){
 		expect(stockService.convertDecimalToWholeIntegerRepresentation(12.34)).to.eql(1234);
 	});
@@ -77,6 +78,8 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 	it("should convert 12.345 to 1235", function(){
 		expect(stockService.convertDecimalToWholeIntegerRepresentation(12.345)).to.eql(1235);
 	});
+
+//Venkat: Let's delete everything below this. Please see the reviews file for next step.        
 
   it("should call getStockPrice in stockservice when calculateNetAssetValue is called", function(){
     var stock = [{price: 100, count: 5}];

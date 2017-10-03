@@ -1,6 +1,7 @@
 var http = require('http');
 var StockService = require('../src/StockService');
-
+                                             
+//Venkat: Please delete this file, we can revisit this later when we need it. We are not at that level of design yet.
 var YahooStockService = new StockService();
 
 YahooStockService.getStockPrice = function(stock, callback){

@@ -7,7 +7,8 @@ StockCalculator.prototype.validate = function(stock){
     throw new Error("Price/Count cannot be less than 0");
   return stock;
 };
-
+                          
+//Venkat: This is unnecessary coupling. The calculateNetAssetValue was focused on computing. Now it has to deal with a dependency. Makes this method more complex than it should be.
 StockCalculator.prototype.calculateNetAssetValue = function(stocks){
   return stocks
     .map(this.stockService.getStockPrice)

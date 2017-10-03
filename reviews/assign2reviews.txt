@@ -1,3 +1,30 @@
+[Venkat 10/03/17 03:49 AM PDT]
+synopsis: let's revisit how we approach the design 
+
+details:
+Coverage:
+Please fix the code coverage, we have code that has no tests.
+
+Let's step back and revisit where we are going.
+Please see suggestions in code. After making those changes, let's look at the next step.
+
+We have calculateNetAssetValue. It takes prices and number of shares and returns the total net asset value (and should not depend on the service). That is cohesive, follows SRP, and good so far.
+
+Let's think of the overall goal. Given a bunch of symbols and the number of shares for each we want to do two things:
+1. Get the asset value for each
+2. Get the net asset value
+
+The part 2 is (almost) done and it does not need any more details that we already have. For the first part, we need to transform a list of symbol and number of shares to list of symbol, number of shares, prices, and asset values. For this we can do the following:
+
+Pass a list with symbols and number of shares.
+Use Sinon to stub out the getPrice method of service.
+Let the stub return a canned integer value for the price.
+We can start the first test with one symbol and 100 shares.
+Then second test with two symbols...
+
+Let's not worry about Yahoo URL at this time. Design with test the method that will getAssetValues for symbols, use Sinon to stub the dependency.
+
+------------------------------------------------------------------------------
 [Venkat 10/02/17 02:05 AM PDT]
 synopsis: good so far 
 
@@ -27,3 +54,4 @@ to get calculateNetAssetValue (and may be the convertDecimalToInteger, but
 we need a better name for that function to tell its real domain specific purpose).
 
 ------------------------------------------------------------------------------
+
