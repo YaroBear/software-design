@@ -2,16 +2,20 @@ var StockCalculator = require("../src/StockCalculator");
 var Chai = require('chai');
 var expect = Chai.expect;
 
+var StockService = require('../src/StockService');
+
 describe('Stock calculator unit tests:', function() {
 	it('canary test', function() {
 		expect(true).to.be.true;
 	});
 
 	var stockCalculator;
+  var stockService;
 
-	beforeEach(function(){
-		stockCalculator = new StockCalculator();
-	});
+  beforeEach(function(){
+    stockService = new StockService();
+    stockCalculator = new StockCalculator(stockService);
+  });
 
 	it('should get the value for one stock @ $1', function(){
 		var stock = [{price: 100, count: 1}];
@@ -73,31 +77,17 @@ describe('Stock calculator unit tests:', function() {
 		expect(stockCalculator.convertDecimalToWholeIntegerRepresentation(12.345)).to.eql(1235);
 	});
 
-});
-
-describe('mock api service tests:', function(){
-
-  var stockCalculator;
-
-  beforeEach(function(){
-    stockCalculator = new StockCalculator();
-  });
-
-  it("should call getStockInfromationService when calculateNetAssetValue is called", function(){
-    var stocks = [
-      {price: 100, count: 5},
-      {price: 200, count: 3},
-      {price: 300, count: 2}
-    ];
+  it("should call getStockPrice in stockservice when calculateNetAssetValue is called", function(){
+    var stock = [{price: 100, count: 5}];
 
     var apiCalled = false;
 
-    stockCalculator.getStockInformationFromService = function(stock){
+    stockService.getStockPrice = function(stock){
       apiCalled = true;
       return stock;
     };
 
-    stockCalculator.calculateNetAssetValue(stocks);
+    stockCalculator.calculateNetAssetValue(stock);
 
     expect(apiCalled).to.be.true;
   });
@@ -105,7 +95,7 @@ describe('mock api service tests:', function(){
   it("should get the asset value for one stock from getStockInformationService", function(){
     var ourStock = [{symbol : "XYZ1", count: 5}];
 
-    stockCalculator.getStockInformationFromService = function(stock){
+    stockService.getStockPrice = function(stock){
       var apiStockInfo = {symbol : "XYZ1", price: 100};
       stock.price = apiStockInfo.price;
       return stock;
@@ -117,7 +107,7 @@ describe('mock api service tests:', function(){
   it("should calculate the asset value if the stock is valid in the stock information service", function(){
     var ourStock = [{symbol : "XYZ1", count: 5}];
 
-    stockCalculator.getStockInformationFromService = function(stock){
+    stockService.getStockPrice = function(stock){
       var apiStockInfo = {symbol : "XYZ1", price: 100};
 
       if (stock.symbol == apiStockInfo.symbol)
@@ -129,7 +119,7 @@ describe('mock api service tests:', function(){
   it("should throw an error if a stock does not exist in the stock information service", function(){
     var ourStock = [{symbol : "XYZI", count: 5}];
 
-    stockCalculator.getStockInformationFromService = function(stock){
+    stockService.getStockPrice = function(stock){
       var apiStockInfo = {symbol : "XYZ1", price: 100};
 
       if (stock.symbol != apiStockInfo.symbol)
@@ -142,3 +132,5 @@ describe('mock api service tests:', function(){
   });
 
 });
+
+
