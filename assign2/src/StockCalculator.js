@@ -16,8 +16,4 @@ StockCalculator.prototype.calculateNetAssetValue = function(stocks){
     .reduce((total, amount) => total + amount);
 };
 
-StockCalculator.prototype.convertDecimalToWholeIntegerRepresentation = function(decimalValue){
-	return decimalValue.toFixed(2) * 100;
-};
-
 module.exports = StockCalculator;
