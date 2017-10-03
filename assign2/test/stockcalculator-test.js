@@ -81,83 +81,83 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 
 //Venkat: Let's delete everything below this. Please see the reviews file for next step.        
 
-  it("should call getStockPrice in stockservice when calculateNetAssetValue is called", function(){
-    var stock = [{price: 100, count: 5}];
-
-    var apiCalled = false;
-
-    stockService.getStockPrice = function(stock){
-      apiCalled = true;
-      return stock;
-    };
-
-    stockCalculator.calculateNetAssetValue(stock);
-
-    expect(apiCalled).to.be.true;
-  });
-
-  it("should get the asset value for one stock from getStockInformationService", function(){
-    var ourStock = [{symbol : "XYZ1", count: 5}];
-
-    stockService.getStockPrice = function(stock){
-      var apiStockInfo = {symbol : "XYZ1", price: 100};
-      stock.price = apiStockInfo.price;
-      return stock;
-    };
-
-    expect(stockCalculator.calculateNetAssetValue(ourStock)).to.be.eql(500);
-  });
-
-  it("should calculate the asset value if the stock is valid in the stock information service", function(){
-    var ourStock = [{symbol : "XYZ1", count: 5}];
-
-    stockService.getStockPrice = function(stock){
-      var apiStockInfo = {symbol : "XYZ1", price: 100};
-
-      if (stock.symbol == apiStockInfo.symbol)
-        stock.price = apiStockInfo.price;
-      return stock;
-    };
-    expect(stockCalculator.calculateNetAssetValue(ourStock)).to.be.eql(500);
-  });
-
-  it("should throw an error if a stock does not exist in the stock information service", function(){
-    var ourStock = [{symbol : "XYZI", count: 5}];
-
-    stockService.getStockPrice = function(stock){
-      var apiStockInfo = {symbol : "XYZ1", price: 100};
-
-      if (stock.symbol != apiStockInfo.symbol)
-        throw new Error("Stock does not exist");
-    };
-
-    var call = function(){stockCalculator.calculateNetAssetValue(ourStock);};
-
-    expect(call).to.throw("Stock does not exist");
-  });
-});
-
-describe('YahooStockService unit tests:', function(){
-  var stockCalculator;
-
-  beforeEach(function(){
-    stockCalculator = new StockCalculator(YahooStockService);
-  });
-
-  it('should return a 200 status when trying to get data for TSLA', function(done){
-
-    YahooStockService.getStockPrice({symbol: "TSLA"}, function(res){
-      expect(res.status).to.eql(200);
-      done();
-    });
-  });
-
-  it('should return a 404 status when trying to get data for an invalid symbol', function(done){
-
-    YahooStockService.getStockPrice({symbol: ""}, function(res){
-      expect(res.status).to.eql(404);
-      done();
-    });
-  });
+//  it("should call getStockPrice in stockservice when calculateNetAssetValue is called", function(){
+//    var stock = [{price: 100, count: 5}];
+//
+//    var apiCalled = false;
+//
+//    stockService.getStockPrice = function(stock){
+//      apiCalled = true;
+//      return stock;
+//    };
+//
+//    stockCalculator.calculateNetAssetValue(stock);
+//
+//    expect(apiCalled).to.be.true;
+//  });
+//
+//  it("should get the asset value for one stock from getStockInformationService", function(){
+//    var ourStock = [{symbol : "XYZ1", count: 5}];
+//
+//    stockService.getStockPrice = function(stock){
+//      var apiStockInfo = {symbol : "XYZ1", price: 100};
+//      stock.price = apiStockInfo.price;
+//      return stock;
+//    };
+//
+//    expect(stockCalculator.calculateNetAssetValue(ourStock)).to.be.eql(500);
+//  });
+//
+//  it("should calculate the asset value if the stock is valid in the stock information service", function(){
+//    var ourStock = [{symbol : "XYZ1", count: 5}];
+//
+//    stockService.getStockPrice = function(stock){
+//      var apiStockInfo = {symbol : "XYZ1", price: 100};
+//
+//      if (stock.symbol == apiStockInfo.symbol)
+//        stock.price = apiStockInfo.price;
+//      return stock;
+//    };
+//    expect(stockCalculator.calculateNetAssetValue(ourStock)).to.be.eql(500);
+//  });
+//
+//  it("should throw an error if a stock does not exist in the stock information service", function(){
+//    var ourStock = [{symbol : "XYZI", count: 5}];
+//
+//    stockService.getStockPrice = function(stock){
+//      var apiStockInfo = {symbol : "XYZ1", price: 100};
+//
+//      if (stock.symbol != apiStockInfo.symbol)
+//        throw new Error("Stock does not exist");
+//    };
+//
+//    var call = function(){stockCalculator.calculateNetAssetValue(ourStock);};
+//
+//    expect(call).to.throw("Stock does not exist");
+//  });
+//});
+//
+//describe('YahooStockService unit tests:', function(){
+//  var stockCalculator;
+//
+//  beforeEach(function(){
+//    stockCalculator = new StockCalculator(YahooStockService);
+//  });
+//
+//  it('should return a 200 status when trying to get data for TSLA', function(done){
+//
+//    YahooStockService.getStockPrice({symbol: "TSLA"}, function(res){
+//      expect(res.status).to.eql(200);
+//      done();
+//    });
+//  });
+//
+//  it('should return a 404 status when trying to get data for an invalid symbol', function(done){
+//
+//    YahooStockService.getStockPrice({symbol: ""}, function(res){
+//      expect(res.status).to.eql(404);
+//      done();
+//    });
+//  });
 
 });
