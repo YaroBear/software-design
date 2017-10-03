@@ -112,9 +112,10 @@ describe('Stock calculator and Stock Service unit tests:', function() {
       var apiStockInfo = {symbol : "XYZ1", price: 100};
 
       if (stock.symbol == apiStockInfo.symbol)
-        stock.price = stock.price = apiStockInfo.price;
+        stock.price = apiStockInfo.price;
       return stock;
     };
+    expect(stockCalculator.calculateNetAssetValue(ourStock)).to.be.eql(500);
   });
 
   it("should throw an error if a stock does not exist in the stock information service", function(){
@@ -142,7 +143,7 @@ describe('YahooStockService unit tests:', function(){
 
   it('should return a 200 status when trying to get data for TSLA', function(done){
 
-    stockCalculator.stockService.getStockPrice({symbol: "TSLA"}, function(res){
+    YahooStockService.getStockPrice({symbol: "TSLA"}, function(res){
       expect(res.status).to.eql(200);
       done();
     });
@@ -150,7 +151,7 @@ describe('YahooStockService unit tests:', function(){
 
   it('should return a 404 status when trying to get data for an invalid symbol', function(done){
 
-    stockCalculator.stockService.getStockPrice({symbol: ""}, function(res){
+    YahooStockService.getStockPrice({symbol: ""}, function(res){
       expect(res.status).to.eql(404);
       done();
     });
