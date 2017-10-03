@@ -1,9 +1,9 @@
 var StockCalculator = require("../src/StockCalculator");
 var Chai = require('chai');
 var expect = Chai.expect;
-
+var sinon = require('sinon');
 var StockService = require('../src/StockService');
-var YahooStockService = require('../src/YahooService'); //Venkat: Please remove
+// var YahooStockService = require('../src/YahooService'); //Venkat: Please remove
 
 describe('Stock calculator and Stock Service unit tests:', function() {
 	it('canary test', function() {
@@ -11,12 +11,18 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 	});
 
 	var stockCalculator;
-  var stockService; //Venkat: Please remove
+    var stockService; //Venkat: Please remove
+    var sandbox;
 
-  beforeEach(function(){
-    stockService = new StockService();
-    stockCalculator = new StockCalculator(stockService);
-  });
+	beforeEach(function(){
+		sandbox = sinon.sandbox.create();
+		stockService = new StockService();
+		stockCalculator = new StockCalculator(stockService);
+	});
+
+	afterEach(function() {
+		sandbox.restore();
+	});
 
 	it('should get the value for one stock @ $1', function(){
 		var stock = [{price: 100, count: 1}];
@@ -67,17 +73,17 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 	});
 
 //Venkat: Let's remove all tests realted to convertDecimalToWholeIntegerRepresentation 
-	it("should convert 12.34 to 1234", function(){
-		expect(stockService.convertDecimalToWholeIntegerRepresentation(12.34)).to.eql(1234);
-	});
+	// it("should convert 12.34 to 1234", function(){
+	// 	expect(stockService.convertDecimalToWholeIntegerRepresentation(12.34)).to.eql(1234);
+	// });
 
-	it("should convert 12.3 to 1230", function(){
-		expect(stockService.convertDecimalToWholeIntegerRepresentation(12.3)).to.eql(1230);
-	});
+	// it("should convert 12.3 to 1230", function(){
+	// 	expect(stockService.convertDecimalToWholeIntegerRepresentation(12.3)).to.eql(1230);
+	// });
 
-	it("should convert 12.345 to 1235", function(){
-		expect(stockService.convertDecimalToWholeIntegerRepresentation(12.345)).to.eql(1235);
-	});
+	// it("should convert 12.345 to 1235", function(){
+	// 	expect(stockService.convertDecimalToWholeIntegerRepresentation(12.345)).to.eql(1235);
+	// });
 
 //Venkat: Let's delete everything below this. Please see the reviews file for next step.        
 
