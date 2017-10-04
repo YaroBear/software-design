@@ -8,13 +8,15 @@ StockCalculator.prototype.validate = function(stock){
   return stock;
 };
                           
-//Venkat: This is unnecessary coupling. The calculateNetAssetValue was focused on computing. Now it has to deal with a dependency. Makes this method more complex than it should be.
 StockCalculator.prototype.calculateNetAssetValue = function(stocks){
   return stocks
-    .map(this.stockService.getStockPrice)
     .map(this.validate)
     .map(stock => stock.price * stock.count)
     .reduce((total, amount) => total + amount);
+};
+
+StockCalculator.prototype.getBidPriceFromService = function(stocks){
+	return stocks.map(this.stockService.getStockPrice);
 };
 
 module.exports = StockCalculator;

@@ -3,7 +3,6 @@ var Chai = require('chai');
 var expect = Chai.expect;
 var sinon = require('sinon');
 var StockService = require('../src/StockService');
-// var YahooStockService = require('../src/YahooService'); //Venkat: Please remove
 
 describe('Stock calculator and Stock Service unit tests:', function() {
 	it('canary test', function() {
@@ -71,99 +70,62 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 
 		expect(call).to.throw("Price/Count cannot be less than 0");
 	});
+});
 
-//Venkat: Let's remove all tests realted to convertDecimalToWholeIntegerRepresentation 
-	// it("should convert 12.34 to 1234", function(){
-	// 	expect(stockService.convertDecimalToWholeIntegerRepresentation(12.34)).to.eql(1234);
-	// });
+describe('stock service tests:', function(){
 
-	// it("should convert 12.3 to 1230", function(){
-	// 	expect(stockService.convertDecimalToWholeIntegerRepresentation(12.3)).to.eql(1230);
-	// });
+	var sandbox;
+	var stockService;
+	var stockCalculator;
 
-	// it("should convert 12.345 to 1235", function(){
-	// 	expect(stockService.convertDecimalToWholeIntegerRepresentation(12.345)).to.eql(1235);
-	// });
+	beforeEach(function(){
+		sandbox = sinon.sandbox.create();
+		stockService = new StockService();
+		stockCalculator = new StockCalculator(stockService);
+	});
 
-//Venkat: Let's delete everything below this. Please see the reviews file for next step.        
+	afterEach(function() {
+		sandbox.restore();
+	});
 
-//  it("should call getStockPrice in stockservice when calculateNetAssetValue is called", function(){
-//    var stock = [{price: 100, count: 5}];
-//
-//    var apiCalled = false;
-//
-//    stockService.getStockPrice = function(stock){
-//      apiCalled = true;
-//      return stock;
-//    };
-//
-//    stockCalculator.calculateNetAssetValue(stock);
-//
-//    expect(apiCalled).to.be.true;
-//  });
-//
-//  it("should get the asset value for one stock from getStockInformationService", function(){
-//    var ourStock = [{symbol : "XYZ1", count: 5}];
-//
-//    stockService.getStockPrice = function(stock){
-//      var apiStockInfo = {symbol : "XYZ1", price: 100};
-//      stock.price = apiStockInfo.price;
-//      return stock;
-//    };
-//
-//    expect(stockCalculator.calculateNetAssetValue(ourStock)).to.be.eql(500);
-//  });
-//
-//  it("should calculate the asset value if the stock is valid in the stock information service", function(){
-//    var ourStock = [{symbol : "XYZ1", count: 5}];
-//
-//    stockService.getStockPrice = function(stock){
-//      var apiStockInfo = {symbol : "XYZ1", price: 100};
-//
-//      if (stock.symbol == apiStockInfo.symbol)
-//        stock.price = apiStockInfo.price;
-//      return stock;
-//    };
-//    expect(stockCalculator.calculateNetAssetValue(ourStock)).to.be.eql(500);
-//  });
-//
-//  it("should throw an error if a stock does not exist in the stock information service", function(){
-//    var ourStock = [{symbol : "XYZI", count: 5}];
-//
-//    stockService.getStockPrice = function(stock){
-//      var apiStockInfo = {symbol : "XYZ1", price: 100};
-//
-//      if (stock.symbol != apiStockInfo.symbol)
-//        throw new Error("Stock does not exist");
-//    };
-//
-//    var call = function(){stockCalculator.calculateNetAssetValue(ourStock);};
-//
-//    expect(call).to.throw("Stock does not exist");
-//  });
-//});
-//
-//describe('YahooStockService unit tests:', function(){
-//  var stockCalculator;
-//
-//  beforeEach(function(){
-//    stockCalculator = new StockCalculator(YahooStockService);
-//  });
-//
-//  it('should return a 200 status when trying to get data for TSLA', function(done){
-//
-//    YahooStockService.getStockPrice({symbol: "TSLA"}, function(res){
-//      expect(res.status).to.eql(200);
-//      done();
-//    });
-//  });
-//
-//  it('should return a 404 status when trying to get data for an invalid symbol', function(done){
-//
-//    YahooStockService.getStockPrice({symbol: ""}, function(res){
-//      expect(res.status).to.eql(404);
-//      done();
-//    });
-//  });
+	it('should get the bid price of GOOG', function(){
+		sandbox.stub(stockService, 'getStockPrice')
+			.withArgs('GOOG')
+			.returns(10000);
 
+		expect(stockCalculator.getBidPriceFromService(['GOOG'])).to.eql([10000]);
+	});
+
+	it('should get the bid price of GOOG and TSLA', function(){
+		sandbox.stub(stockService, 'getStockPrice')
+			.withArgs('GOOG').returns(10000)
+			.withArgs('TSLA').returns(20000);
+
+		expect(stockCalculator.getBidPriceFromService(['GOOG', 'TSLA'])).to.eql([10000, 20000]);
+	});
+
+	it('should get the net asset value of GOOG', function(){
+		sandbox.stub(stockService, 'getStockPrice')
+			.withArgs('GOOG').returns(10000);
+
+		var price = stockCalculator.getBidPriceFromService(['GOOG']);
+		var stock = [{price : price[0], count: 5}];
+
+		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(50000);
+	});
+
+	it('should get the net asset value of GOOG and TSLA', function(){
+		sandbox.stub(stockService, 'getStockPrice')
+			.withArgs('GOOG').returns(10000)
+			.withArgs('TSLA').returns(20000);
+
+		var price = stockCalculator.getBidPriceFromService(['GOOG', 'TSLA']);
+		var stocks = [{price : price[0], count: 5}, {price : price[1], count: 2}];
+
+		expect(stockCalculator.calculateNetAssetValue(stocks)).to.eql(90000);
+	});
+
+	it('should throw an error when getStockPrice is called', function(){
+		expect(stockCalculator.stockService.getStockPrice).to.throw('Not implemented');
+	});
 });
