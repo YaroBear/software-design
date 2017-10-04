@@ -1,3 +1,13 @@
+[Venkat 10/04/17 04:45 AM PDT]
+synopsis: good progress 
+
+details:
+describe('stock service tests:', function(){
+I like how you created a new test suite for this. Good job here.
+
+Good progress.
+
+------------------------------------------------------------------------------
 [Venkat 10/03/17 03:49 AM PDT]
 synopsis: let's revisit how we approach the design 
 

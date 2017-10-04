@@ -14,7 +14,8 @@ StockCalculator.prototype.calculateNetAssetValue = function(stocks){
     .map(stock => stock.price * stock.count)
     .reduce((total, amount) => total + amount);
 };
-
+                                                                    
+//Venkat: Let's take one symbol here instead of an array or list and return the price for that one. symbol instead of stocks
 StockCalculator.prototype.getBidPriceFromService = function(stocks){
 	return stocks.map(this.stockService.getStockPrice);
 };

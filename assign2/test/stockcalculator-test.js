@@ -80,6 +80,8 @@ describe('stock service tests:', function(){
 		sandbox.restore();
 	});
 
+//Venkat: we can reduce a few tests here. Let getBidPriceFromService take one symbol and return one price. Then let's design for what will happen if the given ticket is invalid. Then what will happen if there was a failure to get the data for a valid symbol.                  
+
 	it('should get the bid price of GOOG', function(){
 		sandbox.stub(stockService, 'getStockPrice')
 			.withArgs('GOOG')
@@ -116,7 +118,8 @@ describe('stock service tests:', function(){
 
 		expect(stockCalculator.calculateNetAssetValue(stocks)).to.eql(90000);
 	});
-
+                  
+//Venkat: Please remove
 	it('should throw an error when getStockPrice is called', function(){
 		expect(stockCalculator.stockService.getStockPrice).to.throw('Not implemented');
 	});
