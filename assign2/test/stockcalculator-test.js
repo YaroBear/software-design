@@ -10,17 +10,9 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 	});
 
 	var stockCalculator;
-    var stockService; //Venkat: Please remove
-    var sandbox;
 
 	beforeEach(function(){
-		sandbox = sinon.sandbox.create();
-		stockService = new StockService();
-		stockCalculator = new StockCalculator(stockService);
-	});
-
-	afterEach(function() {
-		sandbox.restore();
+		stockCalculator = new StockCalculator();
 	});
 
 	it('should get the value for one stock @ $1', function(){
