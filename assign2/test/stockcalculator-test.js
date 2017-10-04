@@ -87,37 +87,55 @@ describe('stock service tests:', function(){
 			.withArgs('GOOG')
 			.returns(10000);
 
-		expect(stockCalculator.getBidPriceFromService(['GOOG'])).to.eql([10000]);
+		expect(stockCalculator.getBidPriceFromService('GOOG')).to.eql(10000);
 	});
 
-	it('should get the bid price of GOOG and TSLA', function(){
+	it('should throw an error for an invalid ticker symbol', function(){
+		var call = function() {stockCalculator.getBidPriceFromService('0000');};
+		
+		expect(call).to.throw("Invalid ticker symbol");
+	});
+
+	it('should throw an error if it fails to retrieve data for a valid stock symbol', function(){
 		sandbox.stub(stockService, 'getStockPrice')
-			.withArgs('GOOG').returns(10000)
-			.withArgs('TSLA').returns(20000);
+			.withArgs('GOOG')
+			.returns();
 
-		expect(stockCalculator.getBidPriceFromService(['GOOG', 'TSLA'])).to.eql([10000, 20000]);
+		var call = function() {stockCalculator.getBidPriceFromService('GOOG');};
+
+		expect(call).to.throw("Error retrieving data for valid symbol");
 	});
 
-	it('should get the net asset value of GOOG', function(){
-		sandbox.stub(stockService, 'getStockPrice')
-			.withArgs('GOOG').returns(10000);
 
-		var price = stockCalculator.getBidPriceFromService(['GOOG']);
-		var stock = [{price : price[0], count: 5}];
 
-		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(50000);
-	});
+	// it('should get the bid price of GOOG and TSLA', function(){
+	// 	sandbox.stub(stockService, 'getStockPrice')
+	// 		.withArgs('GOOG').returns(10000)
+	// 		.withArgs('TSLA').returns(20000);
 
-	it('should get the net asset value of GOOG and TSLA', function(){
-		sandbox.stub(stockService, 'getStockPrice')
-			.withArgs('GOOG').returns(10000)
-			.withArgs('TSLA').returns(20000);
+	// 	expect(stockCalculator.getBidPriceFromService(['GOOG', 'TSLA'])).to.eql([10000, 20000]);
+	// });
 
-		var price = stockCalculator.getBidPriceFromService(['GOOG', 'TSLA']);
-		var stocks = [{price : price[0], count: 5}, {price : price[1], count: 2}];
+	// it('should get the net asset value of GOOG', function(){
+	// 	sandbox.stub(stockService, 'getStockPrice')
+	// 		.withArgs('GOOG').returns(10000);
 
-		expect(stockCalculator.calculateNetAssetValue(stocks)).to.eql(90000);
-	});
+	// 	var price = stockCalculator.getBidPriceFromService(['GOOG']);
+	// 	var stock = [{price : price[0], count: 5}];
+
+	// 	expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(50000);
+	// });
+
+	// it('should get the net asset value of GOOG and TSLA', function(){
+	// 	sandbox.stub(stockService, 'getStockPrice')
+	// 		.withArgs('GOOG').returns(10000)
+	// 		.withArgs('TSLA').returns(20000);
+
+	// 	var price = stockCalculator.getBidPriceFromService(['GOOG', 'TSLA']);
+	// 	var stocks = [{price : price[0], count: 5}, {price : price[1], count: 2}];
+
+	// 	expect(stockCalculator.calculateNetAssetValue(stocks)).to.eql(90000);
+	// });
                   
 //Venkat: Please remove
 	it('should throw an error when getStockPrice is called', function(){
