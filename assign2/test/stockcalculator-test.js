@@ -97,7 +97,8 @@ describe('stock service tests:', function(){
 
 		expect(call).to.throw("Invalid stock symbol");
 	});
-
+                        
+//Venkat: Please remove this test
 	it('should throw an error when getStockPrice is called', function(){
 		expect(stockCalculator.stockService.getStockPrice).to.throw('Not implemented');
 	});

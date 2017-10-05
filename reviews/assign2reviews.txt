@@ -1,3 +1,19 @@
+[Venkat 10/05/17 04:48 AM PDT]
+synopsis: let's rework the design a bit 
+
+details:
+Please address and remove the review notes I leave in the code.
+
+Let's rework the design a bit. 
+Let's create a getAssetValues method that takes in stock symbols and number of shares. Let it call the service's getStockPrice. Let getAssetValues return symbols, number of shares, and asset values based on the price it gets.
+Once we write a few positive tests (one symbol, two symbols, three symbols), 
+we can then write the following tests:
+
+1. When one of the symbols is invalid
+2. When request to get price for one of the symbols results in a failure.
+
+
+------------------------------------------------------------------------------
 [Venkat 10/04/17 04:45 AM PDT]
 synopsis: good progress 
 

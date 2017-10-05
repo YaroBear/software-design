@@ -15,10 +15,11 @@ StockCalculator.prototype.calculateNetAssetValue = function(stocks){
     .reduce((total, amount) => total + amount);
 };
                                                                     
-StockCalculator.prototype.getBidPriceFromService = function(symbol){;
+StockCalculator.prototype.getBidPriceFromService = function(symbol){ //Venkat: we can remove this function. We can do this.stockService.getStockPrice from the function that computes the asset values
 	return this.stockService.getStockPrice(symbol);
 };
-
+                            
+//Venkat: It is not clear what this function is returning
 StockCalculator.prototype.getSummaryOfStocks = function(stocks){
     for (var i = 0; i < stocks.length; i++){
     	var symbol = stocks[i].symbol;
