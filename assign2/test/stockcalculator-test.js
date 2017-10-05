@@ -101,4 +101,33 @@ describe('stock service tests:', function(){
 	it('should throw an error when getStockPrice is called', function(){
 		expect(stockCalculator.stockService.getStockPrice).to.throw('Not implemented');
 	});
+
+	it('should call getBidPriceFromService when getSummaryOfStocks is called', function(){
+ 		var stocks = [{symbol: 'GOOG', count: 5}];
+
+		sandbox.stub(stockService, 'getStockPrice')
+			.withArgs('GOOG')
+			.returns(11000);
+
+		var spy = sandbox.spy(stockCalculator, 'getBidPriceFromService');
+
+		stockCalculator.getSummaryOfStocks(stocks);
+
+		expect(spy.calledWith('GOOG')).to.be.true;
+	});
+
+	it('should call calculateNetAssetValue when getSummaryOfStocks is called', function(){
+ 		var stocks = [{symbol: "TSLA", count: 6}];
+ 		
+		sandbox.stub(stockService, 'getStockPrice')
+			.withArgs('TSLA')
+			.returns(10000);
+
+
+		var spy = sandbox.spy(stockCalculator, 'calculateNetAssetValue');
+
+		stockCalculator.getSummaryOfStocks(stocks);
+
+		expect(spy.calledWith([{price: 10000, count: 6}])).to.be.true;
+	});
 });

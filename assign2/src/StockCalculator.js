@@ -19,4 +19,12 @@ StockCalculator.prototype.getBidPriceFromService = function(symbol){;
 	return this.stockService.getStockPrice(symbol);
 };
 
+StockCalculator.prototype.getSummaryOfStocks = function(stocks){
+    for (var i = 0; i < stocks.length; i++){
+    	var symbol = stocks[i].symbol;
+    	var stockPrice = this.getBidPriceFromService(symbol);
+    	var assetValue = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
+    };  
+};
+
 module.exports = StockCalculator;
