@@ -21,11 +21,21 @@ StockCalculator.prototype.getBidPriceFromService = function(symbol){ //Venkat: w
                             
 //Venkat: It is not clear what this function is returning
 StockCalculator.prototype.getSummaryOfStocks = function(stocks){
-    for (var i = 0; i < stocks.length; i++){
-    	var symbol = stocks[i].symbol;
-    	var stockPrice = this.getBidPriceFromService(symbol);
-    	var assetValue = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
-    };  
+  for (var i = 0; i < stocks.length; i++){
+  	var symbol = stocks[i].symbol;
+  	var stockPrice = this.getBidPriceFromService(symbol);
+  	var assetValue = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
+  };  
 };
+
+
+//Nick:  new getAssetValues function.  Its very similar to the getSummaryOfStocks function above but it calls getStockPrice directly and returns the modified stocks array
+StockCalculator.prototype.getAssetValues = function(stocks){
+  for (var i = 0; i < stocks.length; i++){
+    var stockPrice = this.stockService.getStockPrice(stocks[i].symbol);
+    stocks[i].value = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
+  };  
+  return stocks
+}
 
 module.exports = StockCalculator;

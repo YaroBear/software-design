@@ -131,4 +131,44 @@ describe('stock service tests:', function(){
 
 		expect(spy.calledWith([{price: 10000, count: 6}])).to.be.true;
 	});
+
+
+
+	//Nick:  new getAssetValues tests
+	//He mentioned coming up with a few positive tests for getAssetValues using 1 symbol, 2 symbols, and 3 symbols.  Because he said positive tests I set these up to 
+	//directly check the results returned by getAssetValues  with the expected values.
+	it('should return the symbol, number of shares, and total value of 1 stock when getAssetValues is called', function(){
+		var stocks = [{symbol: "TSLA", count: 6}];
+
+		sandbox.stub(stockService, 'getStockPrice')
+			.withArgs('TSLA')
+			.returns(11000);
+
+		expect(stockCalculator.getAssetValues(stocks)).to.be.eql([{symbol: "TSLA", count: 6, value: 66000}]);
+	});
+
+	it('should return the symbols, number of shares and total values of 2 stocks when getAssetValues is called', function(){
+		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}];
+
+		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}];
+
+		var stub = sandbox.stub(stockService, 'getStockPrice');
+		stub.withArgs('TSLA').returns(11000);
+		stub.withArgs('GOOG').returns(10000);
+
+		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+	});
+
+	it('should return the symbols, number of shares and total values of 3 stocks when getAssetValues is called', function(){
+		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'AAPL', count: 3}];
+
+		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'AAPL', count: 3, value: 27000}];
+
+		var stub = sandbox.stub(stockService, 'getStockPrice');
+		stub.withArgs('TSLA').returns(11000);
+		stub.withArgs('GOOG').returns(10000);
+		stub.withArgs('AAPL').returns(9000);
+
+		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+	});
 });
