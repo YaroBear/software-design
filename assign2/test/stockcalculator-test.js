@@ -83,41 +83,22 @@ describe('stock service tests:', function(){
 	it('should get the bid price of GOOG', function(){
 		sandbox.stub(stockService, 'getStockPrice')
 			.withArgs('GOOG')
-			.returns(10000);
+			.returns(17000);
 
-		expect(stockCalculator.getBidPriceFromService('GOOG')).to.eql(10000);
+		expect(stockCalculator.stockService.getStockPrice('GOOG')).to.eql(17000);
 	});
 
-	it('should throw an error if it fails to retrieve data for a valid stock symbol', function(){
+	it('should throw an error for an invalid stock symbol', function(){
 		sandbox.stub(stockService, 'getStockPrice')
 			.withArgs('WASD')
 			.throws(new Error("Invalid stock symbol"));
 
-		var call = function() {stockCalculator.getBidPriceFromService('WASD');};
+		var call = function() {stockCalculator.stockService.getStockPrice('WASD');};
 
 		expect(call).to.throw("Invalid stock symbol");
 	});
                         
-//Venkat: Please remove this test
-	it('should throw an error when getStockPrice is called', function(){
-		expect(stockCalculator.stockService.getStockPrice).to.throw('Not implemented');
-	});
-
-	it('should call getBidPriceFromService when getSummaryOfStocks is called', function(){
- 		var stocks = [{symbol: 'GOOG', count: 5}];
-
-		sandbox.stub(stockService, 'getStockPrice')
-			.withArgs('GOOG')
-			.returns(11000);
-
-		var spy = sandbox.spy(stockCalculator, 'getBidPriceFromService');
-
-		stockCalculator.getSummaryOfStocks(stocks);
-
-		expect(spy.calledWith('GOOG')).to.be.true;
-	});
-
-	it('should call calculateNetAssetValue when getSummaryOfStocks is called', function(){
+	it('should call calculateNetAssetValue when getAssetValues is called', function(){
  		var stocks = [{symbol: "TSLA", count: 6}];
  		
 		sandbox.stub(stockService, 'getStockPrice')
@@ -127,16 +108,11 @@ describe('stock service tests:', function(){
 
 		var spy = sandbox.spy(stockCalculator, 'calculateNetAssetValue');
 
-		stockCalculator.getSummaryOfStocks(stocks);
+		stockCalculator.getAssetValues(stocks);
 
 		expect(spy.calledWith([{price: 10000, count: 6}])).to.be.true;
 	});
 
-
-
-	//Nick:  new getAssetValues tests
-	//He mentioned coming up with a few positive tests for getAssetValues using 1 symbol, 2 symbols, and 3 symbols.  Because he said positive tests I set these up to 
-	//directly check the results returned by getAssetValues  with the expected values.
 	it('should return the symbol, number of shares, and total value of 1 stock when getAssetValues is called', function(){
 		var stocks = [{symbol: "TSLA", count: 6}];
 
@@ -152,9 +128,9 @@ describe('stock service tests:', function(){
 
 		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}];
 
-		var stub = sandbox.stub(stockService, 'getStockPrice');
-		stub.withArgs('TSLA').returns(11000);
-		stub.withArgs('GOOG').returns(10000);
+		sandbox.stub(stockService, 'getStockPrice')
+				.withArgs('TSLA').returns(11000)
+				.withArgs('GOOG').returns(10000);
 
 		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
 	});
@@ -164,11 +140,44 @@ describe('stock service tests:', function(){
 
 		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'AAPL', count: 3, value: 27000}];
 
-		var stub = sandbox.stub(stockService, 'getStockPrice');
-		stub.withArgs('TSLA').returns(11000);
-		stub.withArgs('GOOG').returns(10000);
-		stub.withArgs('AAPL').returns(9000);
+		sandbox.stub(stockService, 'getStockPrice')
+				.withArgs('TSLA').returns(11000)
+				.withArgs('GOOG').returns(10000)
+				.withArgs('AAPL').returns(9000);
 
 		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
 	});
+
+	it('should handle an invalid stock symbol in a list of stocks by setting the value of the invalid stock to N/A', function(){
+		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'WASD', count: 3}];
+
+		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'WASD', count: 3, value: 'N/A'}];
+
+		sandbox.stub(stockService, 'getStockPrice')
+				.withArgs('TSLA').returns(11000)
+				.withArgs('GOOG').returns(10000)
+				.withArgs('WASD').throws(new Error('Invalid stock symbol'));
+
+		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+	});
+
+	it('should handle a failure to retrieve a price for valid stock by setting the value of that stock to Not Retrieved', function(){
+		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'AAPL', count: 3}, {symbol: 'GOOG', count: 5}];
+
+		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'AAPL', count: 3, value: 'Not Retrieved'}, {symbol: 'GOOG', count: 5, value: 50000}];
+
+		sandbox.stub(stockService, 'getStockPrice')
+				.withArgs('TSLA').returns(11000)
+				.withArgs('GOOG').returns(10000)
+				.withArgs('AAPL').throws(new Error('Failed to retrieve data'));
+
+		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+	});
+
+
+// Venkat: Please remove this test
+	it('should throw an error when getStockPrice is called', function(){
+		expect(stockCalculator.stockService.getStockPrice).to.throw('Not implemented');
+	});
+
 });

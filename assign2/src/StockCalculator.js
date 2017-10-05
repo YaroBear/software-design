@@ -15,26 +15,18 @@ StockCalculator.prototype.calculateNetAssetValue = function(stocks){
     .reduce((total, amount) => total + amount);
 };
                                                                     
-StockCalculator.prototype.getBidPriceFromService = function(symbol){ //Venkat: we can remove this function. We can do this.stockService.getStockPrice from the function that computes the asset values
-	return this.stockService.getStockPrice(symbol);
-};
-                            
-//Venkat: It is not clear what this function is returning
-StockCalculator.prototype.getSummaryOfStocks = function(stocks){
-  for (var i = 0; i < stocks.length; i++){
-  	var symbol = stocks[i].symbol;
-  	var stockPrice = this.getBidPriceFromService(symbol);
-  	var assetValue = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
-  };  
-};
-
-
-//Nick:  new getAssetValues function.  Its very similar to the getSummaryOfStocks function above but it calls getStockPrice directly and returns the modified stocks array
 StockCalculator.prototype.getAssetValues = function(stocks){
   for (var i = 0; i < stocks.length; i++){
-    var stockPrice = this.stockService.getStockPrice(stocks[i].symbol);
-    stocks[i].value = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
-  };  
+    try{
+      var stockPrice = this.stockService.getStockPrice(stocks[i].symbol);
+      stocks[i].value = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
+    } catch(error) {
+      if (error.message == 'Invalid stock symbol')
+        stocks[i].value = 'N/A';
+      if (error.message == 'Failed to retrieve data')
+        stocks[i].value = 'Not Retrieved';
+    }
+  }  
   return stocks
 }
 
