@@ -1,3 +1,14 @@
+[Venkat 10/06/17 04:31 AM PDT]
+synopsis: good work 
+
+details:           
+Good work.
+
+Please see suggestions in code.
+
+Let's move forward to the next small step.
+
+------------------------------------------------------------------------------
 [Venkat 10/05/17 04:48 AM PDT]
 synopsis: let's rework the design a bit 
 

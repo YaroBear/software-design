@@ -17,6 +17,7 @@ StockCalculator.prototype.calculateNetAssetValue = function(stocks){
                                                                     
 StockCalculator.prototype.getAssetValues = function(stocks){
   for (var i = 0; i < stocks.length; i++){
+    //Venkat: Let's extract the body of this for alone into a separate method which takes a stock and returns the stock with price or error messages filled in.
     try{
       var stockPrice = this.stockService.getStockPrice(stocks[i].symbol);
       stocks[i].value = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);

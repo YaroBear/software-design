@@ -88,6 +88,7 @@ describe('stock service tests:', function(){
 		expect(stockCalculator.stockService.getStockPrice('GOOG')).to.eql(17000);
 	});
 
+//Venkat: Pelase remove this test, it is testing the stub we created. We should never test a stub. Stub is used to help testing real methods.
 	it('should throw an error for an invalid stock symbol', function(){
 		sandbox.stub(stockService, 'getStockPrice')
 			.withArgs('WASD')
@@ -97,7 +98,8 @@ describe('stock service tests:', function(){
 
 		expect(call).to.throw("Invalid stock symbol");
 	});
-                        
+
+//Venkat: There is no value for this test, please remove                        
 	it('should call calculateNetAssetValue when getAssetValues is called', function(){
  		var stocks = [{symbol: "TSLA", count: 6}];
  		
@@ -151,6 +153,7 @@ describe('stock service tests:', function(){
 	it('should handle an invalid stock symbol in a list of stocks by setting the value of the invalid stock to N/A', function(){
 		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'WASD', count: 3}];
 
+//Venkat: Question. The value here is a number or a string. Will this make our life harder when we need to know the difference. Will it be easier if we keep the asset value in value: and error message in error: Then the result may either have a value or a error. That will be easier to tell if the result is there or we ran into an issue getting the price?
 		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'WASD', count: 3, value: 'Invalid stock symbol'}];
 
 		sandbox.stub(stockService, 'getStockPrice')
