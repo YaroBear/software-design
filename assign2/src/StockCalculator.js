@@ -17,18 +17,22 @@ StockCalculator.prototype.calculateNetAssetValue = function(stocks){
                                                                     
 StockCalculator.prototype.getAssetValues = function(stocks){
   for (var i = 0; i < stocks.length; i++){
-    //Venkat: Let's extract the body of this for alone into a separate method which takes a stock and returns the stock with price or error messages filled in.
-    try{
-      var stockPrice = this.stockService.getStockPrice(stocks[i].symbol);
-      stocks[i].value = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
-    } catch(error) {
-      if (error.message == 'Invalid stock symbol')
-        stocks[i].value = error.message;
-      if (error.message == 'Failed to retrieve data')
-        stocks[i].value = error.message;
-    }
+    this.validateSymbolAndGetPrice(stocks[i]);
   }  
   return stocks
+}
+
+StockCalculator.prototype.validateSymbolAndGetPrice = function(stock){
+      try{
+      var stockPrice = this.stockService.getStockPrice(stock.symbol);
+      stock.value = this.calculateNetAssetValue([{price: stockPrice, count: stock.count}]);
+    } catch(error) {
+      if (error.message == 'Invalid stock symbol')
+        stock.error = error.message;
+      if (error.message == 'Failed to retrieve data')
+        stock.error = error.message;
+    }
+    return stock;
 }
 
 module.exports = StockCalculator;
