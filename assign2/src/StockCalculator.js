@@ -22,9 +22,9 @@ StockCalculator.prototype.getAssetValues = function(stocks){
       stocks[i].value = this.calculateNetAssetValue([{price: stockPrice, count: stocks[i].count}]);
     } catch(error) {
       if (error.message == 'Invalid stock symbol')
-        stocks[i].value = 'N/A';
+        stocks[i].value = error.message;
       if (error.message == 'Failed to retrieve data')
-        stocks[i].value = 'Not Retrieved';
+        stocks[i].value = error.message;
     }
   }  
   return stocks

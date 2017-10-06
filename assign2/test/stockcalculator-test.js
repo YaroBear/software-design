@@ -151,7 +151,7 @@ describe('stock service tests:', function(){
 	it('should handle an invalid stock symbol in a list of stocks by setting the value of the invalid stock to N/A', function(){
 		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'WASD', count: 3}];
 
-		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'WASD', count: 3, value: 'N/A'}];
+		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'WASD', count: 3, value: 'Invalid stock symbol'}];
 
 		sandbox.stub(stockService, 'getStockPrice')
 				.withArgs('TSLA').returns(11000)
@@ -164,7 +164,7 @@ describe('stock service tests:', function(){
 	it('should handle a failure to retrieve a price for valid stock by setting the value of that stock to Not Retrieved', function(){
 		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'AAPL', count: 3}, {symbol: 'GOOG', count: 5}];
 
-		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'AAPL', count: 3, value: 'Not Retrieved'}, {symbol: 'GOOG', count: 5, value: 50000}];
+		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'AAPL', count: 3, value: 'Failed to retrieve data'}, {symbol: 'GOOG', count: 5, value: 50000}];
 
 		sandbox.stub(stockService, 'getStockPrice')
 				.withArgs('TSLA').returns(11000)
@@ -172,12 +172,6 @@ describe('stock service tests:', function(){
 				.withArgs('AAPL').throws(new Error('Failed to retrieve data'));
 
 		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
-	});
-
-
-// Venkat: Please remove this test
-	it('should throw an error when getStockPrice is called', function(){
-		expect(stockCalculator.stockService.getStockPrice).to.throw('Not implemented');
 	});
 
 });
