@@ -132,7 +132,7 @@ describe('stock service tests:', function(){
 
 });
 
-describe('yahoo stock service tests:', function(){
+describe('yahoo stock service tests:', function(){ //Venkat: These should be in a separate file, may be yahoo-stock-service-test.js
 
 	var yahooStockService;
 

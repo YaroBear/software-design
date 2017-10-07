@@ -1,3 +1,22 @@
+[Venkat 10/07/17 05:59 AM CDT]
+synopsis: let's upgrade to modern JavaScript 
+
+details:         
+Let's use class instead of the old style (in assign1 I did not go there because the browser support is weak). Since we're running this in node,
+we can make better use of modern JavaScript features.
+
+I would start with change to the code and keep the tests passing during that time. Once the code is refactored, then change the tests to use modern JavaScript and the tests should keep passing at that time as well. In other words, one change at a time will ensure things continue to work.
+
+Coverage:
+Please fix the code coverage, we have code that has no tests.
+
+Anywhere var is used let's use const if possible otherwise let.
+
+Please use file naming convention of word1-word2-word3.js.
+
+Let's get the coverage up and will take a closer look at the tests and methods.
+
+------------------------------------------------------------------------------
 [Venkat 10/06/17 04:31 AM PDT]
 synopsis: good work 
 

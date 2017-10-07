@@ -1,6 +1,8 @@
 var request = require('request-promise-native');
 var StockService = require('../src/StockService');
 
+//Venkat: How about class YahooStockService extends StockService {...}
+
 var YahooStockService = function(){
 	StockService.call(this);
 };

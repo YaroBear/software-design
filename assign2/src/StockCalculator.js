@@ -2,6 +2,11 @@ var StockCalculator = function(stockService){
   this.stockService = stockService;
 };
 
+//Venkat: How about
+//class StockCalculator {
+//...
+///}
+
 StockCalculator.prototype.validate = function(stock){
   if (stock.price < 0 || stock.count < 0)
     throw new Error("Price/Count cannot be less than 0");
@@ -17,7 +22,7 @@ StockCalculator.prototype.getAssetValues = function(stocks){
   return stocks.map(stock => this.validateSymbolAndGetPrice(stock));
 };
 
-StockCalculator.prototype.validateSymbolAndGetPrice = function(stock){
+StockCalculator.prototype.validateSymbolAndGetPrice = function(stock){ //Venkat: validateSymbolAndGetPrice to getAssetValueForASymbol
   try{
   var stockPrice = this.stockService.getStockPrice(stock.symbol);
   stock.value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
