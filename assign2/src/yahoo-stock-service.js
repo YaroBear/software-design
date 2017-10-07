@@ -1,5 +1,5 @@
 var request = require('request-promise-native');
-var StockService = require('../src/StockService');
+var StockService = require('../src/stock-service');
 
 //Venkat: How about class YahooStockService extends StockService {...}
 
