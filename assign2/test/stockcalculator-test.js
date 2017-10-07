@@ -16,19 +16,19 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 	});
 
 	it('should get the value for one stock @ $1', function(){
-		var stock = [{price: 100, count: 1}];
+		var stock = {price: 100, count: 1};
 
 		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(100);
 	});
 
 	it('should get the value for two stocks @ $1', function(){
-		var stock = [{price: 100, count: 2}];
+		var stock = {price: 100, count: 2};
 
 		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(200);
 	});
 
 	it('should throw an error if stock price is less than $0', function(){
-		var stock = [{price: -100, count: 2}];
+		var stock = {price: -100, count: 2};
 
 		var call = function() {stockCalculator.calculateNetAssetValue(stock);};
 
@@ -36,29 +36,9 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 	});
 
 	it('should throw an error if count of stocks is less than 0', function(){
-		var stock = [{price: 100, count: -2}];
+		var stock = {price: 100, count: -2};
 
 		var call = function() {stockCalculator.calculateNetAssetValue(stock);};
-
-		expect(call).to.throw("Price/Count cannot be less than 0");
-	});
-
-	it('should get the total value of two different stocks', function(){
-		var stocks = [
-		  {price: 250, count: 5},
-		  {price: 300, count: 3},
-		];
-		expect(stockCalculator.calculateNetAssetValue(stocks)).to.eql(2150);
-	});
-
-	it('throw in error if one stock in a list of stocks is invalid', function(){
-		var stocks = [
-			{price: 250, count: 5},
-			{price: 300, count: 3},
-			{price: -1000, count: 2}
-		];
-
-		var call = function() {stockCalculator.calculateNetAssetValue(stocks);};
 
 		expect(call).to.throw("Price/Count cannot be less than 0");
 	});

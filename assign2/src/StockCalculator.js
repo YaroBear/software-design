@@ -8,24 +8,19 @@ StockCalculator.prototype.validate = function(stock){
   return stock;
 };
 
-StockCalculator.prototype.calculateNetAssetValue = function(stocks){
-  return stocks
-    .map(this.validate)
-    .map(stock => stock.price * stock.count)
-    .reduce((total, amount) => total + amount);
+StockCalculator.prototype.calculateNetAssetValue = function(stock){
+  this.validate(stock);
+  return stock.price * stock.count;
 };
                                                                     
 StockCalculator.prototype.getAssetValues = function(stocks){
-  for (var i = 0; i < stocks.length; i++){
-    this.validateSymbolAndGetPrice(stocks[i]);
-  }  
-  return stocks
+    return stocks.map(stock => this.validateSymbolAndGetPrice(stock));
 }
 
 StockCalculator.prototype.validateSymbolAndGetPrice = function(stock){
       try{
       var stockPrice = this.stockService.getStockPrice(stock.symbol);
-      stock.value = this.calculateNetAssetValue([{price: stockPrice, count: stock.count}]);
+      stock.value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
     } catch(error) {
       if (error.message == 'Invalid stock symbol')
         stock.error = error.message;
