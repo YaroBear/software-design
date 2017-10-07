@@ -3,6 +3,7 @@ var Chai = require('chai');
 var expect = Chai.expect;
 var sinon = require('sinon');
 var StockService = require('../src/StockService');
+var YahooStockService = require('../src/YahooStockService');
 
 describe('Stock calculator and Stock Service unit tests:', function() {
 	it('canary test', function() {
@@ -129,4 +130,38 @@ describe('stock service tests:', function(){
 		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
 	});
 
+});
+
+describe('yahoo stock service tests:', function(){
+
+	var yahooStockService;
+
+	beforeEach(function(){
+		yahooStockService = new YahooStockService();
+	});
+
+	it('should connect to the Yahoo stock service and get a response', function(){
+		var response = false;
+		return yahooStockService.getStockPrice('TSLA')
+			.then(function(res){
+				if (res) response = true;
+				expect(response).to.be.true;
+		});
+	});
+
+	it('should convert the csv from YahooStockService into an array', function(){
+		return yahooStockService.getStockPrice('TSLA')
+			.then(function(res){
+				var resArray = yahooStockService.convertCSVtoArray(res);
+				expect(resArray).to.be.an('array');
+		});
+	});
+
+	it('should have retrieved the name of the TSLA stock to be Tesla', function(){
+		return yahooStockService.getStockPrice('TSLA')
+			.then(function(res){
+				var resArray = yahooStockService.convertCSVtoArray(res);
+				expect(resArray[1]).to.eql('"Tesla');
+			});
+	});
 });

@@ -14,20 +14,20 @@ StockCalculator.prototype.calculateNetAssetValue = function(stock){
 };
                                                                     
 StockCalculator.prototype.getAssetValues = function(stocks){
-    return stocks.map(stock => this.validateSymbolAndGetPrice(stock));
-}
+  return stocks.map(stock => this.validateSymbolAndGetPrice(stock));
+};
 
 StockCalculator.prototype.validateSymbolAndGetPrice = function(stock){
-      try{
-      var stockPrice = this.stockService.getStockPrice(stock.symbol);
-      stock.value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
-    } catch(error) {
-      if (error.message == 'Invalid stock symbol')
-        stock.error = error.message;
-      if (error.message == 'Failed to retrieve data')
-        stock.error = error.message;
-    }
-    return stock;
-}
+  try{
+  var stockPrice = this.stockService.getStockPrice(stock.symbol);
+  stock.value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
+  } catch(error) {
+    if (error.message == 'Invalid stock symbol')
+      stock.error = error.message;
+    if (error.message == 'Failed to retrieve data')
+      stock.error = error.message;
+  }
+  return stock;
+};
 
 module.exports = StockCalculator;
