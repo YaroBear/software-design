@@ -20,7 +20,7 @@ class StockCalculator {
 
   getAssetValueForASymbol(stock) {
     try{
-    var stockPrice = this.stockService.getStockPrice(stock.symbol);
+    let stockPrice = this.stockService.getStockPrice(stock.symbol);
     stock.value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
     } catch(error) {
       if (error.message == 'Invalid stock symbol')

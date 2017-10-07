@@ -4,14 +4,14 @@ const YahooStockService = require('../src/yahoo-stock-service');
 
 describe('yahoo stock service tests:', function(){
 
-	var yahooStockService;
+	let yahooStockService;
 
 	beforeEach(function(){
 		yahooStockService = new YahooStockService();
 	});
 
 	it('should connect to the Yahoo stock service and get a response', function(){
-		var response = false;
+		let response = false;
 		return yahooStockService.getStockPrice('TSLA')
 			.then(function(res){
 				if (res) response = true;
@@ -22,7 +22,7 @@ describe('yahoo stock service tests:', function(){
 	it('should convert the csv from YahooStockService into an array', function(){
 		return yahooStockService.getStockPrice('TSLA')
 			.then(function(res){
-				var resArray = yahooStockService.convertCSVtoArray(res);
+				let resArray = yahooStockService.convertCSVtoArray(res);
 				expect(resArray).to.be.an('array');
 		});
 	});
@@ -30,7 +30,7 @@ describe('yahoo stock service tests:', function(){
 	it('should have retrieved the name of the TSLA stock to be Tesla', function(){
 		return yahooStockService.getStockPrice('TSLA')
 			.then(function(res){
-				var resArray = yahooStockService.convertCSVtoArray(res);
+				let resArray = yahooStockService.convertCSVtoArray(res);
 				expect(resArray[1]).to.eql('"Tesla');
 			});
 	});

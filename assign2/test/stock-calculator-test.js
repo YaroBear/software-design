@@ -9,36 +9,36 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 		expect(true).to.be.true;
 	});
 
-	var stockCalculator;
+	let stockCalculator;
 
 	beforeEach(function(){
 		stockCalculator = new StockCalculator();
 	});
 
 	it('should get the value for one stock @ $1', function(){
-		var stock = {price: 100, count: 1};
+		let stock = {price: 100, count: 1};
 
 		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(100);
 	});
 
 	it('should get the value for two stocks @ $1', function(){
-		var stock = {price: 100, count: 2};
+		let stock = {price: 100, count: 2};
 
 		expect(stockCalculator.calculateNetAssetValue(stock)).to.eql(200);
 	});
 
 	it('should throw an error if stock price is less than $0', function(){
-		var stock = {price: -100, count: 2};
+		let stock = {price: -100, count: 2};
 
-		var call = function() {stockCalculator.calculateNetAssetValue(stock);};
+		let call = function() {stockCalculator.calculateNetAssetValue(stock);};
 
 		expect(call).to.throw("Price/Count cannot be less than 0");
 	});
 
 	it('should throw an error if count of stocks is less than 0', function(){
-		var stock = {price: 100, count: -2};
+		let stock = {price: 100, count: -2};
 
-		var call = function() {stockCalculator.calculateNetAssetValue(stock);};
+		let call = function() {stockCalculator.calculateNetAssetValue(stock);};
 
 		expect(call).to.throw("Price/Count cannot be less than 0");
 	});
@@ -46,9 +46,9 @@ describe('Stock calculator and Stock Service unit tests:', function() {
 
 describe('stock service tests:', function(){
 
-	var sandbox;
-	var stockService;
-	var stockCalculator;
+	let sandbox;
+	let stockService;
+	let stockCalculator;
 
 	beforeEach(function(){
 		sandbox = sinon.sandbox.create();
@@ -69,7 +69,7 @@ describe('stock service tests:', function(){
 	});
 
 	it('should return the symbol, number of shares, and total value of 1 stock when getAssetValues is called', function(){
-		var stocks = [{symbol: "TSLA", count: 6}];
+		let stocks = [{symbol: "TSLA", count: 6}];
 
 		sandbox.stub(stockService, 'getStockPrice')
 			.withArgs('TSLA')
@@ -79,9 +79,9 @@ describe('stock service tests:', function(){
 	});
 
 	it('should return the symbols, number of shares and total values of 2 stocks when getAssetValues is called', function(){
-		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}];
+		let stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}];
 
-		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}];
+		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}];
 
 		sandbox.stub(stockService, 'getStockPrice')
 				.withArgs('TSLA').returns(11000)
@@ -91,9 +91,9 @@ describe('stock service tests:', function(){
 	});
 
 	it('should return the symbols, number of shares and total values of 3 stocks when getAssetValues is called', function(){
-		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'AAPL', count: 3}];
+		let stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'AAPL', count: 3}];
 
-		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'AAPL', count: 3, value: 27000}];
+		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'AAPL', count: 3, value: 27000}];
 
 		sandbox.stub(stockService, 'getStockPrice')
 				.withArgs('TSLA').returns(11000)
@@ -104,9 +104,9 @@ describe('stock service tests:', function(){
 	});
 
 	it('should handle an invalid stock symbol in a list of stocks by setting the value of the invalid stock to N/A', function(){
-		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'WASD', count: 3}];
+		let stocks = [{symbol: "TSLA", count: 6}, {symbol: 'GOOG', count: 5}, {symbol: 'WASD', count: 3}];
 
-		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'WASD', count: 3, error: 'Invalid stock symbol'}];
+		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'WASD', count: 3, error: 'Invalid stock symbol'}];
 
 		sandbox.stub(stockService, 'getStockPrice')
 				.withArgs('TSLA').returns(11000)
@@ -117,9 +117,9 @@ describe('stock service tests:', function(){
 	});
 
 	it('should handle a failure to retrieve a price for valid stock by setting the value of that stock to Not Retrieved', function(){
-		var stocks = [{symbol: "TSLA", count: 6}, {symbol: 'AAPL', count: 3}, {symbol: 'GOOG', count: 5}];
+		let stocks = [{symbol: "TSLA", count: 6}, {symbol: 'AAPL', count: 3}, {symbol: 'GOOG', count: 5}];
 
-		var expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'AAPL', count: 3, error: 'Failed to retrieve data'}, {symbol: 'GOOG', count: 5, value: 50000}];
+		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'AAPL', count: 3, error: 'Failed to retrieve data'}, {symbol: 'GOOG', count: 5, value: 50000}];
 
 		sandbox.stub(stockService, 'getStockPrice')
 				.withArgs('TSLA').returns(11000)

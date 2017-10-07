@@ -1,5 +1,5 @@
-var request = require('request-promise-native');
-var StockService = require('../src/stock-service');
+const request = require('request-promise-native');
+const StockService = require('../src/stock-service');
 
 class YahooStockService extends StockService {
 
