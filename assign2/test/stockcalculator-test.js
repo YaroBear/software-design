@@ -1,9 +1,9 @@
-var StockCalculator = require("../src/StockCalculator");
+var StockCalculator = require("../src/stock-calculator");
 var Chai = require('chai');
 var expect = Chai.expect;
 var sinon = require('sinon');
-var StockService = require('../src/StockService');
-var YahooStockService = require('../src/YahooStockService');
+var StockService = require('../src/stock-service');
+var YahooStockService = require('../src/yahoo-stock-service');
 
 describe('Stock calculator and Stock Service unit tests:', function() {
 	it('canary test', function() {
