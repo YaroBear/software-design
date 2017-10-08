@@ -129,11 +129,11 @@ describe('stock service tests:', function(){
 		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
 	});
 
-	it('should not throw an error when implemented', function(){
-		stockService.getStockPrice = function(){
-			return true;
-		}
-		expect(stockService.getStockPrice()).to.be.true;
+	// To Venkat: if we remove this test then we don't have code coverage for stock-service.js
+	// Is there some other way to achieve full coverage? Because getStockPrice is supposed to
+	// be implemented in the child classes, not the base class.
+	it('should throw an error when getStockPrice is not implemented', function(){
+		expect(function(){stockService.getStockPrice()}).to.throw("Not implemented");
 	});
 
 });
