@@ -129,4 +129,11 @@ describe('stock service tests:', function(){
 		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
 	});
 
+	it('should not throw an error when implemented', function(){
+		stockService.getStockPrice = function(){
+			return true;
+		}
+		expect(stockService.getStockPrice()).to.be.true;
+	});
+
 });

@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const YahooStockService = require('../src/yahoo-stock-service');
+const StockCalculator = require('../src/stock-calculator');
 
 describe('yahoo stock service tests:', function(){
 
@@ -12,7 +13,7 @@ describe('yahoo stock service tests:', function(){
 
 	it('should connect to the Yahoo stock service and get a response', function(){
 		let response = false;
-		return yahooStockService.getStockPrice('TSLA')
+		return yahooStockService.getStockInfo('TSLA')
 			.then(function(res){
 				if (res) response = true;
 				expect(response).to.be.true;
@@ -20,18 +21,25 @@ describe('yahoo stock service tests:', function(){
 	});
 
 	it('should convert the csv from YahooStockService into an array', function(){
-		return yahooStockService.getStockPrice('TSLA')
+		return yahooStockService.getStockInfo('TSLA')
 			.then(function(res){
 				let resArray = yahooStockService.convertCSVtoArray(res);
 				expect(resArray).to.be.an('array');
 		});
 	});
 
-	it('should have retrieved the name of the TSLA stock to be Tesla', function(){
-		return yahooStockService.getStockPrice('TSLA')
+	it('should retrieve the correct stock info for TSLA', function(){
+		return yahooStockService.getStockInfo('TSLA')
 			.then(function(res){
 				let resArray = yahooStockService.convertCSVtoArray(res);
-				expect(resArray[1]).to.eql('"Tesla');
+				expect(resArray[1]).to.eql('Tesla, Inc.');
+			});
+	});
+
+	it('should get the stock price for TSLA', function(){
+		return yahooStockService.getStockPrice('TSLA')
+			.then(function(price){
+				expect(typeof price).to.be.eql("number");
 			});
 	});
 });
