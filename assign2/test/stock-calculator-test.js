@@ -128,10 +128,4 @@ describe('stock service tests:', function(){
 
 		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
 	});
-
-//Venkat: Let's move this to a separate test file
-	it('should throw an error when getStockPrice is not implemented', function(){
-		expect(function(){stockService.getStockPrice()}).to.throw("Not implemented");
-	});
-
 });
