@@ -11,6 +11,8 @@ describe('yahoo stock service tests:', function(){
 		yahooStockService = new YahooStockService();
 	});
 
+//Venkat: Please see the last four (bottom) presentations at                     
+//https://www.agilelearner.com/?q=promise. We can benefit from chai-as-promised
 	it('should connect to the Yahoo stock service and get a response', function(){
 		let response = false;
 		return yahooStockService.getStockInfo('TSLA')
@@ -19,7 +21,8 @@ describe('yahoo stock service tests:', function(){
 				expect(response).to.be.true;
 		});
 	});
-
+            
+//Venkat: Here we are interested in teting convertCSVtoArray. We should not call getStockInfo in this test
 	it('should convert the csv from YahooStockService into an array', function(){
 		return yahooStockService.getStockInfo('TSLA')
 			.then(function(res){
@@ -43,3 +46,6 @@ describe('yahoo stock service tests:', function(){
 			});
 	});
 });
+
+//Venkat: a test for invalid ticket symbol
+//a test for network failure

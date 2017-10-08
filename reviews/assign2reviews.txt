@@ -1,3 +1,13 @@
+[Venkat 10/08/17 07:08 AM MDT]
+synopsis: very nice progress 
+
+details:                    
+
+Nice work.
+
+Let's proceed to write a program that will read a file, run the code we have written so far. That's the UI (not GUI) part. Console app is quite enough.
+
+------------------------------------------------------------------------------
 [Venkat 10/07/17 05:59 AM CDT]
 synopsis: let's upgrade to modern JavaScript 
 
