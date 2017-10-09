@@ -22,11 +22,10 @@ class StockCalculator {
     try{
     let stockPrice = this.stockService.getStockPrice(stock.symbol);
     const value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
-    return {symbol: stock.symbol, count: stock.count, value: value};
+    //return {symbol: stock.symbol, count: stock.count, value: value};
     
-    //need to check on node version for this... looking into this...
-    //Venkat: we can replace above code with the following:
-    //return {...stock, value };
+    //Venkat: we can replace above code with the following (needs node 8.x) :
+    return {...stock, value };
     } catch(error) {
       return {symbol: stock.symbol, count: stock.count, error: error.message};
       //Venkat: return {...symbol, error: error.message };
