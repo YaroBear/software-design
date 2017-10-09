@@ -16,24 +16,22 @@ class YahooStockService extends StockService {
     });
 	}
 
-	convertCSVtoArray(csv) {  //Venkat: let's rename this as extractPrice and return the price from here instead of an array
+  extractPrice(csv) {
     let commasOutsideQuotes = /,(?=(?:[^"]*"[^"]*")*[^"]*$)/;
     let quotes = /['"]+/g;
-		return csv.split(commasOutsideQuotes)
-      .map(index => index.replace(quotes, ''));
-	}
+    let stockInfo = csv.split(commasOutsideQuotes);
+    return stockInfo[2];
+  }
 
   getStockPrice(symbol) {
     let that = this;
     return this.getStockInfo(symbol)
       .then(function(res){
-        let resArray = that.convertCSVtoArray(res);
-        if(resArray[1] == 'N/A') throw new Error("Invalid stock symbol");
-        return parseFloat(resArray[2]);
+        let stockPrice = that.extractPrice(res);
+        if(stockPrice == 'N/A') throw new Error("Invalid stock symbol");
+        return parseFloat(stockPrice);
       });
   }
-
-  
 }
 
 module.exports = YahooStockService;

@@ -4,43 +4,44 @@ chai.use(chaiAsPromised);
 const expect = chai.expect;
 const YahooStockService = require('../src/yahoo-stock-service');
 const StockCalculator = require('../src/stock-calculator');
+const sinon = require('sinon');
 
 describe('yahoo stock service tests:', function(){
 
 	let yahooStockService;
+	let sandbox;
 
 	beforeEach(function(){
+		sandbox = sinon.sandbox.create();
 		yahooStockService = new YahooStockService();
+	});
+
+	afterEach(function() {
+		sandbox.restore();
 	});
 
 	it('should connect to the Yahoo stock service and get a response', function(){
 		return expect(yahooStockService.getStockInfo('TSLA')).to.be.fulfilled;
 	});
 
-	it('should convert a csv string into an array', function(){
+	it('should extract the price from a csv string', function(){
 		let csvString = '"TSLA","Tesla, Inc.",352.50,354.39,353.10,355.33,356.88';
-		let csvArray = yahooStockService.convertCSVtoArray(csvString);
-		expect(csvArray).to.be.an('array');  
-		//Venkat: expect(yahooStockService.extractPrice(csvString)).to.be.equal(expected);
+
+		expectedPrice = '352.50';
+
+		expect(yahooStockService.extractPrice(csvString)).to.be.equal(expectedPrice);
 	});
 
-	it('should retrieve the correct stock info for TSLA', function(){
-		return expect(yahooStockService.getStockInfo('TSLA')).to.be.fulfilled
-			.then(function(res){
-				let resArray = yahooStockService.convertCSVtoArray(res);
-				expect(resArray[1]).to.eql('Tesla, Inc.');
-			});
-	});
+	// it('should retrieve the correct stock info for TSLA', function(){
+	// 	return expect(yahooStockService.getStockInfo('TSLA')).to.be.fulfilled
+	// 		.then(function(res){
+	// 			let resArray = yahooStockService.convertCSVtoArray(res);
+	// 			expect(resArray[1]).to.eql('Tesla, Inc.');
+	// 		});
+	// });
 
 	it('should get the stock price for TSLA', function(){ 
-		return expect(yahooStockService.getStockPrice('TSLA')).to.be.fulfilled
-			.then(function(price){
-				expect(typeof price).to.be.eql("number");
-			});                                        
-			//Venkat:  we can check this is a value > 0
-  		
-  		//Venkat: we can make use of chai-as-promised here.
-  		//expect eventually to be equal...
+  		return expect(yahooStockService.getStockPrice('TSLA')).to.eventually.be.above(0);
 	});
 
 	it('should throw an error for an invalid symbol', function(){
