@@ -1,3 +1,12 @@
+[Venkat 10/09/17 07:53 AM MDT]
+synopsis: let's make a few changes 
+
+details:
+Just like in assign1, let's edit package.json to create a start script command to easily run the program.
+
+Please see suggestions in code.
+
+------------------------------------------------------------------------------
 [Venkat 10/08/17 07:08 AM MDT]
 synopsis: very nice progress 
 

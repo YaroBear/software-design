@@ -16,7 +16,7 @@ class YahooStockService extends StockService {
     });
 	}
 
-	convertCSVtoArray(csv) {
+	convertCSVtoArray(csv) {  //Venkat: let's rename this as extractPrice and return the price from here instead of an array
     let commasOutsideQuotes = /,(?=(?:[^"]*"[^"]*")*[^"]*$)/;
     let quotes = /['"]+/g;
 		return csv.split(commasOutsideQuotes)

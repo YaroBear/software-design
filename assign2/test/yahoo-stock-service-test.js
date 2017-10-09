@@ -20,7 +20,8 @@ describe('yahoo stock service tests:', function(){
 	it('should convert a csv string into an array', function(){
 		let csvString = '"TSLA","Tesla, Inc.",352.50,354.39,353.10,355.33,356.88';
 		let csvArray = yahooStockService.convertCSVtoArray(csvString);
-		expect(csvArray).to.be.an('array');
+		expect(csvArray).to.be.an('array');  
+		//Venkat: expect(yahooStockService.extractPrice(csvString)).to.be.equal(expected);
 	});
 
 	it('should retrieve the correct stock info for TSLA', function(){
@@ -31,11 +32,15 @@ describe('yahoo stock service tests:', function(){
 			});
 	});
 
-	it('should get the stock price for TSLA', function(){
+	it('should get the stock price for TSLA', function(){ 
 		return expect(yahooStockService.getStockPrice('TSLA')).to.be.fulfilled
 			.then(function(price){
 				expect(typeof price).to.be.eql("number");
-			});
+			});                                        
+			//Venkat:  we can check this is a value > 0
+  		
+  		//Venkat: we can make use of chai-as-promised here.
+  		//expect eventually to be equal...
 	});
 
 	it('should throw an error for an invalid symbol', function(){
@@ -51,5 +56,8 @@ describe('yahoo stock service tests:', function(){
 		return expect(quickTimeYahooService.getStockInfo('GOOG'))
 			.to.be.rejectedWith('Connection error/timeout')
 	});
+
+//Venkat: use sinon to mock out getStockInfo and verify that getPrice
+//throws an exception for communication error.
 	
 });

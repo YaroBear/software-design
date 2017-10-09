@@ -6,7 +6,7 @@ const mockfs = require('mock-fs');
 
 const FileReader = require('../src/file-reader.js');
 
-describe('mock file reader tests', function(){
+describe('mock file reader tests', function(){ //Venkat: let's remove the word mock. No need for mocks for this test. Read a file and verify it worked.
 
 	let fileReader;
 

@@ -7,6 +7,8 @@ describe('Get stock price test:', function(){
 	let stockService = new StockService();
 
 	it('should throw an error when getStockPrice is not implemented', function(){
-		expect(function(){stockService.getStockPrice()}).to.throw("Not implemented");
+    expect(function(){stockService.getStockPrice()}).to.throw("Not implemented");
+    //Venkat: 
+		//expect(() => stockService.getStockPrice()).to.throw("Not implemented");
 	});
 });
