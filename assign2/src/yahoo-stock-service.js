@@ -2,7 +2,7 @@ const request = require('request-promise-native');
 const StockService = require('../src/stock-service');
 
 class YahooStockService extends StockService {
-  constructor(timeout = 1000){
+  constructor(timeout = 2000){
     super();
     this.timeout = timeout;
   }
