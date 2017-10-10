@@ -1,5 +1,7 @@
 const StockCalculator = require("../src/stock-calculator");
 const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
 const expect = chai.expect;
 const sinon = require('sinon');
 const StockService = require('../src/stock-service');
@@ -63,9 +65,9 @@ describe('stock service tests:', function(){
 	it('should get the bid price of GOOG', function(){
 		sandbox.stub(stockService, 'getStockPrice')
 			.withArgs('GOOG')
-			.returns(17000);
+			.resolves(17000);
 
-		expect(stockCalculator.stockService.getStockPrice('GOOG')).to.eql(17000);
+		expect(stockCalculator.stockService.getStockPrice('GOOG')).to.eventually.eql(17000);
 	});
 
 	it('should return the symbol, number of shares, and total value of 1 stock when getAssetValues is called', function(){
@@ -73,9 +75,9 @@ describe('stock service tests:', function(){
 
 		sandbox.stub(stockService, 'getStockPrice')
 			.withArgs('TSLA')
-			.returns(11000);
+			.resolves(11000);
 
-		expect(stockCalculator.getAssetValues(stocks)).to.be.eql([{symbol: "TSLA", count: 6, value: 66000}]);
+		expect(stockCalculator.getAssetValues(stocks)).to.eventually.eql([{symbol: "TSLA", count: 6, value: 66000}]);
 	});
 
 	it('should return the symbols, number of shares and total values of 2 stocks when getAssetValues is called', function(){
@@ -84,10 +86,10 @@ describe('stock service tests:', function(){
 		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}];
 
 		sandbox.stub(stockService, 'getStockPrice')
-				.withArgs('TSLA').returns(11000)
-				.withArgs('GOOG').returns(10000);
+				.withArgs('TSLA').resolves(11000)
+				.withArgs('GOOG').resolves(10000);
 
-		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+		expect(stockCalculator.getAssetValues(stocks)).to.eventually.eql(expectedResults);
 	});
 
 	it('should return the symbols, number of shares and total values of 3 stocks when getAssetValues is called', function(){
@@ -96,11 +98,11 @@ describe('stock service tests:', function(){
 		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'AAPL', count: 3, value: 27000}];
 
 		sandbox.stub(stockService, 'getStockPrice')
-				.withArgs('TSLA').returns(11000)
-				.withArgs('GOOG').returns(10000)
-				.withArgs('AAPL').returns(9000);
+				.withArgs('TSLA').resolves(11000)
+				.withArgs('GOOG').resolves(10000)
+				.withArgs('AAPL').resolves(9000);
 
-		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+		expect(stockCalculator.getAssetValues(stocks)).to.eventually.eql(expectedResults);
 	});
 
 	it('should handle an invalid stock symbol in a list of stocks by setting the value of the invalid stock to N/A', function(){
@@ -109,11 +111,11 @@ describe('stock service tests:', function(){
 		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'GOOG', count: 5, value: 50000}, {symbol: 'WASD', count: 3, error: 'Invalid stock symbol'}];
 
 		sandbox.stub(stockService, 'getStockPrice')
-				.withArgs('TSLA').returns(11000)
-				.withArgs('GOOG').returns(10000)
-				.withArgs('WASD').throws(new Error('Invalid stock symbol'));
+				.withArgs('TSLA').resolves(11000)
+				.withArgs('GOOG').resolves(10000)
+				.withArgs('WASD').rejects(new Error('Invalid stock symbol'));
 
-		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+		expect(stockCalculator.getAssetValues(stocks)).to.eventually.eql(expectedResults);
 	});
 
 	it('should handle a failure to retrieve a price for valid stock by setting the value of that stock to Not Retrieved', function(){
@@ -122,10 +124,10 @@ describe('stock service tests:', function(){
 		let expectedResults = [{symbol: "TSLA", count: 6, value: 66000}, {symbol: 'AAPL', count: 3, error: 'Failed to retrieve data'}, {symbol: 'GOOG', count: 5, value: 50000}];
 
 		sandbox.stub(stockService, 'getStockPrice')
-				.withArgs('TSLA').returns(11000)
-				.withArgs('GOOG').returns(10000)
-				.withArgs('AAPL').throws(new Error('Failed to retrieve data'));
+				.withArgs('TSLA').resolves(11000)
+				.withArgs('GOOG').resolves(10000)
+				.withArgs('AAPL').rejects(new Error('Failed to retrieve data'));
 
-		expect(stockCalculator.getAssetValues(stocks)).to.be.eql(expectedResults);
+		expect(stockCalculator.getAssetValues(stocks)).to.eventually.eql(expectedResults);
 	});
 });

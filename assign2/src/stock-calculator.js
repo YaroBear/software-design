@@ -15,31 +15,20 @@ class StockCalculator {
   }
 
   getAssetValues(stocks) {
-    return stocks.map(stock => this.getAssetValueForASymbol(stock));
+    let stockPromises = stocks.map(stock => this.getAssetValueForASymbol(stock));
+    return Promise.all(stockPromises).then(result => result);
   }
                
   getAssetValueForASymbol(stock) {
-    try{
-    let stockPrice = this.stockService.getStockPrice(stock.symbol);
-    const value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
-    return {...stock, value };
-    } catch(error) {
-      return {...stock, error: error.message };
-    }
+    let stockPrice;
+    return this.stockService.getStockPrice(stock.symbol)
+      .then(stockPrice =>{
+        const value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
+        return {...stock, value };
+      }).catch(error =>{
+        return {...stock, error: error.message };
+      });
   }
 }
 
 module.exports = StockCalculator;
-
-/*
-  getAssetValueForASymbol(stock) {
-    let stockPrice;
-    this.stockService.getStockPrice(stock.symbol)
-      .then(price =>{
-        const value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
-        return {...stock, value };
-      }).catch(err=>{
-        return {...stock, error: error.message };
-      });
-  }
-  */
