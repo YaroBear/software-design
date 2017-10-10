@@ -16,6 +16,7 @@ class YahooStockService extends StockService {
     let commasOutsideQuotes = /,(?=(?:[^"]*"[^"]*")*[^"]*$)/;
     let quotes = /['"]+/g;
     let stockInfo = csv.split(commasOutsideQuotes);
+    if(stockInfo[2] == 'N/A') return stockInfo[4]; //market closed, used open price instead of bid
     return stockInfo[2];
   }
 

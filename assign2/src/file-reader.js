@@ -1,20 +1,21 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 
 class FileReader {
-	readTheFile(file){
-		fs.readFile(__dirname+'/stock_ledger.txt', "utf8", function(err, data){
-			if(err) throw err;
-			return data;
-		});
+	readFile(file){
+		return fs.readFile(__dirname+ "/"+ file, "utf-8")
+			.then(function(data){
+				return data;
+			}).catch(function(err){
+				throw new Error('File does not exist');
+			});
 	}
 
-	parseFileIntoArray(file){  //Venkat: is this file or linesInFile?
+	parseFileIntoArrayOfStocks(file){
 		let stocks = [];
-		let splitUp = file.split('\n').map(x => x.split(" "));
-		for(let i = 0; i < splitUp.length; i++){
-			stocks.push({symbol: splitUp[i][0], count: parseInt(splitUp[i][1])});
-		}             
-		//Venkat: should we use map instead of for here?
+		file.replace('\r', '')
+			.split('\n')
+			.map(each => each.split(" "))
+			.map(each => stocks.push({symbol: each[0], count: parseInt(each[1])}));
 		return stocks;
 	}
 }
