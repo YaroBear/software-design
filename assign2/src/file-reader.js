@@ -1,8 +1,11 @@
 const fs = require('fs');
 
 class FileReader {
-	readFile(){
-		throw new Error("Not implemented");
+	readTheFile(file){
+		fs.readFile(__dirname+'/stock_ledger.txt', "utf8", function(err, data){
+			if(err) throw err;
+			return data;
+		});
 	}
 
 	parseFileIntoArray(file){  //Venkat: is this file or linesInFile?

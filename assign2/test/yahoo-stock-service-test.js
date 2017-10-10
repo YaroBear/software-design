@@ -11,6 +11,8 @@ describe('yahoo stock service tests:', function(){
 	let yahooStockService;
 	let sandbox;
 
+	this.timeout(10000); //yahoo is extremely slow sometimes
+
 	beforeEach(function(){
 		sandbox = sinon.sandbox.create();
 		yahooStockService = new YahooStockService();
@@ -31,14 +33,6 @@ describe('yahoo stock service tests:', function(){
 
 		expect(yahooStockService.extractPrice(csvString)).to.be.equal(expectedPrice);
 	});
-
-	// it('should retrieve the correct stock info for TSLA', function(){
-	// 	return expect(yahooStockService.getStockInfo('TSLA')).to.be.fulfilled
-	// 		.then(function(res){
-	// 			let resArray = yahooStockService.convertCSVtoArray(res);
-	// 			expect(resArray[1]).to.eql('Tesla, Inc.');
-	// 		});
-	// });
 
 	it('should get the stock price for TSLA', function(){ 
   		return expect(yahooStockService.getStockPrice('TSLA')).to.eventually.be.above(0);
