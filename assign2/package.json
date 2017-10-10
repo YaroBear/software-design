@@ -2,9 +2,10 @@
   "name": "assign2",
   "version": "1.0.0",
   "description": "Assignment 2 for COSC 4353 (Software Design): Stock Calculator",
-  "main": "StockCalculator.js",
+  "main": "main.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha"
+    "test": "nyc --reporter=html --reporter=text mocha",
+    "start": "node src/main.js"
   },
   "author": "",
   "license": "MIT",

@@ -30,3 +30,16 @@ class StockCalculator {
 }
 
 module.exports = StockCalculator;
+
+/*
+  getAssetValueForASymbol(stock) {
+    let stockPrice;
+    this.stockService.getStockPrice(stock.symbol)
+      .then(price =>{
+        const value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
+        return {...stock, value };
+      }).catch(err=>{
+        return {...stock, error: error.message };
+      });
+  }
+  */
