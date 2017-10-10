@@ -27,9 +27,9 @@ describe('yahoo stock service tests:', function(){
 	});
 
 	it('should extract the price from a csv string', function(){
-		let csvString = '"TSLA","Tesla, Inc.",352.50,354.39,353.10,355.33,356.88';
+		let csvString = '"TSLA","Tesla, Inc.",35250,35439,35310,35533,35688';
 
-		expectedPrice = '352.50'; //Venkat: do we expect the price to be 35250 (price in cents? - safe to keep in cents until time to display)
+		expectedPrice = '35250';
 
 		expect(yahooStockService.extractPrice(csvString)).to.be.equal(expectedPrice);
 	});
