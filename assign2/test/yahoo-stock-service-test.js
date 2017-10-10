@@ -49,16 +49,13 @@ describe('yahoo stock service tests:', function(){
 			.to.be.rejectedWith('Invalid stock symbol');
 	});
 
-	// To Venkat: should we use mock-require to override request.defaults({timeout: 1})
-	// instead of setting the timeout as part of the YahooStockService constructor?
-	// https://github.com/request/request#convenience-methods
 	it('should throw an error for network/timeout failure', function(){
-		let quickTimeYahooService = new YahooStockService(1);
-		return expect(quickTimeYahooService.getStockInfo('GOOG'))
-			.to.be.rejectedWith('Connection error/timeout')
-	});
+		sandbox.stub(yahooStockService, 'getStockInfo')
+			.withArgs('GOOG')
+			.throws(new Error('Connection error/timeout'));
 
-//Venkat: use sinon to mock out getStockInfo and verify that getPrice
-//throws an exception for communication error.
-	
+		let call = function() {yahooStockService.getStockPrice('GOOG')};
+
+		expect(call).to.throw('Connection error/timeout'); 
+	});	
 });
