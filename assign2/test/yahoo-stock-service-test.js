@@ -11,7 +11,7 @@ describe('yahoo stock service tests:', function(){
 	let yahooStockService;
 	let sandbox;
 
-	this.timeout(10000); //yahoo is extremely slow sometimes
+	this.timeout(10000);
 
 	beforeEach(function(){
 		sandbox = sinon.sandbox.create();
@@ -29,7 +29,7 @@ describe('yahoo stock service tests:', function(){
 	it('should extract the price from a csv string', function(){
 		let csvString = '"TSLA","Tesla, Inc.",352.50,354.39,353.10,355.33,356.88';
 
-		expectedPrice = '352.50';
+		expectedPrice = '352.50'; //Venkat: do we expect the price to be 35250 (price in cents? - safe to keep in cents until time to display)
 
 		expect(yahooStockService.extractPrice(csvString)).to.be.equal(expectedPrice);
 	});

@@ -1,3 +1,12 @@
+[Venkat 10/10/17 07:55 AM MDT]
+synopsis: let's move forward 
+
+details:
+Let's proceed to write a program that will read a file, run the code we have written so far. That's the UI (not GUI) part. Console app is quite enough.
+
+Just like in assign1, let's edit package.json to create a start script command to easily run the program.
+
+------------------------------------------------------------------------------
 [Venkat 10/09/17 07:53 AM MDT]
 synopsis: let's make a few changes 
 
