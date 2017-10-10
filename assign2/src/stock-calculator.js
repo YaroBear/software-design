@@ -23,7 +23,7 @@ class StockCalculator {
     let stockPrice;
     return this.stockService.getStockPrice(stock.symbol)
       .then(stockPrice =>{
-        const value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
+        let value = this.calculateNetAssetValue({price: stockPrice, count: stock.count});
         return {...stock, value };
       }).catch(error =>{
         return {...stock, error: error.message };
