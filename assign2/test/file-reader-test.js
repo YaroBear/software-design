@@ -24,7 +24,7 @@ describe('file reader tests:', function(){
 
 	it('should parse the file into an array of stocks', function(){
 		return fileReader.readFile('../test/stock_ledger.txt')
-			.then(function(file){
+			.then(file => {
 				expect(fileReader.parseFileIntoArrayOfStocks(file)).to.be.eql([{symbol: "GOOG", count: 200}, {symbol: "TSLA", count: 200}]);
 			});
 	});
