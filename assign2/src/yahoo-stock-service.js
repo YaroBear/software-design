@@ -16,8 +16,9 @@ class YahooStockService extends StockService {
     let commasOutsideQuotes = /,(?=(?:[^"]*"[^"]*")*[^"]*$)/;
     let quotes = /['"]+/g;
     let stockInfo = csv.split(commasOutsideQuotes);
-    if(stockInfo[2] == 'N/A') return stockInfo[4];
-    return stockInfo[2];
+    if(stockInfo[2] == 'N/A' && stockInfo[4] == 'N/A') return stockInfo[2];
+    else if(stockInfo[2] == 'N/A' && stockInfo[4] != 'N/A') return stockInfo[4]*100;
+    return stockInfo[2]*100;
   }
 
   getStockPrice(symbol) {

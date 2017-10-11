@@ -19,11 +19,11 @@ var formatOutput = function(summary){
 
     summary.map(stock => checkForError(stock));
 
-    summary.map(stock => {if (!stock.error) console.log(stock.symbol + '\t' + stock.count + '\t' + stock.value.toFixed(2))});
+    summary.map(stock => {if (!stock.error) console.log(stock.symbol + '\t' + stock.count + '\t' + (stock.value/100).toFixed(2))});
 
     let total = summary.map(stock => stock.value).reduce((total, value) => {return total + value});
 
-    console.log(line + "Total: " + total.toFixed(2));
+    console.log(line + "Total: " + (total/100).toFixed(2));
 
     console.log(line + "Errors: \n");
 
