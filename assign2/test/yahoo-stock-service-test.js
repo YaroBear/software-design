@@ -29,7 +29,7 @@ describe('yahoo stock service tests:', function(){
 	it('should extract the price from a csv string', function(){
 		let csvString = '"TSLA","Tesla, Inc.",35250,35439,35310,35533,35688';
 
-		expectedPrice = '35250';
+		expectedPrice = '35250'; //Venkat: should this be 3525000 ? keeping the price in cents as int than as double (until the last minutes before display) is generally a very safe bet. This will come to surface earlier in languages that are statically and stongly typed. JavaScript being a dynamic and weak typed langauge, it's easy to miss this early on.
 
 		expect(yahooStockService.extractPrice(csvString)).to.be.equal(expectedPrice);
 	});

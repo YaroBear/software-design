@@ -1,3 +1,13 @@
+[Venkat 10/11/17 09:50 AM MDT]
+synopsis: almost done 
+
+details:
+Coverage:
+Please fix the code coverage, we have code that has no tests.
+
+Please see suggestions in code.
+
+------------------------------------------------------------------------------
 [Venkat 10/10/17 07:55 AM MDT]
 synopsis: let's move forward 
 
