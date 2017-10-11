@@ -12,17 +12,28 @@ var formatOutput = function(summary){
 
 	console.log(header + line);
 
-	summary.map(stock => {console.log(stock.symbol + '\t' + stock.count + '\t' + stock.value.toFixed(2))});
+	let checkForError = function(stock){
+        if (stock.error) return stock.value = 0;
+        return stock.value.toFixed(2);
+    }
 
-	let total = summary.map(stock => stock.value).reduce((total, value) => {return total + value});
+    summary.map(stock => checkForError(stock));
 
-	console.log(line + "Total: " + total.toFixed(2));
+    summary.map(stock => {if (!stock.error) console.log(stock.symbol + '\t' + stock.count + '\t' + stock.value.toFixed(2))});
+
+    let total = summary.map(stock => stock.value).reduce((total, value) => {return total + value});
+
+    console.log(line + "Total: " + total.toFixed(2));
+
+    console.log(line + "Errors: \n");
+
+    let errors = summary.map(stock => {if (stock.error) console.log(stock.symbol + " " + stock.error)});
 }
 
 
 let stocks;
 
-fileReader.readFile('../test/stock_ledger.txt')
+fileReader.readFile('../stocks/stock_ledger.txt')
 	.then(file =>{
 		return stocks = fileReader.parseFileIntoArrayOfStocks(file);
 	}).then(stocks =>{
@@ -30,5 +41,5 @@ fileReader.readFile('../test/stock_ledger.txt')
 	}).then(summary =>{
 		formatOutput(summary);
 	}).catch(err =>{
-		console.log(err);
+		formatOutput(err);
 	});
