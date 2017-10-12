@@ -14,12 +14,7 @@ describe('yahoo stock service tests:', function(){
 	this.timeout(10000);
 
 	beforeEach(function(){
-		sandbox = sinon.sandbox.create();
-		yahooStockService = new YahooStockService();
-	});
-
-	afterEach(function() {
-		sandbox.restore();
+		yahooStockService = new YahooStockService(10000);
 	});
 
 	it('should connect to the Yahoo stock service and get a response', function(){
@@ -43,13 +38,29 @@ describe('yahoo stock service tests:', function(){
 			.to.be.rejectedWith('Invalid stock symbol');
 	});
 
-	it('should throw an error for network/timeout failure', function(){
+	it('should (mock) throw an error for network/timeout failure', function(){
+		sandbox = sinon.sandbox.create();
 		sandbox.stub(yahooStockService, 'getStockInfo')
 			.withArgs('GOOG')
 			.throws(new Error('Connection error/timeout'));
 
 		let call = function() {yahooStockService.getStockPrice('GOOG')};
 
-		expect(call).to.throw('Connection error/timeout'); 
-	});	
+		expect(call).to.throw('Connection error/timeout');
+		sandbox.restore();
+	});
+
+	it('should throw an error for network/timeout failure', function(){
+		let quickYahoo = new YahooStockService(1);
+
+		return expect(quickYahoo.getStockPrice('GOOG')).to.be.rejectedWith('Connection error/timeout');
+	});
+
+	it('should use the open price when bid price is unavailable', function(){
+		let csvString = '"TSLA","Tesla, Inc.",N/A,354.39,353.10,355.33,356.88';
+
+		expectedPrice = 35310;
+
+		expect(yahooStockService.extractPrice(csvString)).to.be.equal(expectedPrice);
+	});
 });
