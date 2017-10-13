@@ -1,0 +1,5 @@
+HW3: Due 11:59PM October 20
+                        
+According to the article <http://martinfowler.com/bliki/BeckDesignRules.html>, what are the rules of simple design. Why are these important? Discuss the impact of these principles. Give examples of using these principles in the class so far. Also, if you like, give from examples outside of this class, but limit to your personal experiences.
+
+REPLACE THIS WITH YOUR ANSWER
