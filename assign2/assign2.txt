@@ -40,3 +40,6 @@ Don't bring in dependencies until you no longer can avoid them (last responsible
 Start with a few tests, minimum code to make those work. 
 
 Bring forward practices and tools you learned from assignment 1. Verify that your build is passing for assignment 2 in continuous integration.
+
+Grading postponed. Waiting for response to <https://groups.google.com/d/msg/uhcsf17sd/c96tsdDZMb0/udY6zDYFAAAJ> from berejnoi
+
