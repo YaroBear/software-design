@@ -3,3 +3,21 @@ HW3: Due 11:59PM October 20
 According to the article <http://martinfowler.com/bliki/BeckDesignRules.html>, what are the rules of simple design. Why are these important? Discuss the impact of these principles. Give examples of using these principles in the class so far. Also, if you like, give from examples outside of this class, but limit to your personal experiences.
 
 REPLACE THIS WITH YOUR ANSWER
+
+The 4 rules of simple design as stated by Kent Beck are:
+
+(1) "Passes the tests".  
+		First and foremost, the software must pass the tests written for it.  This rule is about ensuring that the software functions as intended, and is the most important of the four.
+
+(2) "Reveals intention".  
+		Code is exectued by machines but read by humans.  Well desgined code should be written in a way that clearly communicates the "intention" of the code.  This involves using 
+		good naming conventions for variables and methods.  It also means that generally "clever" code should be avoided as it makes reading the code more complicated.  
+		There were a couple of times during assignment 2 that Venkat mentioned it was not clear what a function was returning.  Even though we may have been on the right track with
+		our function design, we had not written those functions in a way that clearly communicated their purpose.  In one case, we simply changed what the function was returning and its
+		name to make its purpose more clear.  Other times, more refactoring was involved.  This just highlighted that the "codes intention" may have been clear to us because we wrote it, 
+		but that doesnt necessarily mean that it is clear to everyone else.
+
+(3) "No duplication"  
+		Also known as the DRY principle, this rule states that repetition should be avoided in design.
+
+(4) "Fewest elements"
