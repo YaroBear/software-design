@@ -41,5 +41,12 @@ Start with a few tests, minimum code to make those work.
 
 Bring forward practices and tools you learned from assignment 1. Verify that your build is passing for assignment 2 in continuous integration.
 
-Grading postponed. Waiting for response to <https://groups.google.com/d/msg/uhcsf17sd/c96tsdDZMb0/udY6zDYFAAAJ> from berejnoi
-
+Total [100]: 100
+Code compiles [10]:
+Program produces reasonably desired results when run from the build script [10]:
+Good tests for handling Network failure and program gracefully handles network failure [10]:
+All tests pass [20]:
+Test quality [10]:
+Code Coverage report generated and has necessary coverage [10]:
+Design quality [20]:
+Code quality [10]:
