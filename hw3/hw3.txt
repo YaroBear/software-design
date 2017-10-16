@@ -9,15 +9,25 @@ The 4 rules of simple design as stated by Kent Beck are:
 (1) "Passes the tests".  
 		First and foremost, the software must pass the tests written for it.  This rule is about ensuring that the software functions as intended, and is the most important of the four.
 
+		Writing simple and failing tests and then refining the code just enough to make it pass made our overall design simpler. We can get caught up with designing complex hierarchies in effort to somehow make our software more future proof, but that ends up being more of a distraction than an actual aid to the task at hand.
+		Writing bite size tests with equally small amounts of code let us focus on keeping the solution to the overall problem as minimal as possible. If a simple solution can solve the problem at hand, then wasting time with extra complexity just seems silly.
+		Test driven development really shined in assignment 1 when we were designing the minesweeper game. The first activity was to draw class diagrams of how we thought the game should be written. Once we applied TTD and ended up with a fully working application, we realized just how much complexity was unnecessary to accomplish the goal. We ended up using a fraction of the classes from what we originally brainstormed.
+
 (2) "Reveals intention".  
-		Code is exectued by machines but read by humans.  Well desgined code should be written in a way that clearly communicates the "intention" of the code.  This involves using 
-		good naming conventions for variables and methods.  It also means that generally "clever" code should be avoided as it makes reading the code more complicated.  
-		There were a couple of times during assignment 2 that Venkat mentioned it was not clear what a function was returning.  Even though we may have been on the right track with
-		our function design, we had not written those functions in a way that clearly communicated their purpose.  In one case, we simply changed what the function was returning and its
-		name to make its purpose more clear.  Other times, more refactoring was involved.  This just highlighted that the "codes intention" may have been clear to us because we wrote it, 
-		but that doesnt necessarily mean that it is clear to everyone else.
+		Code is executed by machines but read by humans.  Well-designed code should be written in a way that clearly communicates the "intention" of the code.  This involves using good naming conventions for variables and methods.  It also means that generally "clever" code should be avoided as it makes reading the code more complicated. 
+
+		There were a couple of times during assignment 2 that Venkat mentioned it was not clear what a function was returning.  Even though we may have been on the right track with our function design, we had not written those functions in a way that clearly communicated their purpose.  
+
+		In one case, we simply changed what the function was returning and its name to make its purpose clearer.  Other times, more refactoring was involved.  This just highlighted that the "codes intention" may have been clear to us because we wrote it, but that doesn’t necessarily mean that it is clear to everyone else.
 
 (3) "No duplication"  
 		Also known as the DRY principle, this rule states that repetition should be avoided in design.
 
+		While writing the code for both assignments 1 and 2, we kept an eye out for any code that seemed to be repetitive. A clear example of saving repeated code was the validate function for the input in both assignments. These validate functions basically did the same thing, which was to make sure the input was not out of bounds in context to the domain. Before even writing the validate function, we would start writing code that would include bounds checking, but once another function would require similar validation, we would proceed to move it into its own separate function. This resulted in functioned that maintained the single responsibility principle, as well as minimized or even eliminated duplicate code.
+
 (4) "Fewest elements"
+		Anything that does not serve the above three rules should be removed. Adding extra elements to make a design more future proof or extensible is not worth the complexity that comes along with it. Most often it makes the design less flexible as we cannot predict what the future will require from the software.
+
+Summary:
+
+There are many programming paradigms and language styles that can be put as requirements for a piece of software. The reality is that you will never know exactly what exact path to take regarding architecture, and what design principles should be used up until you have written a significant portion of the code. Following these four simple rules from the very beginning will let the design reveal itself, illustrate the software's true intention, and keep the design as simple and minimal as possible so that future decisions can be made with greater clarity and ease.
