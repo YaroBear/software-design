@@ -1,0 +1,11 @@
+[Venkat 10/17/17 11:56 AM CEST]
+synopsis: nice work so far 
+
+details:
+"REPLACE THIS WITH YOUR ANSWER" We can remove this line now.
+
+Nice work so far.
+
+Discuss what the author of the rules says we should do when there is a conflict between applying these rules.
+
+------------------------------------------------------------------------------
