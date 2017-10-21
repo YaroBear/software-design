@@ -1,0 +1,9 @@
+[Venkat 10/21/17 05:22 AM CEST]
+synopsis: good start 
+
+details:
+Please integrate code into CI.
+
+Good start. Let's write a few more tests for the StringWriter.
+
+------------------------------------------------------------------------------

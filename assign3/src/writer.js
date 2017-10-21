@@ -1,4 +1,4 @@
-class Writer{
+class Writer{ //Venkat: Let's remove this, we can think of this when we need it.
 	constructor(){
 		this.buffer;
 	}
