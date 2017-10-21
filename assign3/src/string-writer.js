@@ -20,19 +20,9 @@ class StringWriter{
 	}
 
 	removeDuplicates(){
-		let words = this.contents.split(" ");
-		this.contents = "";
-
-		for (let i = 1; i < words.length; i++){
-			if (words[i-1] != words[i]){
-				this.contents += words[i-1];
-				this.contents += " ";
-				if (i == words.length - 1)
-					this.contents += words[i];
-			}
-			if (words[i-1] == words[i] && i == words.length-1)
-				this.contents += words[i];
-		}
+		this.contents = this.contents.split(" ")
+			.filter((word, index, array) => {if (word != array[index + 1]) return word})
+			.join(" ");
 	}
 }
 
