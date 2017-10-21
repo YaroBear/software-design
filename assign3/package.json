@@ -1,0 +1,20 @@
+{
+  "name": "writer",
+  "version": "1.0.0",
+  "description": "generic writer",
+  "main": "writer.js",
+  "scripts": {
+    "test": "nyc --reporter=html --reporter=text mocha"
+  },
+  "keywords": [
+    "assign3",
+    "cosc4353"
+  ],
+  "author": "Yaroslav Berejnoi, Nick Biddle",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1"
+  }
+}
