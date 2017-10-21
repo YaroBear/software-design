@@ -14,6 +14,6 @@ describe('writer tests:', function(){
 	});
 
 	it('write should throw not implemented error', function(){
-		expect(function(){writer.write();}).to.be.throw("Not implemented");
+		expect(function(){writer.write();}).to.throw("Not implemented");
 	});
 });
