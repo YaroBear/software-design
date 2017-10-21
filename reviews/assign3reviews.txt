@@ -1,3 +1,10 @@
+[Venkat 10/21/17 14:53 PM EDT]
+synopsis: build not integrated into CI 
+
+details:
+Please integrate code into CI.
+
+------------------------------------------------------------------------------
 [Venkat 10/21/17 05:22 AM CEST]
 synopsis: good start 
 
