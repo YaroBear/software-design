@@ -31,3 +31,5 @@ The 4 rules of simple design as stated by Kent Beck are:
 Summary:
 
 There are many programming paradigms and language styles that can be put as requirements for a piece of software. The reality is that you will never know exactly what exact path to take regarding architecture, and what design principles should be used up until you have written a significant portion of the code. Following these four simple rules from the very beginning will let the design reveal itself, illustrate the software's true intention, and keep the design as simple and minimal as possible so that future decisions can be made with greater clarity and ease.  In the rare cases where these rules conflict with each other, the author states that "empathy wins over some strictly technical merit".  Meaning, the programmer should empathize with future readers of the code and consider the impact any changes will have on code clarity.  
+
+Total [10]: 10
