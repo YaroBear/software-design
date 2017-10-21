@@ -1,17 +1,23 @@
 class StringWriter{
 	constructor(){
 		this.contents = "";
+		this.open = true;
 	}
 
 	write(string){
-		this.contents += string;
+		if(this.open){
+			this.contents += string;
+		}
+		else throw new Error('Closed for writing');
 	}
 
 	read(){
 		return this.contents;
 	}
 	
-	//Venkat: let's write a method to return the content
+	close(){
+		this.open = false;
+	}
 }
 
 module.exports = StringWriter;

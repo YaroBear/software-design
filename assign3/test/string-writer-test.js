@@ -13,7 +13,7 @@ describe('string writer tests:', function(){
 		stringWriter = new StringWriter();
 	});
 
-	it('should write to content', function(){
+	it('should write to contents', function(){
 		stringWriter.write("Some string");
 		expect(stringWriter.contents).to.be.eql("Some string");
 	});
@@ -29,4 +29,13 @@ describe('string writer tests:', function(){
 		stringWriter.write(" and one more for good measure");
 		expect(stringWriter.read()).to.be.eql("Some string yet another one and one more for good measure");
 	});
+
+	it('should close contents for writing', function(){
+		stringWriter.close();
+		let call =  function(){stringWriter.write("Some string");};
+
+		expect(call).to.throw("Closed for writing");
+	});
+
+
 });
