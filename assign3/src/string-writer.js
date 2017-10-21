@@ -1,14 +1,15 @@
-const Writer = require('../src/writer'); //Venkat: Please remove
-
-class StringWriter extends Writer { //Venkat: YAGNI, remove Writer. Bring later only if and when needed
+class StringWriter{
 	constructor(){
-		super(); //Venkat: remove
-		this.buffer = ""; //Venkat: contents instead of buffer
+		this.contents = "";
 	}
 
 	write(string){
-		return this.buffer += string; //Venkat: no return from here.
-	}                           
+		this.contents += string;
+	}
+
+	read(){
+		return this.contents;
+	}
 	
 	//Venkat: let's write a method to return the content
 }
