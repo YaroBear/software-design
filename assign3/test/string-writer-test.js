@@ -37,8 +37,8 @@ describe('string writer tests:', function(){
 		expect(call).to.throw("Closed for writing");
 	});
 
-	it('should remove consecutive duplicate words from within a string', function(){
-		stringWriter.write("string with with duplicates");
+	it('should remove multiple consecutive duplicate words within a string', function(){
+		stringWriter.write("string with with with duplicates");
 
 		stringWriter.removeDuplicates();
 
@@ -47,14 +47,6 @@ describe('string writer tests:', function(){
 
 	it('should remove consecutive duplicate words from the end of a string', function(){
 		stringWriter.write("string with duplicates duplicates");
-
-		stringWriter.removeDuplicates();
-
-		expect(stringWriter.read()).to.be.eql("string with duplicates");
-	});
-
-	it('should remove multiple consecutive duplicate words within a string', function(){
-		stringWriter.write("string with with with duplicates");
 
 		stringWriter.removeDuplicates();
 
