@@ -16,21 +16,21 @@ describe('file writer tests:', function(){
 	});
 
 	it('should open and write to the file', function(){
-		fileWriter.open()
+		return fileWriter.open()
 			.then(() =>{
 				return expect(fileWriter.write("some string")).to.eventually.be.true;
 			});
 	});
 
 	it('should open and close the file', function(){
-		fileWriter.open()
+		return fileWriter.open()
 			.then(() =>{
 				return expect(fileWriter.close()).to.eventually.be.true;
 			});
 	});
 
 	it('should open, write, and close the file', function(){
-		fileWriter.open()
+		return fileWriter.open()
 			.then(() =>{
 				return fileWriter.write("another one");
 			}).then(() =>{
@@ -42,8 +42,13 @@ describe('file writer tests:', function(){
 		return expect(fileWriter.close()).to.eventually.be.rejectedWith("File is not open");
 	});
 
-	it('should throw an errow when writing to a file that is not open', function(){
+	it('should throw an error when writing to a file that is not open', function(){
 		return expect(fileWriter.write("Some string")).to.eventually.be.rejectedWith("File is not open");
+	});
+
+	it('should throw an error when opening a directory that does not exist', function(){
+		fileWriter = new FileWriter('../doesnt_exist/file.txt');
+		return expect(fileWriter.open()).to.eventually.be.rejectedWith("Directory does not exist");
 	});
 
 });

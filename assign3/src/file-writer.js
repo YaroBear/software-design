@@ -8,7 +8,8 @@ class FileWriter{
 
 	open(){
 		return fs.open(this.path, 'a')
-			.then((fd) => {this.fileDescriptor = fd; return true;});
+			.then((fd) => {this.fileDescriptor = fd; return true;})
+			.catch(() => {throw new Error("Directory does not exist")});
 	}
 
 	write(string){
