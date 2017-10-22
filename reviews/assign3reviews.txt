@@ -1,3 +1,12 @@
+[Venkat 10/22/17 10:53 AM EDT]
+synopsis: let's keep an eye for SPR and OCP violation 
+
+details:
+Please see suggestions in code.
+
+After the changes, let's focus on FileWriter next.
+
+------------------------------------------------------------------------------
 [Venkat 10/21/17 14:53 PM EDT]
 synopsis: build not integrated into CI 
 
