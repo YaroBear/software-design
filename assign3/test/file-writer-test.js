@@ -38,7 +38,7 @@ describe('file writer tests:', function(){
 	it('should write and close the file', function(){
 		return fileWriter.write(" another one")
 			.then(() =>{
-				return fileWriter.close();
+				return fileWriter.close()
 			})
 			.then(() =>{
 				expect(fileWriter.opened).to.be.false;
@@ -48,7 +48,7 @@ describe('file writer tests:', function(){
 	it('should write and close the file and reject writing again', function(){
 		return fileWriter.write(" first")
 			.then(() =>{
-				return fileWriter.close();
+				return fileWriter.close()
 			})
 			.then(() =>{
 				return fileWriter.write(" second")

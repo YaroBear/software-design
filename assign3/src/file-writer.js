@@ -16,7 +16,7 @@ class FileWriter{
 		if(this.opened){
 			return this.open()
 				.then(() =>{
-					return fs.write(this.fileDescriptor, string);
+					fs.write(this.fileDescriptor, string);
 				});
 		}
 	}
