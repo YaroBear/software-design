@@ -14,9 +14,9 @@ describe('file writer tests:', function(){
 	
 	after(() => require('fs').unlinkSync(TEST_OUTPUT_FILE));
 
-	it('should open a file for writing', function(){ //Venkat: Let's remove this test, let open be an operation that is internal to the FileWriter.
-		return expect(fileWriter.open()).to.eventually.be.true;
-	});
+	// it('should open a file for writing', function(){ //Venkat: Let's remove this test, let open be an operation that is internal to the FileWriter.
+	// 	return expect(fileWriter.open()).to.eventually.be.true;
+	// });
 
 	it('should open and write to the file', function(){
 		return fileWriter.open()
@@ -42,22 +42,6 @@ describe('file writer tests:', function(){
 			}).then(() =>{
 				return expect(fileWriter.close()).to.eventually.be.true;
 			});
-	});
-
-//Venkat: no need for this test
-	it('should throw an error when closing a file that is not open', function(){
-		return expect(fileWriter.close()).to.eventually.be.rejectedWith("File is not open");
-	});
-
-//Venkat: no need for this test
-	it('should throw an error when writing to a file that is not open', function(){
-		return expect(fileWriter.write("Some string")).to.eventually.be.rejectedWith("File is not open");
-	});
-
-//Venkat: no need for this test
-	it('should throw an error when opening a directory that does not exist', function(){
-		fileWriter = new FileWriter('../doesnt_exist/file.txt');
-		return expect(fileWriter.open()).to.eventually.be.rejectedWith("Directory does not exist");
 	});
 
 });

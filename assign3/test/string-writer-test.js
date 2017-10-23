@@ -3,14 +3,14 @@ const expect = chai.expect;
 const StringWriter = require('../src/string-writer');
 
 describe('string writer tests:', function(){
-	it('canary test', function(){
-		expect(true).to.be.true;
+	let stringWriter; 
+
+	beforeEach(function(){
+		stringWriter = new StringWriter();
 	});
 
-	let stringWriter; //Venkat: let's move this to before the canary test
-
-	beforeEach(function(){ //Venkat: Let's move this to before the canary test
-		stringWriter = new StringWriter();
+	it('canary test', function(){
+		expect(true).to.be.true;
 	});
 
 	it('should write to contents', function(){
