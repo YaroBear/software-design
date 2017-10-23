@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 
 class FileWriter{
 	constructor(path){
-		this.path = __dirname + '/' + path;
+		this.path = /* __dirname + '/' + */ path; //Venkat: let the file given be of full path, no need for __dirname
 		this.fileDescriptor;
 	}
 
@@ -18,7 +18,7 @@ class FileWriter{
 			.catch(() => {throw new Error("File is not open")});
 	}
 	
-	close(){
+	close(){ //Venkat: this can set a flag that tells if the write should write or ignore contents.
 		return fs.close(this.fileDescriptor)
 			.then(() => true)
 			.catch(() => {throw new Error("File is not open")});

@@ -7,9 +7,9 @@ describe('string writer tests:', function(){
 		expect(true).to.be.true;
 	});
 
-	let stringWriter;
+	let stringWriter; //Venkat: let's move this to before the canary test
 
-	beforeEach(function(){
+	beforeEach(function(){ //Venkat: Let's move this to before the canary test
 		stringWriter = new StringWriter();
 	});
 
