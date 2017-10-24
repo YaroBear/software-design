@@ -1,3 +1,11 @@
+[Venkat 10/24/17 15:43 PM MDT]
+synopsis: let's honor DRY and SRP 
+
+details:                         
+
+Notice how the tests in StringWriter and FileWriter do the same thing, but on two different classes. Let's remove that duplication, keeping the tests DRY, without violating SRP (keeping the tests classes separate).
+
+------------------------------------------------------------------------------
 [Venkat 10/24/17 05:05 AM MDT]
 synopsis: let's keep the two writes consistent 
 
