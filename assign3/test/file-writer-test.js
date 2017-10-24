@@ -35,16 +35,6 @@ describe('file writer tests:', function(){
 			});
 	});
 
-	it('should write and close the file', function(){
-		return fileWriter.write(" another one")
-			.then(() =>{
-				return fileWriter.close()
-			})
-			.then(() =>{
-				expect(fileWriter.opened).to.be.false; //Venkat: Don't check for open, instead check that another write call does not write contents. Looks like the next test does that, we can remove this test.
-			});
-	});
-
 	it('should write and close the file and reject writing again', function(){
 		return fileWriter.write(" first")
 			.then(() =>{
@@ -57,7 +47,7 @@ describe('file writer tests:', function(){
 				return fs.readFile(TEST_OUTPUT_FILE, 'utf-8')
 			})
 			.then((data) =>{
-				expect(data).to.be.eql("some string and another string another one first");
+				expect(data).to.be.eql("some string and another string first");
 			});
 	});
 });

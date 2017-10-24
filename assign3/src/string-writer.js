@@ -5,9 +5,12 @@ class StringWriter{
 	}
 
 	write(string){
-		if(this.open){
-			this.contents += string;
-		}
+		return new Promise((resolve, reject) => {
+			if(this.open){
+				this.contents += string;
+			}
+			resolve();
+		});
 	}
 	
 	close(){
