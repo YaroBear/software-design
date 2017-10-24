@@ -41,7 +41,7 @@ describe('file writer tests:', function(){
 				return fileWriter.close()
 			})
 			.then(() =>{
-				expect(fileWriter.opened).to.be.false;
+				expect(fileWriter.opened).to.be.false; //Venkat: Don't check for open, instead check that another write call does not write contents. Looks like the next test does that, we can remove this test.
 			});
 	});
 
