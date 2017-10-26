@@ -20,6 +20,11 @@ class FileWriter{
 				});
 		}
 	}
+
+	read(){
+		return fs.readFile(this.path, 'utf-8')
+			.then((data) => data);
+	}
 	
 	close(){
 		return fs.close(this.fileDescriptor)

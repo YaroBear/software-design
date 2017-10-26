@@ -12,6 +12,12 @@ class StringWriter{
 			resolve();
 		});
 	}
+
+	read(){
+		return new Promise((resolve, reject)=>{
+			resolve(this.contents);
+		});
+	}
 	
 	close(){
 		this.open = false;
