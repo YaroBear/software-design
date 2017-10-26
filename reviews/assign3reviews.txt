@@ -1,3 +1,18 @@
+[Venkat 10/26/17 06:38 AM EDT]
+synopsis: let's use the language capabilities to make code DRY 
+
+details:
+Please, no comments in code. Do the best you can and I will point you in the right direction, if necessary, during the next review.
+
+JavaScript is one of the most flexible languages.
+
+We can create a function that returns stuff, just about anything.
+What if we group the tests into a function that takes a object and 
+runs the tests on that given object?
+
+Experiment, play with some ideas.
+
+------------------------------------------------------------------------------
 [Venkat 10/24/17 15:43 PM MDT]
 synopsis: let's honor DRY and SRP 
 

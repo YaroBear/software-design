@@ -7,8 +7,6 @@ const FileWriter = require('../src/file-writer');
 
 const fs = require('fs-extra');
 
-// confused, how do we eliminate duplicae tests if each test requires either the string-writer or file-writer class?
-
 describe('writer(fileWriter) tests:', function(){
 
 	it('canary test', function(){

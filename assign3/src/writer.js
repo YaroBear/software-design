@@ -1,4 +1,4 @@
-class Writer{
+class Writer{  //Venkat: Please remove
 	constructor(writer){
 		this.writer = writer;
 	}
