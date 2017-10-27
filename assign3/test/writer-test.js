@@ -6,20 +6,21 @@ const FileWriter = require('../src/file-writer');
 
 const fs = require('fs-extra');
 
-describe('writer tests:', function(){
+const createTests = function(WriterClass) {
+	describe('writer tests:', function(){
 
-	it('canary test', function(){
-		expect(true).to.be.true;
-	});
+		const TEST_OUTPUT_FILE = './test.txt';
 
-	const TEST_OUTPUT_FILE = './test.txt';
+		before(() => writer = new WriterClass(TEST_OUTPUT_FILE));
 
-	writers = [ new FileWriter(TEST_OUTPUT_FILE),
-	 			new StringWriter()]; //Venkat: This file is violating SRP and OCP.
+		if (WriterClass == FileWriter){
+			after(() => fs.unlinkSync(TEST_OUTPUT_FILE));
+		}
 
-	after(() => fs.unlinkSync(TEST_OUTPUT_FILE));
+		it('canary test', function(){
+			expect(true).to.be.true;
+		});
 
-	writers.forEach((writer) =>{
 		it('should open and write', function(){
 			return writer.write("some string")
 				.then(() => {
@@ -56,6 +57,6 @@ describe('writer tests:', function(){
 				});
 		});
 	});
+}
 
-	
-});
+module.exports = createTests;
