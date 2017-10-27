@@ -15,8 +15,8 @@ describe('writer tests:', function(){
 	const TEST_OUTPUT_FILE = './test.txt';
 
 	writers = [ new FileWriter(TEST_OUTPUT_FILE),
-	 			new StringWriter()];
-	
+	 			new StringWriter()]; //Venkat: This file is violating SRP and OCP.
+
 	after(() => fs.unlinkSync(TEST_OUTPUT_FILE));
 
 	writers.forEach((writer) =>{

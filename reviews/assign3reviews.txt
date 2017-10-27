@@ -1,3 +1,40 @@
+[Venkat 10/27/17 04:47 AM EDT]
+synopsis: let's honor SRP and OCP 
+
+details:                         
+
+The writer-test is violating SRP and OCP. It depends on two classes instead of at most one (SRP). If we decide to add another writer we have to open and change it (OCP).
+
+We can honor DRY without violating SRP and OCP.
+
+Let's try the following:
+
+In writer-test.js:
+
+const createTests = function(WriterClass) {
+  describe('writer tests:', function() {
+		let writer;
+		
+		beforeEach(() => writer = new WriterClass());
+		
+		it 1
+		it 2
+		... all using writer. No mention of StringWriter or FileWriter in this entire file.
+  }); 
+}    
+
+module.exports = createTests;
+
+Then
+
+string-writer-test.js:
+
+const createTests = require('writer-test');
+const StringWriter = require('../string-writer');
+
+createTests(StringWriter); //tada
+
+------------------------------------------------------------------------------
 [Venkat 10/26/17 06:38 AM EDT]
 synopsis: let's use the language capabilities to make code DRY 
 
