@@ -8,10 +8,6 @@ const fs = require('fs-extra');
 
 const TEST_OUTPUT_FILE = './test.txt';
 
-const creator = function(TEST_OUTPUT_FILE) {
-	return fileWriter = new FileWriter(TEST_OUTPUT_FILE);
-}
-
 const cleanup = function() {
   fs.unlinkSync(TEST_OUTPUT_FILE);
 }
