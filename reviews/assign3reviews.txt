@@ -1,3 +1,13 @@
+[Venkat 10/28/17 04:27 AM EDT]
+synopsis: let's avoid coupling where it should not be 
+
+details:                                             
+
+Please see suggestions in code.
+
+After this, please take the next small step.
+
+------------------------------------------------------------------------------
 [Venkat 10/27/17 04:47 AM EDT]
 synopsis: let's honor SRP and OCP 
 

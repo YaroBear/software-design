@@ -5,3 +5,4 @@ const createTests = require('./writer-test');
 const StringWriter = require('../src/string-writer');
 
 createTests(StringWriter); 
+//Venkat: createTests(() => return new StringWriter(), () => {});
