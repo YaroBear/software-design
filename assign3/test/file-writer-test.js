@@ -4,12 +4,16 @@ const expect = chai.expect;
 const createTests = require('./writer-test');
 const FileWriter = require('../src/file-writer');
 
-createTests(FileWriter); 
+const fs = require('fs-extra');
 
-//Venkat: createTests(() => new FileWriter(TEST_FILE), () => cleanup());
+const TEST_OUTPUT_FILE = './test.txt';
 
-/*
-const cleanup = function() {
-  ...delete TEST_FILE...
+const creator = function(TEST_OUTPUT_FILE) {
+	return fileWriter = new FileWriter(TEST_OUTPUT_FILE);
 }
-*/
+
+const cleanup = function() {
+  fs.unlinkSync(TEST_OUTPUT_FILE);
+}
+
+createTests(() => new FileWriter(TEST_OUTPUT_FILE), () => cleanup());

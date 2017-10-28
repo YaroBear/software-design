@@ -4,5 +4,10 @@ const expect = chai.expect;
 const createTests = require('./writer-test');
 const StringWriter = require('../src/string-writer');
 
-createTests(StringWriter); 
-//Venkat: createTests(() => return new StringWriter(), () => {});
+createTests(() => new StringWriter(), () => {});
+
+const creator = function() {
+	return stringWriter = new StringWriter;
+}
+
+const cleanup = function() {}

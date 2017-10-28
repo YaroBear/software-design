@@ -1,25 +1,12 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const StringWriter = require('../src/string-writer'); //Venkat: Please remove
-const FileWriter = require('../src/file-writer'); //Venkat: Please remove
-
-const fs = require('fs-extra'); //Venkat: Please remove
-
-const createTests = function(WriterClass) {
+const createTests = function(creator, cleanup) {
 	describe('writer tests:', function(){
 
-		const TEST_OUTPUT_FILE = './test.txt'; //Venkat: Please remove
+		before(() => writer = creator());
 
-		before(() => writer = new WriterClass(TEST_OUTPUT_FILE)); //Venkat: This does not make sense for a general case. So, let's rethink. 
-		/*         
-		Instead of passing in WriterClass, we may pass in a creator
-		  writer = creator();
-		*/
-
-		if (WriterClass == FileWriter){ //Venkat: failure of OCP please remove. Instead, change createTests like so const createTests = function(creator, cleanup)
-			after(() => fs.unlinkSync(TEST_OUTPUT_FILE)); //Venkat: after(() => cleanup());
-		}
+		after(() => cleanup());
 
 		it('canary test', function(){
 			expect(true).to.be.true;
