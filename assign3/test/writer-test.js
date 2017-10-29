@@ -1,16 +1,22 @@
 const chai = require('chai');
 const expect = chai.expect;
 
+const lowerCaseConverterTests = require('./lowercase-converter-test');
+
+describe('Canary Test:', function(){
+
+	it('canary test', function(){
+		expect(true).to.be.true;
+	});
+});
+
 const createTests = function(creator, cleanup) {
+
 	describe('writer tests:', function(){
 
 		before(() => writer = creator());
 
 		after(() => cleanup());
-
-		it('canary test', function(){
-			expect(true).to.be.true;
-		});
 
 		it('should open and write', function(){
 			return writer.write("some string")
@@ -48,6 +54,9 @@ const createTests = function(creator, cleanup) {
 				});
 		});
 	});
+
+	// lowerCaseConverterTests(creator, cleanup);
+
 }
 
 module.exports = createTests;
