@@ -1,3 +1,19 @@
+[Venkat 10/29/17 11:25 AM GMT]
+synopsis: please take small steps 
+
+details:                         
+
+WriterUtility: Fails OCP. If we need another feature we have to open and change this.
+
+We just started on lowercase. We have not given a chance to see how that design looks. So, no reason to run off and create uppercase, duplicate remover, etc.
+
+Please delete anything related to uppercase, duplicate remover, and stupid remover.
+
+Let's focus on lowercase conversion.
+
+Let's create a LowerCaseConverter class. Let it provide conversion of a string to lowercase. Write test LowerCaseConverterTest. In this call the method of LowerCaseConverter and verify it works. Then write a test to use the LowerCaseConverter with StringWriter. Then a test to use it with FileWriter. This will help us to think about how we will use the converters with the Writers.
+
+------------------------------------------------------------------------------
 [Venkat 10/28/17 04:27 AM EDT]
 synopsis: let's avoid coupling where it should not be 
 
