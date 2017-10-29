@@ -8,11 +8,11 @@ describe('lowercase converter tests:', function(){
 	it('should make the string lower case', function(){
 		expect(lowerCaseConverter.toLowerCase("UPPERCASE")).to.eql("uppercase");
 	});
-
 });
 
-const lowerCaseConversionTests = function(creator, cleanup){
-	describe('lowercase conversion writer tests:', function(){
+const lowerCaseConverterTest = function(creator, cleanup){
+
+	describe('lowercase converter integration tests:', function(){
 
 		before(() => writer = creator());
 
@@ -20,9 +20,7 @@ const lowerCaseConversionTests = function(creator, cleanup){
 
 		it('should convert a string to lowercase and write', function(){
 
-			let string = "UppERcase STRING";
-
-			return writer.write(lowerCaseConverter.toLowerCase(string))
+			return writer.write(lowerCaseConverter.toLowerCase("UPPerCase STRING"))
 				.then(() => {
 					return writer.read();
 				})
@@ -31,6 +29,7 @@ const lowerCaseConversionTests = function(creator, cleanup){
 				});
 		});
 	});
+
 }
 
-module.exports = lowerCaseConversionTests;
+module.exports = lowerCaseConverterTest;
