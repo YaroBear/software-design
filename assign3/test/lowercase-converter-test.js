@@ -1,13 +1,14 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const lowerCaseConverter = require('../src/lowercase-converter');
+const LowerCaseConverter = require('../src/lowercase-converter');
+const Converter = require('../src/converter');
+const WriterUtility = require('../src/writer-utility');
 
 describe('lowercase converter tests:', function(){
 
 	it('should make the string lower case', function(){
-		expect(lowerCaseConverter.toLowerCase("UPPERCASE")).to.eql("uppercase");
-		//Venkat: Let's change UPPERCASE to "Some TeXt"
+		expect(LowerCaseConverter.toLowerCase("Some TeXt")).to.eql("some text");
 	});
 });
 
@@ -21,20 +22,16 @@ const lowerCaseConverterTest = function(creator, cleanup){
 
 		it('should convert a string to lowercase and write', function(){
 
-//Venkat: this is not adequate. This is equivalent to
-//const converted = lowerCaseConverter.toLowerCase("stuff");
-//writer.write(converted)
+			let converter = new Converter(LowerCaseConverter.toLowerCase);
 
-//We want to design a way to pass zero, one, or more converters to a writer,
-//and it should apply those conversions before writing the stuff given to it.
+			const writerUtility = new WriterUtility(writer, converter);
 
-
-			return writer.write(lowerCaseConverter.toLowerCase("UPPerCase STRING"))
+			return writerUtility.write("Some TeXt")
 				.then(() => {
-					return writer.read();
+					return writerUtility.read();
 				})
 				.then((data) =>{
-					expect(data).to.be.eql("uppercase string");
+					expect(data).to.be.eql("some text");
 				});
 		});
 	});

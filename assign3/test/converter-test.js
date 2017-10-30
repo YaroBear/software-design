@@ -11,7 +11,7 @@ describe('converter tests:', function(){
 	it('should take a single instance of a converter in its constructor', function(){
 		let converter = new Converter(lowerCaseConverter);
 
-		expect(converter.converters[0]).to.be.eql(lowerCaseConverter);;
+		expect(converter.converters[0]).to.be.eql(lowerCaseConverter);
 	});
 
 	it('should be able to chain any number of converter instances using and', function(){

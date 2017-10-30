@@ -9,7 +9,8 @@ class Converter{
 	}
 
 	convert(string){
-		return this.converters.reduce(each => {return each(string);});
+		this.converters.forEach(converter => {string = converter(string)});
+		return string;
 	}
 }
 
