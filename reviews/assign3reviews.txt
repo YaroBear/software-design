@@ -1,3 +1,23 @@
+[Venkat 10/30/17 05:17 AM CET]
+synopsis: let's rethink about the design 
+
+details:                                
+
+Please see suggestions in code.
+
+What if we had a Converter and the converter can be chained. For example
+
+const converter = new Converter(func1).and(func2).and(func3);
+
+For example, func1 may be LoweCaseConverter.toLowerCase                                  
+
+Then converter.convert("some string") can return a string that has been
+converted by func1 and the output converted by func2 and it's output in turn
+converted by func3.
+
+Then a writer can hold on to a converter instance, call convert within write and then use the converted output.
+
+------------------------------------------------------------------------------
 [Venkat 10/29/17 11:25 AM GMT]
 synopsis: please take small steps 
 
