@@ -1,3 +1,13 @@
+[Venkat 10/31/17 07:44 AM CET]
+synopsis: let's move forward 
+
+details:                    
+
+Please see suggestions in code.
+
+Let's implement the next feature. Keep an eye for DRY and SRP.
+
+------------------------------------------------------------------------------
 [Venkat 10/30/17 05:17 AM CET]
 synopsis: let's rethink about the design 
 
