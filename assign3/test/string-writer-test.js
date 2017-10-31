@@ -3,8 +3,10 @@ const expect = chai.expect;
 
 const createTests = require('./writer-test');
 const StringWriter = require('../src/string-writer');
-const createConverterTests = require('./lowercase-converter-test');
+const converters = require('require.all')('./converter-tests');
 
 createTests(() => new StringWriter(), () => {});         
 
-createConverterTests(() => new StringWriter(), () => {});
+ for (let converter in converters){
+ 	converters[converter](() => new StringWriter(), () => {});
+ }

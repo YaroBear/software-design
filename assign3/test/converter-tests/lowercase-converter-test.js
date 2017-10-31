@@ -1,9 +1,9 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const LowerCaseConverter = require('../src/lowercase-converter');
-const Converter = require('../src/converter');
-const WriterUtility = require('../src/writer-utility');
+const LowerCaseConverter = require('../../src/converters/lowercase-converter');
+const Converter = require('../../src/converter');
+const WriterUtility = require('../../src/writer-utility');
 
 describe('lowercase converter tests:', function(){
 

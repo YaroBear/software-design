@@ -5,13 +5,7 @@ class WriterUtility{
 	}
 
 	write(string){
-		let convertedString = this.converter.convert(string);
-		return this.writer.write(convertedString);
-		
-		//Venkat: 
-		/*
-		return this.writer.write(this.converter.convert(string))
-		*/
+		return this.writer.write(this.converter.convert(string));
 	}
 
 	read(){

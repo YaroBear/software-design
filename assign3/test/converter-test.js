@@ -2,7 +2,7 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Converter = require('../src/converter');
-const LowerCaseConverter = require('../src/lowercase-converter.js');
+const LowerCaseConverter = require('../src/converters/lowercase-converter.js');
 
 describe('converter tests:', function(){
 

@@ -15,7 +15,8 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
-    "nyc": "^11.2.1"
+    "nyc": "^11.2.1",
+    "require.all": "^2.0.3"
   },
   "dependencies": {
     "fs-extra": "^4.0.2"
