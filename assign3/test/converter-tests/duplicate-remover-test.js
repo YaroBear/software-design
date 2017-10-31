@@ -20,13 +20,13 @@ const duplicateRemoverTest = function(creator, cleanup){
 
 		after(() => cleanup());
 
-		it('should remove dupicates from a string and write', function(){
+		it('should remove duplicates from a string and write', function(){
 
 			let converter = new Converter(DuplicateRemover.removeDuplicates);
 
 			let writerUtility = new WriterUtility(writer, converter);
 
-			writerUtility.write("some repetitive repetitive text")
+			return writerUtility.write("some repetitive repetitive text")
 				.then(() => {
 					return writerUtility.read();
 				})
