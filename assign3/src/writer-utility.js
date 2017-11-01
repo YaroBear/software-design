@@ -1,4 +1,4 @@
-class WriterUtility{   #Venkat: let's merge this with a Writer base class that both StringWriter and FileWriter inherit from. Then we don't need WriterUtility. The Writer will not know any specific converter, but will work with converter which is generic
+class WriterUtility{   //Venkat: let's merge this with a Writer base class that both StringWriter and FileWriter inherit from. Then we don't need WriterUtility. The Writer will not know any specific converter, but will work with converter which is generic
 	constructor(writer, converter){
 		this.writer = writer;
 		this.converter = converter;
