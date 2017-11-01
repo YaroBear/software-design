@@ -1,4 +1,4 @@
-class StringWriter{
+class StringWriter{  //Venkat: extends Writer. We can move all common things between StringWriter and FileWriter into Writer
 	constructor(){
 		this.contents = "";
 		this.open = true;

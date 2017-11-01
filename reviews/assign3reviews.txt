@@ -1,3 +1,11 @@
+[Venkat 11/01/17 07:55 AM CET]
+synopsis: let's refactor a bit 
+
+details:                      
+
+Please see suggestions in code.
+
+------------------------------------------------------------------------------
 [Venkat 10/31/17 07:44 AM CET]
 synopsis: let's move forward 
 
