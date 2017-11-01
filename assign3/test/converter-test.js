@@ -27,6 +27,6 @@ describe('converter tests:', function(){
 	it('should apply all converter instances on a string', function(){
 		let converter = new Converter(lowerCaseConverter).and(stupidRemover).and(duplicateRemover);
 
-		expect(converter.convert("SOME stupid awesome REPETITIVE repetitive text")).to.be.eql("some awesome repetitive text");
+		expect(converter.convert("SOME stupid awesome REPETITIVE repetitive text")).to.be.eql("some s***** awesome repetitive text");
 	});
 });

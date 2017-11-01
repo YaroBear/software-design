@@ -8,7 +8,7 @@ const WriterUtility = require('../../src/writer-utility');
 describe('stupid remover tests:', function(){
 
 	it('should remove the word stupid from a string', function(){
-		expect(StupidRemover.removeStupid("Some Stupid text")).to.eql("Some text");
+		expect(StupidRemover.removeStupid("Some stupid text")).to.eql("Some s***** text");
 	});
 });
 
@@ -26,12 +26,12 @@ const stupidRemoverTest = function(creator, cleanup){
 
 			const writerUtility = new WriterUtility(writer, converter);
 
-			return writerUtility.write("some Stupid TEXT")
+			return writerUtility.write("some stupid TEXT")
 				.then(() => {
 					return writerUtility.read();
 				})
 				.then((data) =>{
-					expect(data).to.be.eql("some TEXT");
+					expect(data).to.be.eql("some s***** TEXT");
 				});
 		});
 	});
