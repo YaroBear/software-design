@@ -1,3 +1,11 @@
+[Venkat 11/02/17 12:47 PM MDT]
+synopsis: the duplication keeps on creeping up 
+
+details:
+
+Please see suggestions in code.
+
+------------------------------------------------------------------------------
 [Venkat 11/01/17 07:55 AM CET]
 synopsis: let's refactor a bit 
 

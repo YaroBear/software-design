@@ -6,7 +6,7 @@ class FileWriter extends Writer{
 		super(converter);
 		this.path = path;
 		this.fileDescriptor;
-		this.opened = true;
+		this.opened = true; //Venkat: Move to the base, no need to repeat in StringWriter
 	}
 
 	open(){

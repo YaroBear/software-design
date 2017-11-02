@@ -3,8 +3,8 @@ const Writer = require('./writer');
 class StringWriter extends Writer{
 	constructor(converter){
 		super(converter);
-		this.contents = "";
-		this.open = true;
+		this.contents = ""; 
+		this.open = true;   //Venkat: Move to the base, no need to repeat in FileWriter
 	}
 
 	writeContents(string){
