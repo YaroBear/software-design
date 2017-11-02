@@ -3,7 +3,8 @@ const expect = chai.expect;
 
 const DuplicateRemover = require('../../src/converters/duplicate-remover');
 const Converter = require('../../src/converter');
-const WriterUtility = require('../../src/writer-utility');
+
+const StringWriter = require('../../src/string-writer');
 
 describe('stupid remover tests:', function(){
 
@@ -16,19 +17,20 @@ const duplicateRemoverTest = function(creator, cleanup){
 
 	describe('duplicate remover integration tests:', function(){
 
-		before(() => writer = creator());
+		let writer;
+
+		before(() => {
+			writer = creator();
+			writer.converter = new Converter(DuplicateRemover.removeDuplicates);
+		});
 
 		after(() => cleanup());
 
 		it('should remove duplicates from a string and write', function(){
 
-			let converter = new Converter(DuplicateRemover.removeDuplicates);
-
-			let writerUtility = new WriterUtility(writer, converter);
-
-			return writerUtility.write("some repetitive repetitive text")
+			return writer.writeContents("some repetitive repetitive text")
 				.then(() => {
-					return writerUtility.read();
+					return writer.read();
 				})
 				.then((data) => {
 					expect(data).to.be.eql("some repetitive text");

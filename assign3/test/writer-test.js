@@ -17,7 +17,7 @@ const createTests = function(creator, cleanup) {
 		after(() => cleanup());
 
 		it('should open and write', function(){
-			return writer.write("some string")
+			return writer.writeContents("some string")
 				.then(() => {
 					return writer.read();
 				})
@@ -27,7 +27,7 @@ const createTests = function(creator, cleanup) {
 		});
 
 		it('should be able to write multiple times', function(){
-			return writer.write(" and another string")
+			return writer.writeContents(" and another string")
 				.then(() => {
 					return writer.read();
 				})
@@ -37,12 +37,12 @@ const createTests = function(creator, cleanup) {
 		});
 
 		it('should write and close and reject writing again', function(){
-			return writer.write(" first")
+			return writer.writeContents(" first")
 				.then(() =>{
 					return writer.close()
 				})
 				.then(() =>{
-					return writer.write(" second")
+					return writer.writeContents(" second")
 				})
 				.then(() =>{
 					return writer.read();

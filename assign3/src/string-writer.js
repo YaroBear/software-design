@@ -1,13 +1,16 @@
-class StringWriter{  //Venkat: extends Writer. We can move all common things between StringWriter and FileWriter into Writer
-	constructor(){
+const Writer = require('./writer');
+
+class StringWriter extends Writer{
+	constructor(converter){
+		super(converter);
 		this.contents = "";
 		this.open = true;
 	}
 
-	write(string){
+	writeContents(string){
 		return new Promise((resolve, reject) => {
 			if(this.open){
-				this.contents += string;
+				this.contents += super.write(string);
 			}
 			resolve();
 		});

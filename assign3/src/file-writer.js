@@ -1,7 +1,9 @@
+const Writer = require('./writer');
 const fs = require('fs-extra');
 
-class FileWriter{
-	constructor(path){
+class FileWriter extends Writer{
+	constructor(path, converter){
+		super(converter);
 		this.path = path;
 		this.fileDescriptor;
 		this.opened = true;
@@ -12,11 +14,11 @@ class FileWriter{
 			.then((fd) => {this.fileDescriptor = fd;});
 	}
 
-	write(string){
+	writeContents(string){
 		if(this.opened){
 			return this.open()
 				.then(() =>{
-					fs.write(this.fileDescriptor, string);
+					fs.write(this.fileDescriptor, super.write(string));
 				});
 		}
 	}

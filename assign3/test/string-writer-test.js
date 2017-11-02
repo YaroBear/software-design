@@ -7,6 +7,6 @@ const converters = require('require.all')('./converter-tests');
 
 createTests(() => new StringWriter(), () => {});         
 
- for (let converter in converters){
- 	converters[converter](() => new StringWriter(), () => {});
- }
+for (let converter in converters){
+	converters[converter](() => new StringWriter(), () => {});
+}
