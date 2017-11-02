@@ -4,12 +4,11 @@ class StringWriter extends Writer{
 	constructor(converter){
 		super(converter);
 		this.contents = ""; 
-		this.open = true;   //Venkat: Move to the base, no need to repeat in FileWriter
 	}
 
 	writeContents(string){
 		return new Promise((resolve, reject) => {
-			if(this.open){
+			if(this.opened){
 				this.contents += super.write(string);
 			}
 			resolve();
@@ -23,7 +22,7 @@ class StringWriter extends Writer{
 	}
 	
 	close(){
-		this.open = false;
+		this.opened = false;
 	}
 }
 

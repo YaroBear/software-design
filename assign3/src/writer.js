@@ -1,6 +1,7 @@
 class Writer{
 	constructor(converter){
 		this.converter = converter;
+		this.opened = true;
 	}
 
 	write(string){
