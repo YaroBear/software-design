@@ -1,10 +1,8 @@
 class DuplicateRemover{
 
 	static removeDuplicates(string){
-		let words = string.split(" ");
-
 		return string.split(" ")
-            .filter((word, index, array) => {if (word != words[index + 1]) return word})
+            .filter((word, index, array) => {if (word != array[index + 1]) return word})
             .join(" ");
 	}
 
