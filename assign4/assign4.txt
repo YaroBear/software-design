@@ -1,0 +1,25 @@
+Assign 4: Due 11:59PM November 17
+
+We'll implement a very small part of a game. Each avatar has different capabilities. There are some strict rules as to how we can transform or change from one avatar to another.
+
+The following is a list of avatars and capabilities of each. The list below
+also shows the transformation sequence. You can change from a particular avatar to either the avatar above it or to the avatar below it, but not to any other avatar directly.
+
+
+Bike   drive through narrow lanes
+Car    drive fast
+Plane  fly fast
+Rocket fly really fast
+
+There are several aspects of the game that we won't focus on. The only thing
+we're going to focus on is the activities in each avatar and the transformations.
+
+Write the program in a way that at any given time we can ask the activity
+(like drive, fly, etc.) be performed by the players current avatar. Also, at any given time, we can ask the avatar to be changed to one of the two permissible avatars. 
+
+Write the application so that the above sequence may be altered without any code change (for example, if we want to allow going from a Bike to Plane, we should be able to do that without having to change any code). Test drive the code that deals with the central logic and related classes.
+
+Please carry forward practices from previous assignments:
+automated testing
+Continuous integration
+Code coverage
