@@ -1,8 +1,6 @@
-const Avatar = require('./avatar');
-
-class Bike extends Avatar{
+class Bike{
 	constructor(){
-		super();
+
 	}
 
 	driveThroughNarrowLanes(){
