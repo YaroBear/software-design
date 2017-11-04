@@ -1,6 +1,11 @@
 class Avatar {
 	constructor(type){
-		return type;
+		this.type = type;
+		return this.type;
+	}
+
+	transform(type){
+		this.type = type;
 	}
 }
 

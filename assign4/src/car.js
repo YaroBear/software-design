@@ -1,6 +1,8 @@
-class Car {
-	constructor(){
+const Avatar = require('./avatar');
 
+class Car extends Avatar {
+	constructor(){
+		super();
 	}
 
 	driveFast(){

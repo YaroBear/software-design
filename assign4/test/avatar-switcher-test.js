@@ -29,8 +29,8 @@ describe('Game avatar switcher unit tests:', function() {
 
 	it('a bike should be able to transform into a car', function(){
 		let avatar = new Avatar(new Bike());
-		avatar = new Avatar(new Car());
+		avatar.transform(new Car());
 
-		expect(avatar.driveFast()).to.be.true;
+		expect(avatar.type.driveFast()).to.be.true;
 	});
 });
