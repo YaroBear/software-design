@@ -64,3 +64,12 @@ Please carry forward practices from previous assignments:
 automated testing
 Continuous integration
 Code coverage
+
+
+Total [100]: 100
+All tests pass [20]:
+Code coverage [10]:
+Test Quality [20]:
+StringWriter and FileWriter Design [20]:
+Converters Design [20]:
+Code Quality [10]:
