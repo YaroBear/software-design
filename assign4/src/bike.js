@@ -1,10 +1,10 @@
 class Bike{
-	constructor(){
+	constructor(){ //Venkat: Please remove
 
 	}
 
-	driveThroughNarrowLanes(){
-		return true;
+	driveThroughNarrowLanes(){ //Venkat: action instead of driveThroughNarrowLanes
+		return true;       //Venkat: no return
 	}
 	
 }

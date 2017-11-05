@@ -1,10 +1,10 @@
 class Car {
-	constructor(){
+	constructor(){ //Venkat: Please remove
 
 	}
 
-	driveFast(){
-		return true;
+	driveFast(){ //Venkat: action instead of driveFast
+		return true; //Venkat: no return
 	}
 	
 }

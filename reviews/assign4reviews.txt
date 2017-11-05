@@ -1,0 +1,8 @@
+[Venkat 11/05/17 04:43 AM CST]
+synopsis: let's rework some design details 
+
+details:                                  
+
+Please see suggestions in code.
+
+------------------------------------------------------------------------------
