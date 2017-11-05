@@ -3,7 +3,7 @@ const expect = chai.expect;
 
 const Bike = require('../src/bike');
 const Car = require('../src/car');
-const Avatar = require('../src/avatar');
+const Player = require('../src/player');
 
 
 describe('Game avatar switcher unit tests:', function() {
@@ -11,27 +11,17 @@ describe('Game avatar switcher unit tests:', function() {
 		expect(true).to.be.true;
 	});
 
-	it('bike should be able to drive through narrow lanes', function(){ //Venkat: Please remove
-		let bike = new Bike();
-		expect(bike.driveThroughNarrowLanes()).to.be.true;
-	});
+	it('a player with the bike avatar calls the interal action of bike', function(){
+		let player = new Player(new Bike());
 
-	it('car should be able to drive fast', function(){ //Venkat: Please remove
-		let car = new Car();
-		expect(car.driveFast()).to.be.true;
-	});
+		let called = false;
 
-	it('an avatar can be a bike', function(){
-		let avatar = new Avatar(new Bike()); //Venkat: new Player(new Bike())
+		player.currentAvatar.action = function(){
+			called = true;
+		}
 
-		expect(avatar.driveThroughNarrowLanes()).to.be.true;
-		//Venkat: when performAction is called on Player, it should in turn call action on the Avatar like Bike
-	});
+		player.performAction();
 
-	it('a bike should be able to transform into a car', function(){ //Venkat: Please remove
-		let avatar = new Avatar(new Bike());
-		avatar = new Avatar(new Car());
-
-		expect(avatar.driveFast()).to.be.true;
+		expect(called).to.be.true;
 	});
 });
