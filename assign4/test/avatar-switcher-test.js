@@ -33,7 +33,7 @@ describe('Game avatar switcher unit tests:', function() {
 
 		let called = false;
 
-		Car.prototype.action = function(){
+		player.currentAvatar.action = function(){
 			called = true;
 		}
 
@@ -49,7 +49,7 @@ describe('Game avatar switcher unit tests:', function() {
 
 		let called = false;
 
-		Bike.prototype.action = function(){
+		player.currentAvatar.action = function(){
 			called = true;
 		}
 
@@ -69,7 +69,7 @@ describe('Game avatar switcher unit tests:', function() {
 
 		let called = false;
 
-		Player.prototype.isValidTransformation = function(){
+		player.isValidTransformation = function(){
 			called = true;
 		}
 
