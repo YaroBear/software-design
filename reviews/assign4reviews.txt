@@ -1,3 +1,11 @@
+[Venkat 11/05/17 16:46 PM CST]
+synopsis: let's keep an eye on SRP and OCP 
+
+details:                                  
+
+We want to be able to add new avatars, change the sequence of transformation, etc. without having to change any code. 
+
+------------------------------------------------------------------------------
 [Venkat 11/05/17 04:43 AM CST]
 synopsis: let's rework some design details 
 

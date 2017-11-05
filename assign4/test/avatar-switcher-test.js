@@ -16,7 +16,8 @@ describe('Game avatar switcher unit tests:', function() {
 		let player = new Player(new Bike());
 
 		let called = false;
-
+                                 
+//Venkat: nice work here.
 		player.currentAvatar.action = function(){
 			called = true;
 		}

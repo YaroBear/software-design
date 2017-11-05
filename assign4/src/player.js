@@ -1,7 +1,7 @@
 class Player { 
 	constructor(avatar){
 		this.currentAvatar = avatar;
-		this.transformRules = {
+		this.transformRules = { //Venkat: Fails SRP and OCP.
 			Bike : {Car: {}},
 			Car: {Bike: {}, Plane: {}},
 			Plane: {Car : {}}
