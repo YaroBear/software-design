@@ -4,6 +4,7 @@ const expect = chai.expect;
 const Bike = require('../src/bike');
 const Car = require('../src/car');
 const Plane = require('../src/plane');
+const Rocket = require('../src/rocket');
 const Player = require('../src/player');
 
 describe('Game avatar switcher unit tests:', function() {
@@ -13,9 +14,10 @@ describe('Game avatar switcher unit tests:', function() {
 	});
 
 	const defaultRules = {
-		Bike : {Car: {}},
+		Bike : {Rocket: {}, Car: {}},
 		Car: {Bike: {}, Plane: {}},
-		Plane: {Car : {}}
+		Plane: {Car : {}, Rocket: {}},
+		Rocket: {Plane: {}, Bike: {}}
 	};
 
 	it('a player with the bike avatar should call the internal action of bike', function(){
@@ -82,5 +84,20 @@ describe('Game avatar switcher unit tests:', function() {
 		player.transform(new Bike());
 
 		expect(called).to.be.true;
+	});
+
+	it('should be able to change the transform rules', function(){
+		const newRules = {
+			Bike : {Plane: {}},
+			Car: {},
+			Plane: {},
+			Rocket: {}
+		};
+
+		let player = new Player(new Bike()).setRules(defaultRules);
+
+		player.setRules(newRules);
+
+		expect(player.isValidTransformation(new Plane())).to.be.true;
 	});
 });
