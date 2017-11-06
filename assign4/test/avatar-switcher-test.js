@@ -6,18 +6,23 @@ const Car = require('../src/car');
 const Plane = require('../src/plane');
 const Player = require('../src/player');
 
-
 describe('Game avatar switcher unit tests:', function() {
+
 	it('canary test', function() {
 		expect(true).to.be.true;
 	});
+
+	const defaultRules = {
+		Bike : {Car: {}},
+		Car: {Bike: {}, Plane: {}},
+		Plane: {Car : {}}
+	};
 
 	it('a player with the bike avatar should call the internal action of bike', function(){
 		let player = new Player(new Bike());
 
 		let called = false;
                                  
-//Venkat: nice work here.
 		player.currentAvatar.action = function(){
 			called = true;
 		}
@@ -28,7 +33,7 @@ describe('Game avatar switcher unit tests:', function() {
 	});
 
 	it('a player with bike avatar should transform into a car avatar and call its internal action', function(){
-		let player = new Player(new Bike());
+		let player = new Player(new Bike()).setRules(defaultRules);
 
 		player.transform(new Car());
 
@@ -44,7 +49,7 @@ describe('Game avatar switcher unit tests:', function() {
 	});
 
 	it('a player with car avatar should transform into a bike avatar and call its interal action', function(){
-		let player = new Player(new Car());
+		let player = new Player(new Car()).setRules(defaultRules);
 
 		player.transform(new Bike());
 
@@ -60,7 +65,7 @@ describe('Game avatar switcher unit tests:', function() {
 	});
 
 	it('a bike to plane transformation should not be valid', function(){
-		let player = new Player(new Bike());
+		let player = new Player(new Bike()).setRules(defaultRules);
 
 		expect(player.isValidTransformation(new Plane())).to.be.false;
 	});

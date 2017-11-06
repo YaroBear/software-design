@@ -1,11 +1,7 @@
 class Player { 
 	constructor(avatar){
 		this.currentAvatar = avatar;
-		this.transformRules = { //Venkat: Fails SRP and OCP.
-			Bike : {Car: {}},
-			Car: {Bike: {}, Plane: {}},
-			Plane: {Car : {}}
-		};
+		this.transformRules;
 	}
 
 	performAction(){
@@ -23,6 +19,11 @@ class Player {
 		if(this.isValidTransformation(differentAvatar)){
 			this.currentAvatar = differentAvatar;
 		}
+	}
+
+	setRules(rules){
+		this.transformRules = rules;
+		return this;
 	}
 }
 
