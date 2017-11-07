@@ -1,3 +1,12 @@
+[Venkat 11/07/17 01:03 AM CET]
+synopsis: let's honor SRP on Player 
+
+details:
+Right now player is taking on a lot of responsibilities. Let's reduce that and keep it focused on keeping the current avatar and delegating the action. The transform call should also delegate the logic to outside of Player.
+
+Let's separate, likewise, the tests for action from tests from transformation.
+
+------------------------------------------------------------------------------
 [Venkat 11/05/17 16:46 PM CST]
 synopsis: let's keep an eye on SRP and OCP 
 
