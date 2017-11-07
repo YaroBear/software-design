@@ -10,7 +10,7 @@ const TransformAvatar = require('../src/transform-avatar');
 
 describe('transform avatar tests:', function(){
 
-	const defaultRules = {
+	const defaultRules = { //Venkat: this appears quite noisy, can we reduce the noice here? Also, where will this information come from? We would not want to hard code this anywhere in the code.
 		Bike : {Rocket: {}, Car: {}},
 		Car: {Bike: {}, Plane: {}},
 		Plane: {Car : {}, Rocket: {}},
