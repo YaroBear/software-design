@@ -11,21 +11,35 @@ class TransformationRules{
 		this.head;
 	}
 
+	findLastRule(){
+		let current = this.head;
+			while(current.down != this.head){
+				current = current.down;
+		}
+		return current;
+	}
+
+	setHeadTo(avatar){
+		this.head = new Rule(avatar);
+		this.head.down = this.head;
+	}
+
+	connectRulesAndSetLastToHead(lastRule, newRule){
+		newRule.up = lastRule;
+		newRule.down = this.head;
+		lastRule.down = newRule;
+	}
+
 	addRule(avatar){
 		if(!this.head){
-			this.head = new Rule(avatar);
-			this.head.down = this.head;
+			this.setHeadTo(avatar);
 		}
 		
 		else{
-			let current = this.head;
-			while(current.down != this.head){
-				current = current.down;
-			}
-			let rule = new Rule(avatar);
-			rule.up = current;
-			rule.down = this.head;
-			current.down = rule;
+			let lastRule = this.findLastRule();
+			let newRule = new Rule(avatar);
+
+			this.connectRulesAndSetLastToHead(lastRule, newRule);
 		}
 	}
 }
