@@ -42,6 +42,19 @@ class TransformationRules{
 			this.connectRulesAndSetLastToHead(lastRule, newRule);
 		}
 	}
+
+	getAvatarRules(avatar){
+		let current = this.head;
+		let rules = {};
+			while(current.down != this.head){
+				if (current.avatar.constructor == avatar.constructor){
+					rules["up"] = current.up.avatar;
+					rules["down"] = current.down.avatar;
+				}
+				current = current.down;
+			}
+		return rules
+	}
 }
 
 module.exports = TransformationRules;

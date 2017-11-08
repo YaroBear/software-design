@@ -14,35 +14,38 @@ describe('transformation rules test:', function() {
 
 	beforeEach(function(){
 		rules = new TransformationRules();
+		rules.addRule(new Bike());
+		rules.addRule(new Car());
+		rules.addRule(new Plane());
+		rules.addRule(new Rocket());
 	});
 
-	it('adding a single rules puts the rule at the head', function(){
-		rules.addRule(new Bike());
+	it('bike rule should be at the head of the rules', function(){
 
 		expect(rules.head.avatar.constructor).to.be.eql(new Bike().constructor);
 	});
 
-	it('adding another rule assigns head.down to the new rule', function(){
-		rules.addRule(new Bike());
-		rules.addRule(new Car());
+	it('bike rule should point down to car rule', function(){
 
 		expect(rules.head.down.avatar.constructor).to.be.eql(new Car().constructor);
 	});
 
-	it('adding another rules assigns its up pointer to the previous rule', function(){
-		rules.addRule(new Bike());
-		rules.addRule(new Car());
+	it('car rule should point up to bike rule', function(){
 
 		expect(rules.head.down.up.avatar.constructor).to.be.eql(new Bike().constructor);
 
 	});
 
 	it('adding any number of rules always sets the last rule to loop back up to head', function(){
-		rules.addRule(new Bike());
-		rules.addRule(new Car());
-		rules.addRule(new Plane());
-		rules.addRule(new Rocket());
 
 		expect(rules.head.down.down.down.down.avatar.constructor).to.eql(rules.head.avatar.constructor);
+	});
+
+	it('should find an avatar in the rules list and return its transformation rules', function(){
+
+		let expectedRules = rules.getAvatarRules(new Car());
+
+		expect(expectedRules.up.constructor).to.be.eql(new Bike().constructor);
+		expect(expectedRules.down.constructor).to.be.eql(new Plane().constructor);
 	});
 });
