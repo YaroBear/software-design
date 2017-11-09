@@ -1,3 +1,10 @@
+[Venkat 11/09/17 05:00 AM CET]
+synopsis: please address previous review suggestions in code
+
+details:  
+Please address and remove the review notes I leave in the code. Notes from previous review still there in code.
+
+------------------------------------------------------------------------------
 [Venkat 11/07/17 21:57 PM CET]
 synopsis: a few things to visit 
 
