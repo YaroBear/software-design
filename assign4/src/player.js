@@ -1,11 +1,19 @@
 class Player { 
-	constructor(avatar, transformRules){
+	constructor(avatar, rules){
 		this.currentAvatar = avatar;
-		this.transformRules = transformRules;
+		this.rules = rules;
 	}
 
 	performAction(){
 		this.currentAvatar.action();
+	}
+
+	transformUp(){
+		this.currentAvatar = this.rules.getAvatarRules(this.currentAvatar).up;
+	}
+
+	transformDown(){
+		this.currentAvatar = this.rules.getAvatarRules(this.currentAvatar).down;
 	}
 }
 

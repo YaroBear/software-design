@@ -27,6 +27,7 @@ class TransformationRules{
 	connectRulesAndSetLastToHead(lastRule, newRule){
 		newRule.up = lastRule;
 		newRule.down = this.head;
+		this.head.up = newRule;
 		lastRule.down = newRule;
 	}
 

@@ -20,6 +20,7 @@ describe('transformation rules test:', function() {
 		rules.addRule(new Rocket());
 	});
 
+
 	it('bike rule should be at the head of the rules', function(){
 
 		expect(rules.head.avatar.constructor).to.be.eql(new Bike().constructor);
@@ -39,6 +40,20 @@ describe('transformation rules test:', function() {
 	it('adding any number of rules always sets the last rule to loop back up to head', function(){
 
 		expect(rules.head.down.down.down.down.avatar.constructor).to.eql(rules.head.avatar.constructor);
+	});
+
+	it('findLastRule should return the last rule', function(){
+
+		let lastRule = rules.findLastRule();
+
+		expect(rules.head.down.down.down.avatar.constructor).to.be.eql(lastRule.avatar.constructor);
+	});
+
+	it('the head rule should point up to the last rule', function(){
+
+		let lastRule = rules.findLastRule();
+
+		expect(rules.head.up.avatar.constructor).to.be.eql(lastRule.avatar.constructor);
 	});
 
 	it('should find an avatar in the rules list and return its transformation rules', function(){

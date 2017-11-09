@@ -26,7 +26,6 @@ describe('transform avatar tests:', function(){
 	});
 
 	it('transforming a car up should return a Bike avatar', function(){
-
 		expect(transformAvatar.transformUp(new Car()).constructor).to.be.eql(new Bike().constructor);
 	});
 
