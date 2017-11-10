@@ -10,10 +10,12 @@ class Player {
 
 	transformUp(){
 		this.currentAvatar = this.rules.getAvatarRules(this.currentAvatar).up;
+		//Venkat: this.rules.upFrom(this.currentAvatar); will be nice?
 	}
 
 	transformDown(){
 		this.currentAvatar = this.rules.getAvatarRules(this.currentAvatar).down;
+		//Venkat: this. rules.downFrom(this.currentAvatar); ?
 	}
 }
 

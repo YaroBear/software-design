@@ -1,4 +1,4 @@
-class Rule{
+class Rule{ //Venkat: Too much code here in this file. All we need is an array. When the upFrom is called we can look up the index and return value based on it. A mod % operation can keep us in range.
 	constructor(avatar){
 		this.avatar = avatar;
 		this.up;

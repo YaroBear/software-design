@@ -1,3 +1,11 @@
+[Venkat 11/10/17 05:33 AM EET]
+synopsis: let's reduce code 
+
+details:                   
+
+Please see suggestions in code.
+
+------------------------------------------------------------------------------
 [Venkat 11/09/17 05:00 AM CET]
 synopsis: please address previous review suggestions in code
 
