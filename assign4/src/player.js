@@ -1,7 +1,9 @@
+const avatars = require('require.all')('./avatars');
+
 class Player { 
-	constructor(avatar, rules){ //Venkat: transformations instead of rules
+	constructor(avatar, transformations){
 		this.currentAvatar = avatar;
-		this.rules = rules;
+		this.transformations = transformations;
 	}
 
 	performAction(){
@@ -9,11 +11,11 @@ class Player {
 	}
 
 	transformUp(){
-		this.currentAvatar = this.rules.upFrom(this.currentAvatar);
+		this.currentAvatar = new avatars[this.transformations.upFrom(this.currentAvatar)];
 	}
 
 	transformDown(){
-		this.currentAvatar = this.rules.downFrom(this.currentAvatar);
+		this.currentAvatar = new avatars[this.transformations.downFrom(this.currentAvatar)];
 	}
 }
 

@@ -16,5 +16,7 @@
     "mocha": "^4.0.1",
     "nyc": "^11.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "require.all": "^2.0.3"
+  }
 }

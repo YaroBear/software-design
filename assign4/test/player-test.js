@@ -1,14 +1,14 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const Bike = require('../src/bike');
-const Car = require('../src/car');
-const Plane = require('../src/plane');
-const Rocket = require('../src/rocket');
+const Bike = require('../src/avatars/bike');
+const Car = require('../src/avatars/car');
+const Plane = require('../src/avatars/plane');
+const Rocket = require('../src/avatars/rocket');
 
 const Player = require('../src/player');
 
-const TransformationRules= require('../src/transformation-rules');
+const Transformations = require('../src/transformations');
 
 describe('player tests:', function() {
 
@@ -16,19 +16,14 @@ describe('player tests:', function() {
 		expect(true).to.be.true;
 	});
 
-	let rules;
+	let transformations;
 
 	beforeEach(function(){
-		let defaultRules = [new Bike(), new Car(), new Plane(), new Rocket()];
-		rules = new TransformationRules(defaultRules);
-		//Venkat: How about 
-		//transformations = new TransformationRules(["Bike", "Car", "Plane", "Rocket"]);
-		//Then, given a current Avatar, we can create an instance of the next Avatar from the name like "Bike", "Plane", etc.
-		//That way, the user has to supply only a array of strings which can be, for example, read from a file. Would that make the code more extensible?
+		transformations = new Transformations(["bike", "car", "plane", "rocket"]);
 	});
 
 	it('a player with the bike avatar should call the internal action of bike', function(){
-		let player = new Player(new Bike(), rules);
+		let player = new Player(new Bike(), transformations);
 
 		let called = false;
                                  
@@ -42,7 +37,7 @@ describe('player tests:', function() {
 	});
 
 	it('a player with bike avatar should transform into a car avatar when transforming up', function(){
-		let player = new Player(new Bike(), rules);
+		let player = new Player(new Bike(), transformations);
 
 		player.transformUp();
 
@@ -50,7 +45,7 @@ describe('player tests:', function() {
 	});
 
 	it('a player with car avatar should transform into a bike avatar when transforming down', function(){
-		let player = new Player(new Car(), rules);
+		let player = new Player(new Car(), transformations);
 
 		player.transformDown();
 
