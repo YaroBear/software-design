@@ -1,60 +1,28 @@
-class Rule{ //Venkat: Too much code here in this file. All we need is an array. When the upFrom is called we can look up the index and return value based on it. A mod % operation can keep us in range.
-	constructor(avatar){
-		this.avatar = avatar;
-		this.up;
-		this.down;
-	}
-}
-
 class TransformationRules{
-	constructor(){
-		this.head;
+	constructor(rules){
+		this.rulesArray = rules;
 	}
 
-	findLastRule(){
-		let current = this.head;
-			while(current.down != this.head){
-				current = current.down;
-		}
-		return current;
-	}
-
-	setHeadTo(avatar){
-		this.head = new Rule(avatar);
-		this.head.down = this.head;
-	}
-
-	connectRulesAndSetLastToHead(lastRule, newRule){
-		newRule.up = lastRule;
-		newRule.down = this.head;
-		this.head.up = newRule;
-		lastRule.down = newRule;
-	}
-
-	addRule(avatar){
-		if(!this.head){
-			this.setHeadTo(avatar);
-		}
-		
-		else{
-			let lastRule = this.findLastRule();
-			let newRule = new Rule(avatar);
-
-			this.connectRulesAndSetLastToHead(lastRule, newRule);
+	upFrom(currentAvatar){
+		for (let i=0;i<this.rulesArray.length;i++){
+			if(this.rulesArray[i].constructor.name == currentAvatar.constructor.name)
+				return this.rulesArray[(i+1)%this.rulesArray.length];
 		}
 	}
 
-	getAvatarRules(avatar){
-		let current = this.head;
-		let rules = {};
-			while(current.down != this.head){
-				if (current.avatar.constructor == avatar.constructor){
-					rules["up"] = current.up.avatar;
-					rules["down"] = current.down.avatar;
-				}
-				current = current.down;
-			}
-		return rules
+	downFrom(currentAvatar){
+		for (let i=0;i<this.rulesArray.length;i++){
+			if(this.rulesArray[i].constructor.name == currentAvatar.constructor.name)
+				return this.rulesArray[(i+4-1)%this.rulesArray.length];
+		}
+	}
+
+	getRule(index){
+		return this.rulesArray[index];
+	}
+
+	changeRules(newRules){
+		this.rulesArray = newRules;
 	}
 }
 

@@ -19,11 +19,8 @@ describe('player tests:', function() {
 	let rules;
 
 	beforeEach(function(){
-		rules = new TransformationRules();
-		rules.addRule(new Bike());
-		rules.addRule(new Car());
-		rules.addRule(new Plane());
-		rules.addRule(new Rocket());
+		let defaultRules = [new Bike(), new Car(), new Plane(), new Rocket()];
+		rules = new TransformationRules(defaultRules);
 	});
 
 	it('a player with the bike avatar should call the internal action of bike', function(){
@@ -40,18 +37,18 @@ describe('player tests:', function() {
 		expect(called).to.be.true;
 	});
 
-	it('a player with bike avatar should transform into a car avatar when transforming down', function(){
+	it('a player with bike avatar should transform into a car avatar when transforming up', function(){
 		let player = new Player(new Bike(), rules);
 
-		player.transformDown();
+		player.transformUp();
 
 		expect(player.currentAvatar.constructor).to.be.eql(new Car().constructor);
 	});
 
-	it('a player with car avatar should transform into a bike avatar when transforming up', function(){
+	it('a player with car avatar should transform into a bike avatar when transforming down', function(){
 		let player = new Player(new Car(), rules);
 
-		player.transformUp();
+		player.transformDown();
 
 		expect(player.currentAvatar.constructor).to.be.eql(new Bike().constructor);
 	});
