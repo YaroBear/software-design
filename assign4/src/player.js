@@ -2,7 +2,7 @@ const avatars = require('require.all')('./avatars');
 
 class Player { 
 	constructor(avatar, transformations){
-		this.currentAvatar = avatar;
+		this.currentAvatar = new avatars[avatar];
 		this.transformations = transformations;
 	}
 

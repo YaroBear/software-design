@@ -23,7 +23,7 @@ describe('player tests:', function() {
 	});
 
 	it('a player with the bike avatar should call the internal action of bike', function(){
-		let player = new Player(new Bike(), transformations);
+		let player = new Player("bike", transformations);
 
 		let called = false;
                                  
@@ -37,7 +37,7 @@ describe('player tests:', function() {
 	});
 
 	it('a player with bike avatar should transform into a car avatar when transforming up', function(){
-		let player = new Player(new Bike(), transformations);
+		let player = new Player("bike", transformations);
 
 		player.transformUp();
 
@@ -45,7 +45,7 @@ describe('player tests:', function() {
 	});
 
 	it('a player with car avatar should transform into a bike avatar when transforming down', function(){
-		let player = new Player(new Car(), transformations);
+		let player = new Player("car", transformations);
 
 		player.transformDown();
 
