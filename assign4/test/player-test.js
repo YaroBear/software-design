@@ -21,6 +21,10 @@ describe('player tests:', function() {
 	beforeEach(function(){
 		let defaultRules = [new Bike(), new Car(), new Plane(), new Rocket()];
 		rules = new TransformationRules(defaultRules);
+		//Venkat: How about 
+		//transformations = new TransformationRules(["Bike", "Car", "Plane", "Rocket"]);
+		//Then, given a current Avatar, we can create an instance of the next Avatar from the name like "Bike", "Plane", etc.
+		//That way, the user has to supply only a array of strings which can be, for example, read from a file. Would that make the code more extensible?
 	});
 
 	it('a player with the bike avatar should call the internal action of bike', function(){

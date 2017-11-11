@@ -1,3 +1,11 @@
+[Venkat 11/11/17 05:46 AM EET]
+synopsis: good so far 
+
+details:             
+
+Good so far. Please see suggestions in code.
+
+------------------------------------------------------------------------------
 [Venkat 11/10/17 05:33 AM EET]
 synopsis: let's reduce code 
 

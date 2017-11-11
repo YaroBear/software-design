@@ -1,13 +1,19 @@
-class TransformationRules{
+class TransformationRules{ //Venkat: Transformations instead of TransformationRules
 	constructor(rules){
-		this.rulesArray = rules;
+		this.rulesArray = rules; //Venkat: rulesArray to rules
 	}
 
 	upFrom(currentAvatar){
-		for (let i=0;i<this.rulesArray.length;i++){
-			if(this.rulesArray[i].constructor.name == currentAvatar.constructor.name)
-				return this.rulesArray[(i+1)%this.rulesArray.length];
-		}
+    for (let i=0;i<this.rulesArray.length;i++){
+     if(this.rulesArray[i].constructor.name == currentAvatar.constructor.name)
+       return this.rulesArray[(i+1)%this.rulesArray.length];
+    }
+    
+    //Venkat: How about?
+    // const matchingAvatar = this.rulesArray.find(avatar => avatar.constructor.name === currentAvatar.constructor.name)
+    // 
+    //     const index = this.rulesArray.indexOf(matchingAvatar)
+    //     return this.rulesArray[ (index + 1) % this.rulesArray.length];
 	}
 
 	downFrom(currentAvatar){
@@ -17,11 +23,11 @@ class TransformationRules{
 		}
 	}
 
-	getRule(index){
+	getRule(index){ //getAvatarAt
 		return this.rulesArray[index];
 	}
 
-	changeRules(newRules){
+	changeRules(newRules){ //Venkat: Remove
 		this.rulesArray = newRules;
 	}
 }

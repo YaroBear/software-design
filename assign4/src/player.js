@@ -1,5 +1,5 @@
 class Player { 
-	constructor(avatar, rules){
+	constructor(avatar, rules){ //Venkat: transformations instead of rules
 		this.currentAvatar = avatar;
 		this.rules = rules;
 	}
