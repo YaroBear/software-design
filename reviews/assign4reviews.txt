@@ -1,3 +1,17 @@
+[Venkat 11/12/17 05:44 AM CET]
+synopsis: very nice work 
+
+details:
+
+Very nice work, especially with require.all.
+
+Nice work keeping the code DRY in Transformations.
+
+Write a small main script that will create a player and in a loop will ask it to perform action, transform up say a half a dozen time.
+
+Change package.json to easily run that code.
+
+------------------------------------------------------------------------------
 [Venkat 11/11/17 05:46 AM EET]
 synopsis: good so far 
 

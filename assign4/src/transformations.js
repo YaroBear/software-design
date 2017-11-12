@@ -16,7 +16,8 @@ class Transformations{
 
 	downFrom(currentAvatar){
 		let index = this.findIndexOf(currentAvatar);
-		return this.rules[(index+this.rules.length-1)%this.rules.length];
+		return this.rules[(index+this.rules.length-1)%this.rules.length];   
+		//Venkat: Please give space around operators to help the reader
 	}
 
 	getAvatarAt(index){
