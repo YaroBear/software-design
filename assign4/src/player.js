@@ -11,11 +11,11 @@ class Player {
 	}
 
 	transformUp(){
-		this.currentAvatar = new avatars[this.transformations.upFrom(this.currentAvatar)];  //Venkat: let's move that new into the upFrom
+		this.currentAvatar = this.transformations.upFrom(this.currentAvatar);
 	}
 
 	transformDown(){
-		this.currentAvatar = new avatars[this.transformations.downFrom(this.currentAvatar)];
+		this.currentAvatar = this.transformations.downFrom(this.currentAvatar);
 	}
 }
 

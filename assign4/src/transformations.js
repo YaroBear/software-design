@@ -1,3 +1,5 @@
+const avatars = require('require.all')('./avatars');
+
 class Transformations{
 	constructor(rules){
 		this.rules = rules;
@@ -10,13 +12,15 @@ class Transformations{
 
 	upFrom(currentAvatar){
 		let index = this.findIndexOf(currentAvatar);
-		return this.rules[ (index + 1) % this.rules.length];
+		let avatar = this.rules[ (index + 1) % this.rules.length];
+		return new avatars[avatar];
     }
     
 
 	downFrom(currentAvatar){
 		let index = this.findIndexOf(currentAvatar);
-		return this.rules[( index + this.rules.length - 1) % this.rules.length];
+		let avatar = this.rules[( index + this.rules.length - 1) % this.rules.length];
+		return new avatars[avatar];
 	}
 
 	getAvatarAt(index){
