@@ -9,7 +9,24 @@ Object.values(avatars).forEach((avatar) =>{
 
 let avatar = Object.values(avatars)[0];
 
-let player = new Player(new avatar, new Transformations(Object.keys(avatars))); //Venkat: The order in which the files are loaded/required is not necessarily the order of transformation.
+let defaultRules = Object.keys(avatars);
+
+let transformations = new Transformations(defaultRules);
+
+let player = new Player(new avatar, transformations);
+
+for(let i = 0; i < 6; i++){
+    player.performAction();
+    player.transformUp();
+}
+
+let newRules = defaultRules.sort(function(a,b) {
+	return 0.5 - Math.random();
+});
+
+transformations = new Transformations(newRules);
+
+player.changeTransformations(transformations);
 
 for(let i = 0; i < 6; i++){
     player.performAction();

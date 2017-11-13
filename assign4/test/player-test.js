@@ -51,4 +51,16 @@ describe('player tests:', function() {
 
 		expect(player.currentAvatar.constructor).to.be.eql(new Bike().constructor);
 	});
+
+	it('a player can be given different transform rules', function(){
+		let player = new Player(new Car(), transformations);
+
+		let newTransformations = new Transformations(["car", "bike", "plane", "rocket"]);
+
+		player.changeTransformations(newTransformations);
+
+		player.transformUp();
+
+		expect(player.currentAvatar.constructor).to.be.eql(new Bike().constructor);
+	});
 });

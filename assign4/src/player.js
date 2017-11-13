@@ -15,6 +15,10 @@ class Player {
 	transformDown(){
 		this.currentAvatar = this.transformations.downFrom(this.currentAvatar);
 	}
+
+	changeTransformations(newTransformations){
+		this.transformations = newTransformations;
+	}
 }
 
 module.exports = Player;
