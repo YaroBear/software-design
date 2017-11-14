@@ -1,3 +1,12 @@
+[Venkat 11/14/17 07:49 AM MST]
+synopsis: how to provide order 
+
+details:
+The coverage report shows untested functions.
+
+As a user I don't want default order or random order. I want to specifically provide order of avatars. Let's design for that. (Don't assume everything has to be in code).
+
+------------------------------------------------------------------------------
 [Venkat 11/13/17 08:33 AM MST]
 synopsis: how to change the order of transformation? 
 
