@@ -6,6 +6,9 @@
     "test": "nyc --reporter=html --reporter=text mocha",
     "start": "node ./src/main.js"
   },
+  "config": {
+    "defaultArgs": "bike bike car plane rocket"
+  },
   "keywords": [
     "assign4",
     "cosc4353"

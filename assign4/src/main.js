@@ -1,8 +1,13 @@
 const Player = require('./player');
 const Transformations = require('./transformations');
 
-if (process.argv.length < 4){
-	throw new Error("must have at least two args: npm start bike bike car plane rocket...");
+let args;
+
+if (process.argv.length > 3){
+	args = process.argv;
+}
+else{
+	args = process.env.npm_package_config_defaultArgs.split(" ");
 }
 
 let avatars = require('require.all')('./avatars');
@@ -11,9 +16,11 @@ Object.values(avatars).forEach((avatar) =>{
     avatar.prototype.action = function(){console.log("Calling action of : " + this.constructor.name);}
 });
 
-let startingAvatar = new avatars[process.argv[2]];
+console.log(args);
 
-let defaultRules = process.argv.slice(3);
+let startingAvatar = new avatars[args[2]];
+
+let defaultRules = args.slice(3);
 
 let transformations = new Transformations(defaultRules);
 
