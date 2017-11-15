@@ -1,3 +1,22 @@
+[Venkat 11/15/17 08:11 AM MST]
+synopsis: run failed 
+
+details:
+Please see suggestions in code.
+
+Run failed.
+> npm start
+
+> game-avatar@1.0.0 start ...assign4
+> node ./src/main.js
+
+...assign4/src/main.js:5
+	throw new Error("must have at least two args: npm start bike bike car plane rocket...");
+	^
+
+Let's make the start task so that we can run and see some output without much effort.
+
+------------------------------------------------------------------------------
 [Venkat 11/14/17 07:49 AM MST]
 synopsis: how to provide order 
 
