@@ -3,7 +3,6 @@ const Transformations = require('./transformations');
 
 if (process.argv.length < 4){
 	throw new Error("must have at least two args: npm start bike bike car plane rocket...");
-	process.exit();
 }
 
 let avatars = require('require.all')('./avatars');

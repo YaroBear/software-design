@@ -1,4 +1,4 @@
-const avatars = require('require.all')('./avatars');
+const avatars = require('require.all')('../src/avatars');
 
 class Transformations{
 	constructor(rules){
