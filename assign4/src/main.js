@@ -16,8 +16,6 @@ Object.values(avatars).forEach((avatar) =>{
     avatar.prototype.action = function(){console.log("Calling action of : " + this.constructor.name);}
 });
 
-console.log(args);
-
 let startingAvatar = new avatars[args[2]];
 
 let defaultRules = args.slice(3);
