@@ -23,3 +23,13 @@ Please carry forward practices from previous assignments:
 automated testing
 Continuous integration
 Code coverage
+
+Total [100]: 100
+Code compiles [10]:
+Program produces the desired result [10]:
+All tests pass [20]:
+Test quality [10]:  
+Code coverage [10]:
+Design is extensible for changing order without changing code [20]:
+Design quality[10]:
+Code quality [10]:
