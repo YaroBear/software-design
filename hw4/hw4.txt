@@ -8,8 +8,30 @@ Give a collective answer as a pair, however, where needed, feel free to mention 
 
 1. What did you essentially learn in this course about design?
 
-Replace this with your response.
+Writing software is easy, but writing well designed software is hard. There is no single strategy that can tackle every problem, but there are some principles that can guide us to arrive at an elegant solution. 
 
 2. What are some of the general guidelines you would follow when designing?
 
-Replace this with your response.
+- KISS: Keep it simple stupid
+
+Code is executed by machines but is also meant to be read and shared with other human beings. Keep over-design to a minimum, sometimes the most elegant solution is also the simplest and easiest to implement
+
+- SRP: Single responsibility principle
+
+Keep code modular. Group classes that belong together in the same module, and keep methods that belong together in the same class. Every class should maintain a narrow responsibility in the grand scheme of the software.
+
+- LSP: Liskov's substitution
+
+Child classes can be directly substituted where a base class is used.
+
+- DIP: Dependency inversion principle
+
+- TDD: Test driven design
+
+- YAGNI: You aren't gonna need it (yet)
+
+- OCP: Open closed principle
+
+- Never force a design pattern, let it arise naturally as you are coding and be aware of some of the best practices when working with certain patterns
+
+- Use inheritance sparingly. If in base classes or child classes change, then we are in violation of LSP and OCP.
