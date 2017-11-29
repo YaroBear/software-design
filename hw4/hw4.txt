@@ -18,31 +18,49 @@ Automated testing provides another important type of feedback.  Automated testin
 
 2. What are some of the general guidelines you would follow when designing?
 
-- KISS: Keep it simple stupid
-
-Code is executed by machines but is also meant to be read and shared with other human beings. Keep over-design to a minimum, sometimes the most elegant solution is also the simplest.  It is often easier to write complex code than it is to write simple code that accomplishes exactly what is desired.  It is important to remember that code requires maintainance, and that most of the time that maintainance will be performed by people who had part in the design process.  Because of this, the code should be written so it is "self documenting".  Meaning it is simple and straight-forward enough that someone unfamiliar with it can read and understand how it operates without the need for excessive comments.
-
-- SRP: Single responsibility principle
-
-Keep code modular. Group classes that belong together in the same module, and keep methods that belong together in the same class. Every class should maintain a narrow responsibility in the grand scheme of the software.
-
-- LSP: Liskov's substitution
-
-Child classes can be directly substituted where a base class is used.
-
-- DIP: Dependency inversion principle
-
 - TDD: Test driven design
 
 Automated testing provides a very beneficial feedback loop.  It immediately shows developers whether or not code is still functioning as intended.  This is a confidnece builder because errors can be fixed as soon as tests fail.  However, it is important to note that TDD does NOT guarantee bug-free code.  Good design principles must still be followed, otherwise irrelevant or useless tests might be written.  TDD only aids the design process if used properly.  Developers must listen to their tests and pay attention to the 'smell' of the code.  Tests should be written in a way that guides the design process and documents what the code does.  Once again, this highlights the need for practicing these design principles.
+
+
+- KISS: Keep it simple stupid
+
+Code is executed by machines but is also meant to be read and shared with other human beings. Keep over-design to a minimum, sometimes the most elegant solution is also the simplest.  It is often easier to write complex code than it is to write simple code that accomplishes exactly what is desired.  It is important to remember that code requires maintainance, and that most of the time that maintainance will be performed by people who had part in the design process.  Because of this, the code should be written so it is "self documenting".  Meaning it is simple and straight-forward enough that someone unfamiliar with it can read and understand how it operates without the need for excessive comments.  Well written tests can be very helpful making code self-documenting. 
+
+
+-DRY:  Don't Repeat Yourself
+
+The DRY principle is related to KISS.  Writing repetitive code goes against the idea of Keeping It Simple".  DRY refers to duplication effort as well as written code.  
+
+
+- SRP: Single responsibility principle
+
+Keep code modular. Group classes that belong together in the same module, and keep methods that belong together in the same class. Every class should maintain a narrow responsibility in the grand scheme of the software.  SRP states that each class should only be responsible for ONE piece of the program's functionality, and that responsibility should be encapsulated by the class.  Or, as Robert Martin puts it, "a class should only have one reason to change".  
+
+
+- LSP: Liskov's substitution principle
+
+Child classes can be directly substituted where a base class is used, and what is true of the base class is true for every derived class but not necessarily vice versa.  Inheritance can introduce unwanted coupling, so it is important to use it carefully.  Delegation can be a better choice than inheritance.  A good rule of thumb is to use delegation if an instance of an object wants to re-use a class, and to use inheritance if an instance will be used as a class.
+
+
+- DIP: Dependency inversion principle
+
+In general, it is good practice to remove dependencies if possible.  If not, they should be decoupled.  The Dependency Inversion Principle states "high level modules should not depend on low level modules"
+ and "abstractions should not depend on details, details should depend on abstractions".  If concrete classes depend on each other, the dependency can be "inverted" by introducing an interface on which both the higher level class and lower level class(es) depend.  This way concrete classes can be made to depend on interfaces rather than other concrete classes, eliminating the tight coupling.  
+
 
 - YAGNI: You aren't gonna need it (yet)
 
 YAGNI goes hand in hand with KISS.  Adding methods that are not currently required is not "Keeping It Simple".  
 
+
 - OCP: Open closed principle
 
-Methods should be open for extension but closed for modification.
+Methods should be open for extension but closed for modification.  It is important to remember that "closure" is "strategic", not "complete".  Meaning the program is not 100% closed
+
+
+Each of these principles is important, and all should be considered while designing a program.  Often, these principles are grouped together and referred to as SOLID (SRP, OCP, LSP, ISP, and DIP) or DYSOLD(DRY, YAGNI, SRP, OCP, LSP, and DIP).  
+
 
 - Never force a design pattern, let it arise naturally as you are coding and be aware of some of the best practices when working with certain patterns
 
