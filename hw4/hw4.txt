@@ -64,4 +64,4 @@ Each of these principles is important, and all should be considered while design
 
 - Never force a design pattern, let it arise naturally as you are coding and be aware of some of the best practices when working with certain patterns
 
-- Use inheritance sparingly. If in base classes or child classes change, then we are in violation of LSP and OCP.
+- Use inheritance sparingly. If base classes or child classes change, then we most like are in violation of LSP and OCP.
