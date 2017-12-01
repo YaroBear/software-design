@@ -11,57 +11,65 @@ Give a collective answer as a pair, however, where needed, feel free to mention 
 Writing software is easy, but writing well designed software is hard. There is no single strategy that can tackle every problem, but there are some principles that can guide us to arrive at an elegant solution.  In general, these design principles are easy to understand, but they still require practice to be applied correctly.  Consistently using good design principles will help a developer learn what 'good' code looks (or smells) like in different situations.  
 
 Feedback is also a critical part of the development process.  Feedback from the customer (or Professor in this case) provides confidence that development is moving in the right direction.  
-Nick:  I have a tendency to over-complicate things.  There were several occasions during the assignments that I would get off track chasing a solution we ended up discarding.  The daily feedback from Venkat was so important in keeping us on track.  Everytime we took a wrong turn, the feedback would nudge us back in the right direction.  This kept small problems from blowing up.  It makes me think of some of the old assignments Ive written.  Often there was some step I wasn't sure about early on in the development process.  This would lead me to implement a less than ideal solution because I wasnt quite sure about the requirement for that step.  I'd tell myself I'd go back and fix that little issue once I figured out exactly what the requirements were.  Sometimes that realization didn't happen until many more steps had been taken though.  At that point, the 'small' problem has propagated through much of the rest of the code and become much bigger.  Fixing what started as a small issue then required changing a large percent of the code.  It was frustrating, and as assignments got bigger I dreaded making changes.  None of the changes we made during this class felt like that, rather it felt like every day we were making minor course adjustments while still moving forward.  Overall, this was much less stressful.
 
-Automated testing provides another important type of feedback.  Automated testing gives a developer immediate feedback about changes to code.  This is crucial, because it shows the developer that the code written yesterday still works with the changes made today.  If any of the changes cause problems, the developer can immediately see which tests are failing and refactor accordingly rather than waiting for a user to complain that some function doesnt work right.  Feedback from the automated tests provides confidence that the code still functions as desired.
+Nick:  I tend to over-complicate things.  There were several occasions during the assignments that I would get off track chasing a solution we ended up discarding.  The daily feedback from Venkat was so important in keeping us on track.  Every time we took a wrong turn, the feedback would nudge us back in the right direction.  This kept small problems from blowing up.  It makes me think of some of the old assignments I've written.  Often there was some step I wasn't sure about early on in the development process.  This would lead me to implement a less than ideal solution because I wasn't quite sure about the requirement for that step.  I'd tell myself I'd go back and fix that little issue once I figured out exactly what the requirements were.  Sometimes that realization didn't happen until many more steps had been taken though.  At that point, the 'small' problem has propagated through much of the rest of the code and become much bigger.  Fixing what started as a small issue then required changing a large percent of the code.  It was frustrating, and as assignments got bigger I dreaded making changes and occasionally resorted to full rebuilds.  None of the changes we made during this class felt like that, rather it felt like every day we were making minor course adjustments while still moving forward.  Overall, this was much less stressful.
+
+Automated testing provides another important type of feedback.  Automated testing gives a developer immediate feedback about changes to code.  This is crucial, because it shows the developer that the code written yesterday still works with the changes made today.  If any of the changes cause problems, the developer can immediately see which tests are failing and refactor accordingly rather than waiting for a user to complain that some function doesn't work right.  Feedback from the automated tests provides confidence that the code still functions as desired.
+
+Nick:  This course was my first experience with Continuous Integration as well.  I found it very useful.  It was always nice to know that the build was still stable after changes had been made.  And I think it even highlighted some issues we had with tests that involved promises.  If I recall correctly, we had written a few tests for assignment 2 that involved promises, and they were all passing on our computers. But a computer that took longer to connect to the service would cause the promises to be rejected and the tests to fail.  The continuous integration showed us our tests were a little more brittle than we had thought.  
+
 
 
 2. What are some of the general guidelines you would follow when designing?
 
-- TDD: Test driven design
+- TDD: Test Driven Design
 
-Automated testing provides a very beneficial feedback loop.  It immediately shows developers whether or not code is still functioning as intended.  This is a confidnece builder because errors can be fixed as soon as tests fail.  However, it is important to note that TDD does NOT guarantee bug-free code.  Good design principles must still be followed, otherwise irrelevant or useless tests might be written.  TDD only aids the design process if used properly.  Developers must listen to their tests and pay attention to the 'smell' of the code.  Tests should be written in a way that guides the design process and documents what the code does.  Once again, this highlights the need for practicing these design principles.
+Automated testing provides a very beneficial feedback loop.  It immediately shows developers whether or not code is still functioning as intended.  This is a confidence builder because errors can be fixed as soon as tests fail.  However, it is important to note that TDD does NOT guarantee bug-free code.  Good design principles must still be followed, otherwise irrelevant or useless tests might be written.  TDD only aids the design process if used properly.  Developers must listen to their tests and pay attention to the 'smell' of the code.  Tests should be written in a way that guides the design process and documents what the code does.
 
 
-- KISS: Keep it simple stupid
+- KISS: Keep It Simple Stupid
 
-Code is executed by machines but is also meant to be read and shared with other human beings. Keep over-design to a minimum, sometimes the most elegant solution is also the simplest.  It is often easier to write complex code than it is to write simple code that accomplishes exactly what is desired.  It is important to remember that code requires maintainance, and that most of the time that maintainance will be performed by people who had part in the design process.  Because of this, the code should be written so it is "self documenting".  Meaning it is simple and straight-forward enough that someone unfamiliar with it can read and understand how it operates without the need for excessive comments.  Well written tests can be very helpful making code self-documenting. 
+Code is executed by machines but is also meant to be read and shared with other human beings. Keep over-design to a minimum, sometimes the most elegant solution is also the simplest.  It is often easier to write complex code than it is to write simple code that accomplishes exactly what is desired.  It is important to remember that code requires maintenance, and that most of the time that maintenance will be performed by people who had part in the design process.  Because of this, the code should be written so it is "self-documenting".  Meaning it is simple and straight-forward enough that someone unfamiliar with it can read and understand how it operates without the need for excessive comments.  Well written tests can be very helpful making code self-documenting. 
 
 
 -DRY:  Don't Repeat Yourself
 
-The DRY principle is related to KISS.  Writing repetitive code goes against the idea of Keeping It Simple".  DRY refers to duplication effort as well as written code.  
+The DRY principle is related to KISS.  Writing repetitive code goes against the idea of Keeping It Simple.  DRY refers to duplication effort as well as written code.  
 
 
-- SRP: Single responsibility principle
+- SRP: Single Responsibility Principle
 
-Keep code modular. Group classes that belong together in the same module, and keep methods that belong together in the same class. Every class should maintain a narrow responsibility in the grand scheme of the software.  SRP states that each class should only be responsible for ONE piece of the program's functionality, and that responsibility should be encapsulated by the class.  Or, as Robert Martin puts it, "a class should only have one reason to change".  
+Keep code modular. Group classes that belong together in the same module, and keep methods that belong together in the same class. Every class should maintain a narrow responsibility in the grand scheme of the software.  SRP states that each class should be responsible for only ONE piece of the program's functionality, and that responsibility should be encapsulated by the class.  Or, as Robert Martin puts it, "a class should only have one reason to change".  
 
 
-- LSP: Liskov's substitution principle
+- LSP: Liskov's Substitution Principle
 
 Child classes can be directly substituted where a base class is used, and what is true of the base class is true for every derived class but not necessarily vice versa.  Inheritance can introduce unwanted coupling, so it is important to use it carefully.  Delegation can be a better choice than inheritance.  A good rule of thumb is to use delegation if an instance of an object wants to re-use a class, and to use inheritance if an instance will be used as a class.
 
 
-- DIP: Dependency inversion principle
+- DIP: Dependency Inversion Principle
 
 In general, it is good practice to remove dependencies if possible.  If not, they should be decoupled.  The Dependency Inversion Principle states "high level modules should not depend on low level modules"
  and "abstractions should not depend on details, details should depend on abstractions".  If concrete classes depend on each other, the dependency can be "inverted" by introducing an interface on which both the higher level class and lower level class(es) depend.  This way concrete classes can be made to depend on interfaces rather than other concrete classes, eliminating the tight coupling.  
 
 
-- YAGNI: You aren't gonna need it (yet)
+- YAGNI: You Aren't Gonna Need It (yet)
 
 YAGNI goes hand in hand with KISS.  Adding methods that are not currently required is not "Keeping It Simple".  
 
 
-- OCP: Open closed principle
+- OCP: Open Closed Principle
 
-Methods should be open for extension but closed for modification.  It is important to remember that "closure" is "strategic", not "complete".  Meaning the program is not 100% closed
+Methods should be open for extension but closed for modification.  It is important to remember that closure is "strategic", not "complete".  Meaning the program is not 100% closed
 
 
 Each of these principles is important, and all should be considered while designing a program.  Often, these principles are grouped together and referred to as SOLID (SRP, OCP, LSP, ISP, and DIP) or DYSOLD(DRY, YAGNI, SRP, OCP, LSP, and DIP).  
 
 
-- Never force a design pattern, let it arise naturally as you are coding and be aware of some of the best practices when working with certain patterns
+Design Patterns can be beneficial, but should not be forced.  The design principles discussed above should still guide the design process.  Patterns should only be applied to address specific needs that arise during the this process.  The patterns discussed in this course can be classified as creational, structural, or behavioral.  Creational patterns deal with the process of object creation.  Structural  patterns focus on how objects or classes are composed.  Behavioral patterns deal with the interaction of objects or classes.  
 
-- Use inheritance sparingly. If base classes or child classes change, then we most like are in violation of LSP and OCP.
+Creational patterns include: Abstract factory, Factory method, Prototype, Singleton, and Builder.  
+
+Structural patterns include:  Adapter, Facade, Proxy, Bridge, Composite, Decorator, and Decorator with Lambda expressions.  
+
+Behavioral patterns include:  Chain of responsibility, Iterator, Mediator, Observer
