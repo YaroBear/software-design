@@ -68,7 +68,23 @@ Each of these principles is important, and all should be considered while design
 
 Design Patterns can be beneficial, but should not be forced.  The design principles discussed above should still guide the design process.  Patterns should only be applied to address specific needs that arise during the this process.  The patterns discussed in this course can be classified as creational, structural, or behavioral.  Creational patterns deal with the process of object creation.  Structural  patterns focus on how objects or classes are composed.  Behavioral patterns deal with the interaction of objects or classes.  
 
-Creational patterns include: Abstract factory, Factory method, Prototype, Singleton, and Builder.  
+Creational patterns include: Abstract factory, Factory method, Prototype, Singleton, and Builder.
+
+- Abstract factory:
+Individual factories that have a common theme are grouped together without specifying their concrete classes. The client software creates the concrete implementation, and uses the generic interface to instantiate concrete objects.
+The pattern separates the details of the implementation from the usage of the objects and relies on object composition.
+
+- Factory method:
+Factory methods deal with creating objects without having to specify the exact class of the object. This pattern tries to solve inflexibility when we want to change the way we instantiate an object without having to change the class.
+
+- Prototype:
+Similar to the factory method, the prototype patterns seeks to eliminate subclassing an object creator in the client application. Rather than using the "new" keyword when requesting an object, an abstract class which holds a clone() method, is implemented by any class that needs polymorphic constructor capabilities. The client calls the clone() method with a parameter specifying the concrete class that is needed, or by another means provided by another design pattern.
+
+- Singleton:
+This patterns restricts instantiation to just one or very few objects, which is useful for restricting actions to one object and forces a global state. An example could be a connection to a database. The implementation often involves one constructor method and a getInstance() method that returns a pointer to the singleton object. The main focus is to ensure only one instance is ever created, the single instance can be accessed easily, and that the singleton class controls the creation and restriction of the object.
+
+- Builder:
+This pattern seeks to ease the creation of objects which are build by the composition of other objects constructors tossed as its parameters. Object creation relies on another builder object which receives each initialization parameter and returns the constructed object all at once for use by the calling object.
 
 Structural patterns include:  Adapter, Facade, Proxy, Bridge, Composite, Decorator, and Decorator with Lambda expressions.  
 
