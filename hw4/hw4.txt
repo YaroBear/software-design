@@ -78,7 +78,7 @@ The pattern separates the details of the implementation from the usage of the ob
 Factory methods deal with creating objects without having to specify the exact class of the object. This pattern tries to solve inflexibility when we want to change the way we instantiate an object without having to change the class.
 
 - Prototype:
-Similar to the factory method, the prototype patterns seeks to eliminate subclassing an object creator in the client application. Rather than using the "new" keyword when requesting an object, an abstract class which holds a clone() method, is implemented by any class that needs polymorphic constructor capabilities. The client calls the clone() method with a parameter specifying the concrete class that is needed, or by another means provided by another design pattern.
+Similar to the factory method, the prototype patterns seeks to eliminate sub-classing an object creator in the client application. Rather than using the "new" keyword when requesting an object, an abstract class which holds a clone() method, is implemented by any class that needs polymorphic constructor capabilities. The client calls the clone() method with a parameter specifying the concrete class that is needed, or by another means provided by another design pattern.
 
 - Singleton:
 This patterns restricts instantiation to just one or very few objects, which is useful for restricting actions to one object and forces a global state. An example could be a connection to a database. The implementation often involves one constructor method and a getInstance() method that returns a pointer to the singleton object. The main focus is to ensure only one instance is ever created, the single instance can be accessed easily, and that the singleton class controls the creation and restriction of the object.
@@ -86,6 +86,36 @@ This patterns restricts instantiation to just one or very few objects, which is 
 - Builder:
 This pattern seeks to ease the creation of objects which are build by the composition of other objects constructors tossed as its parameters. Object creation relies on another builder object which receives each initialization parameter and returns the constructed object all at once for use by the calling object.
 
-Structural patterns include:  Adapter, Facade, Proxy, Bridge, Composite, Decorator, and Decorator with Lambda expressions.  
+Structural patterns include:  Adapter, Facade, Proxy, Bridge, Composite, Decorator, and Decorator with Lambda expressions.
+
+- Adapter:  
+Also known as the wrapper or after thought pattern. Used to adapt incompatible interfaces without modifying source code.
+
+- Facade:
+Used to alleviate complexities of a system and provide a simpler interface to the client.
+
+- Proxy:
+Used as a wrapper or interface to access a resource that is expensive or impossible to duplicate. Access control is important, and whole object creation may be deferred to a later time by the use of smaller objects that expose the same interface.
+
+- Bridge:
+Separates an abstraction from its implementation by putting them into separate class hierarchies. Implements the abstraction by delegating to an implementor object which enables configuration at runtime.
+
+- Composite:
+A partitioning pattern where objects are treated the same way as if they were a single instance of the same type of object, with intention to be represented as a tree structure.
+
+- Decorator:
+Allows adding behavior to an object without affecting other objects of the same class, which makes it a useful alternative to sub-classing via inheritance.
 
 Behavioral patterns include:  Chain of responsibility, Iterator, Mediator, Observer
+
+- Chain of responsibility:
+Object are split into either command or processing objects. Each process object contains logic that defined the types of command objects it can handle or otherwise passed in the processing chain. This pattern often decouples the sender of a request from the receiver, and enables more than one receiver to process a request.
+
+- Iterator:
+This pattern decouples algorithms from their containers, including methods such as traversing and searching a container. Elements should be accessed without exposing the internal data structure, and new methods can be defined without changing the container's interface.
+
+- Mediator:
+Communication between objects is encapsulated within a mediator object instead of directly with each other, effectively decoupling the objects and allowing the possibility to change interaction between different sets of objects. 
+
+- Observer:
+A subject object maintains a list of its dependents called observers and notifies them of state changes by calling one of their methods. Objects have a one to many dependency without tightly coupling them. This pattern plays a key part in the Model View Controller architectural pattern.
