@@ -18,12 +18,12 @@ XYZJ 1000
 Assuming the price for each of those stocks on the top is $1, $2, and $3, and the stocks at the bottom are either invalid or runs into error when fetching.
 Then the output would look like:
 
-Symbol  Shares  Net Asset Value
---------------------------------
-XYZ1  	1000		$1000.00
-XYZ2	1500		$3000.00
-XYZ3  	2312  	    $6936.00
-...
+| Symbol        | Shares        | Net Asset Value  |
+| ------------- |:-------------:| ----------------:|
+| XYZ1      	| 1000 			| $1600.00         |
+| XYZ2      	| 1500	      	| $3000.00         |
+| XYZ3 			| 2312      	| $6936.00         |
+
 Total       $.....total of all the net asset values...
 
 Errors:
